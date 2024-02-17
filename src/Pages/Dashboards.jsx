@@ -116,6 +116,17 @@ function Dashboards() {
             </>
             }
         </div>
+        <div className="w-[15vw] mt-[10vh] mb-[50px] h-auto p-4 flex flex-col justify-between items-start rounded-[10px] bg-[#D9D9D9] gap-4">
+          <div className="font-bold">
+            <p>Quick Links:</p>
+          </div>
+          <div className="flex flex-col gap-2">
+            <Link target="_blank" to={"https://dashworx.co.uk/"}>Website</Link>
+            <Link target="_blank" to={"https://dashworx.co.uk/book-a-demo/"}> 
+              Contact Dashworx
+            </Link>
+          </div>
+        </div>
       </div>
       <Footer />
     </div>

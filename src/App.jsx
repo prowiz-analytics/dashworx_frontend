@@ -9,7 +9,7 @@ import Password from './Pages/Password';
 import PasswordPageReset from './Pages/Password';
 import Admin from './Pages/Admin';
 
-export const API = "https://maxify.prowiz.io"
+export const API = "https://dashworx.prowiz.io"
 
 function App() {
   return (

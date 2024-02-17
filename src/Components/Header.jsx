@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import logo from '../Assets/logo.jpeg';
+import logo from '../Assets/logo.svg';
 import loginIcon from '../Assets/Login_icon 1.svg';
 import DownArrow from '../Assets/downArrow.svg'
 import { useNavigate } from 'react-router-dom';

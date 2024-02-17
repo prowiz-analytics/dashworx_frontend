@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../Assets/logo.png";
+import logo from "../Assets/logo.svg";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import App, { API } from "../App";
@@ -214,7 +214,7 @@ function PasswordPageReset() {
       <div className="flex flex-col w-full justify-center items-center gap-2">
         <div className="w-[90%] h-[2px] bg-[#000000]"></div>
         <p className="flex flex-row justify-start  w-[90%]">
-          Client Portal | Maxify Limited
+          Client Portal | Dashworx Limited
         </p>
         <ToastContainer />
       </div>
