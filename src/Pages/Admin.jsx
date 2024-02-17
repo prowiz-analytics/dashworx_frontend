@@ -17,6 +17,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Admin() {
+  const validateMessages = {
+    required: "${label} is required!",
+  };
+
   const [form] = Form.useForm();
   const successNotify = (data) => toast.success(data);
   const notify = (data) => toast.error(data);
@@ -27,11 +31,17 @@ function Admin() {
   const navigate = useNavigate();
 
   const CreateUser = async (formData) => {
-    formData.dashboards.map((item) => {
-      console.log(item.dashboard);
-      item.dashboard = JSON.stringify(item.dashboard);
-      item.username = formData.email;
-    });
+    console.log(formData);
+    if (
+      formData.dashboards !== undefined &&
+      formData?.dashboards?.length !== 0
+    ) {
+      formData.dashboards.map((item) => {
+        console.log(item.dashboard);
+        item.dashboard = JSON.stringify(item.dashboard);
+        item.username = formData.email;
+      });
+    }
     console.log(formData);
     let user = JSON.parse(localStorage.getItem("data"));
     const headers = {
@@ -70,27 +80,42 @@ function Admin() {
       items[0].dashboards = user_dashboards;
       form.setFieldsValue({ items });
     } catch (err) {
-      console.log(err)
+      console.log(err);
       notify(err.response.data.detail);
     }
   };
 
   const UpdateDashboards = async (formData) => {
-    formData.dashboards.map((item) => {
-      item.dashboard = JSON.stringify(item.dashboard.trim());
-      item.username = formData.email;
-    });
+    if (
+      formData.dashboards !== undefined &&
+      formData?.dashboards?.length !== 0
+    ) {
+      formData.dashboards.map((item) => {
+        console.log(item.dashboard);
+        item.dashboard = JSON.stringify(item.dashboard);
+        item.username = formData.email;
+      });
+    }
+    if (formData.dashboards === undefined) {
+      formData.dashboards = [];
+    }
     console.log(formData);
     let user = JSON.parse(localStorage.getItem("data"));
     const headers = {
       token: user.token,
     };
-    console.log(typeof formData);
-    const data = await axios.post(`${API}/admin/update`, formData, { headers });
-    if (data.status === 200) {
-      successNotify("Updated Dashboards Successfully");
-    } else {
-      notify("Something Went Wrong");
+    try {
+      console.log(typeof formData);
+      const data = await axios.post(`${API}/admin/update`, formData, {
+        headers,
+      });
+      if (data.status === 200) {
+        successNotify("Updated Dashboards Successfully");
+      } else {
+        notify("Something Went Wrong");
+      }
+    } catch (err) {
+      notify(err.response.data.detail);
     }
   };
 
@@ -190,6 +215,7 @@ function Admin() {
                 initialValues={{
                   items: [{}],
                 }}
+                validateMessages={validateMessages}
               >
                 <Form.List name="items">
                   {(fields, { add, remove }) => (
@@ -213,23 +239,41 @@ function Admin() {
                             />
                           }
                         >
-                          <Form.Item label="Email" name={[field.name, "email"]}>
+                          <Form.Item
+                            label="Email"
+                            name={[field.name, "email"]}
+                            rules={[
+                              {
+                                required: true,
+                              },
+                            ]}
+                          >
                             <Input />
                           </Form.Item>
                           <Form.Item
                             label="Password"
                             name={[field.name, "password"]}
+                            rules={[
+                              {
+                                required: true,
+                              },
+                            ]}
                           >
                             <Input />
                           </Form.Item>
                           <Form.Item
                             label="First_Name"
                             name={[field.name, "first_name"]}
+                            rules={[
+                              {
+                                required: true,
+                              },
+                            ]}
                           >
                             <Input />
                           </Form.Item>
                           {/* Nest Form.List */}
-                          <Form.Item label="List">
+                          <Form.Item label="Dashboards">
                             <Form.List name={[field.name, "dashboards"]}>
                               {(subFields, subOpt) => (
                                 <div
@@ -279,6 +323,7 @@ function Admin() {
                         onClick={() =>
                           CreateUser(form.getFieldsValue().items[0])
                         }
+                        htmlType="submit"
                         block
                       >
                         Create User
@@ -307,6 +352,7 @@ function Admin() {
                 initialValues={{
                   items: [{}],
                 }}
+                validateMessages={validateMessages}
               >
                 <Form.List name="items">
                   {(fields, { add, remove }) => (
@@ -335,6 +381,11 @@ function Admin() {
                               label="Email"
                               name={[field.name, "email"]}
                               className="m-0 basis-[70%]"
+                              rules={[
+                                {
+                                  required: true,
+                                },
+                              ]}
                             >
                               <Input />
                             </Form.Item>
@@ -351,7 +402,7 @@ function Admin() {
                           </div>
 
                           {/* Nest Form.List */}
-                          <Form.Item label="List">
+                          <Form.Item label="Dashboards">
                             <Form.List name={[field.name, "dashboards"]}>
                               {(subFields, subOpt) => (
                                 <div
@@ -401,6 +452,7 @@ function Admin() {
                         onClick={() =>
                           UpdateDashboards(form.getFieldsValue().items[0])
                         }
+                        htmlType="submit"
                         block
                       >
                         Update User
