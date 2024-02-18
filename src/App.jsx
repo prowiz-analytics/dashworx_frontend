@@ -9,6 +9,7 @@ import Password from './Pages/Password';
 import PasswordPageReset from './Pages/Password';
 import Admin from './Pages/Admin';
 
+// URI OF API
 export const API = "https://dashworx.prowiz.io"
 
 function App() {
