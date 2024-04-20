@@ -8,6 +8,7 @@ import Dash from './Pages/Dash';
 import Password from './Pages/Password';
 import PasswordPageReset from './Pages/Password';
 import Admin from './Pages/Admin';
+import Home from './Pages/Home';
 
 // URI OF API
 export const API = "https://dashworx.prowiz.io"
@@ -21,6 +22,7 @@ function App() {
           <Route path='/' element={<Login/>}/>
           <Route path='/resetpassword' element={<ResetPassword/>}/>
           <Route path='/dashboards' element={<Dashboards/>}/>
+          <Route path='/home' element={<Home/>}/>
           <Route path='/admin' element={<Admin/>}/>
           <Route path='/dash' element={<Dash/>}/>
           <Route path='/resetpassword/:token' element={<PasswordPageReset/>}/>

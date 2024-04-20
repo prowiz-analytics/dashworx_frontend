@@ -10,15 +10,16 @@ function Header(props) {
   const navigate = useNavigate();
   const [hover,setHover] =useState(false);
   return (
-    <div className="w-full h-20 flex flex-row justify-between items-center p-4 profile">
+    <div className="w-full h-20 flex flex-row justify-between items-center p-4 profile bg-[#f1f1f1]">
         <img src={logo} alt="" className='h-14 w-[250px] rounded-sm cursor-pointer' onClick={()=>{if(isNavigatable){navigate('/dashboards')}}}/>
-        <div className="w-[auto] relative h-8 bg-hoverColor text-[#ffffff] flex flex-row gap-2 mr-4 rounded-md justify-between items-center px-2 profile" onMouseOver={()=>setHover(true)} onMouseOut={()=>setHover(false)}>
+        <div className="w-[auto] relative h-8 bg-hoverColor text-[#f1f1f1] flex flex-row gap-2 mr-4 rounded-md justify-between items-center px-2 profile" onMouseOver={()=>setHover(true)} onMouseOut={()=>setHover(false)}>
             <img src={loginIcon} alt="" className='w-6 h-6' />
-            <p className='font-bold'>My Account</p>
+            <p className='font-bold quicksand-font'>My Account</p>
             <img src={DownArrow} alt="" />
             
         </div>
-        {hover && <div className="absolute w-[157px] bg-[#D9D9D9] h-auto  mt-28 py-4 px-2 right-[48px] rounded-[10px] no-profile flex flex-col font-[600]" onMouseOver={()=>setHover(true)} onMouseOut={()=>setHover(false)}>
+        {hover && <div className="absolute w-[157px] quicksand-font bg-[#f1f1f1] h-auto border-[2px] border-[#274156
+]  mt-28 py-2 px-2 right-[33px] rounded-[10px] no-profile flex flex-col gap-1 font-[600]" onMouseOver={()=>setHover(true)} onMouseOut={()=>setHover(false)}>
                 <p className='cursor-pointer' onClick={()=>{if(isNavigatable){navigate('/dashboards')}}}>Home</p>    
                 <p className='cursor-pointer' onClick={()=>{navigate('/login');localStorage.removeItem('data')}}>Log Out</p>    
                 <p className='cursor-pointer'onClick={()=>navigate('/resetpassword')}>Change Password</p>   

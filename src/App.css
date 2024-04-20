@@ -1,5 +1,13 @@
-*{
-  font-family: 'Quicksand', sans-serif;
+/* *{
+  font-family: 'Quicksand',sans-serif;
+} */
+
+.graphik-font{
+  font-family: 'Graphik' !important;
+}
+
+.quicksand-font{
+  font-family: 'Quicksand',sans-serif;
 }
 
 .error_outline:focus{
@@ -36,4 +44,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.sidenav{
+  height: calc(100vh - 80px);
 }

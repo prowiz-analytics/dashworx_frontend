@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "Graphik";
+    src: local("Graphik"),
+      url("./Fonts/GraphikBlack.otf") format("opentype");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Graphik";
+    src: local("Graphik"),
+      url("./Fonts/GraphikMedium.otf") format("opentype");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Graphik";
+    src: local("Graphik"),
+      url("./Fonts/GraphikBold.otf") format("opentype");
+    font-weight: 600;
+}
