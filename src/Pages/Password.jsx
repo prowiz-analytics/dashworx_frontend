@@ -141,7 +141,7 @@ function PasswordPageReset() {
                 <input
                   type="submit"
                   value="Reset Password"
-                  className="w-[100%] items-center p-4 bg-primaryColor text-[#ffffff] font-bold rounded-md cursor-pointer"
+                  className="w-[100%] items-center p-4 bg-[#1C6E8C] text-[#ffffff] font-bold rounded-md cursor-pointer"
                 />
               )}
               {emailField && (
@@ -156,12 +156,12 @@ function PasswordPageReset() {
                   <input
                     type="submit"
                     value="Reset Password"
-                    className="w-[100%] items-center p-4 bg-primaryColor text-[#ffffff] font-bold rounded-md cursor-pointer"
+                    className="w-[100%] items-center p-4 bg-[#1C6E8C] text-[#ffffff] font-bold rounded-md cursor-pointer"
                   />
                   <input
                     type="button"
                     value="Back to Login"
-                    className="w-[100%] items-center p-4 bg-primaryColor text-[#ffffff] font-bold rounded-md mt-4 cursor-pointer"
+                    className="w-[100%] items-center p-4 bg-[#1C6E8C] text-[#ffffff] font-bold rounded-md mt-4 cursor-pointer"
                     onClick={() => navigate("/login")}
                   />
                 </>
@@ -198,12 +198,12 @@ function PasswordPageReset() {
               <input
                 type="submit"
                 value="Reset Password"
-                className="w-[100%] items-center p-4 bg-primaryColor text-[#ffffff] font-bold rounded-md cursor-pointer"
+                className="w-[100%] items-center p-4 bg-[#1C6E8C] text-[#ffffff] font-bold rounded-md cursor-pointer"
               />
               <input
                 type="button"
                 value="Back to Login"
-                className="w-[100%] items-center p-4 bg-primaryColor text-[#ffffff] font-bold rounded-md mt-4 cursor-pointer"
+                className="w-[100%] items-center p-4 bg-[#1C6E8C] text-[#ffffff] font-bold rounded-md mt-4 cursor-pointer"
                 onClick={()=>navigate('/login')}
               />
               

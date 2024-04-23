@@ -109,7 +109,7 @@ function Login() {
             <input
               type="submit"
               value="Login"
-              className="w-[100%] items-center p-4 bg-primaryColor text-[#ffffff] font-bold rounded-md cursor-pointer"
+              className="w-[100%] items-center p-4 bg-[#1C6E8C] text-[#ffffff] font-bold rounded-md cursor-pointer"
             />
             <div className="flex justify-end items-end">
               <Link to={"/resetpassword"} className="underline">

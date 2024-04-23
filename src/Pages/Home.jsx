@@ -50,7 +50,7 @@ function Home() {
       <Header />
       <div className="flex flex-row">
         <div className="flex flex-col justify-between items-center sidenav basis-[20%] bg-[#f1f1f1] ">
-          <div className="flex flex-col justify-between items-center h-[25%] w-[90%] gap-12">
+          <div className="flex flex-col justify-between items-center h-[25%] w-[90%] gap-10">
             <div className="border-b-[1px] w-[90%]">
               <p className="text-xl font-[500] text-center graphik-font text-[#28262C]">
                 Current Plan : {"Premium"}
@@ -102,8 +102,9 @@ function Home() {
                     <Link
                       target="_blank"
                       to={"https://dashworx.co.uk/book-a-demo/"}
+                      className=""
                     >
-                      <p className="font-[500] graphik-font text-[#28262C]">
+                      <p className="font-[500] graphik-font text-[#28262C] border-b-[1px]">
                         Contact Dashworx
                       </p>
                     </Link>
@@ -115,17 +116,17 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div className="w-[95%] flex flex-row justify-start items-center border-t-[1px]">
-              <p className="py-2 quicksand-font">
-                <span className="font-[500] text-[#28262C]">Portal </span>|
-                Dashworx Limited
+            <div className="w-[95%] flex flex-row justify-start items-center border-t-[1px] ml-2">
+              <p className="py-2 quicksand-font ">
+                <span className="font-[600] text-[#28262C]">Portal </span>|
+                {`${process.env.REACT_APP_CLIENT}`} Limited
               </p>
             </div>
           </div>
         </div>
         <div className="basis-[80%] flex flex-col home-section">
           <div className="p-4">
-            <p className="text-[4vmin] font-[400] text-[#000000] flex flex-row">
+            <p className="text-[4vmin] ml-8 font-[600] text-[#000000] flex flex-row">
               Welcome{" "}
               <Skeleton
                 title={false}
@@ -145,7 +146,7 @@ function Home() {
               </Skeleton>
             </p>
           </div>
-          <div className="flex flex-col p-4 gap-4 min-h-[70vh]">
+          <div className="flex flex-col p-4 gap-4 min-h-[70vh] justify-start items-center">
             <div className="grid grid-cols-2 w-full justify-start items-center gap-10">
               {loading &&
                 [1, 2, 3, 4].map((item, index) => {
@@ -157,7 +158,7 @@ function Home() {
                       }}
                     >
                       <div
-                        className="w-[80%] h-[30vh] bg-primaryColor hover:bg-hoverColor cursor-pointer flex flex-col justify-center items-center gap-8 rounded-[10px] text-[#ffffff]"
+                        className="w-[80%] h-[30vh] bg-[#1C6E8C] hover:bg-hoverColor cursor-pointer flex flex-col justify-center items-center gap-8 rounded-[10px] text-[#ffffff]"
                         onClick={() => {
                           navigate(`/dash`, {
                             state: { data: item.link },
@@ -174,7 +175,7 @@ function Home() {
                 data?.dashboards?.length > 0 &&
                 data?.dashboards?.map((item, index) => {
                   return (
-                    <div className="w-[100%] flex flex-row justify-start items-center">
+                    <div className="w-[100%] flex flex-row justify-center items-center">
                       <div
                         className="w-[90%] h-[auto] bg-white cursor-pointer hover:bg-[#274156] hover:text-[#ffffff] group hover:fill-[#ffffff] flex flex-row justify-between px-10 items-center gap-8 rounded-[10px] text-[#28262C] border-4 border-[#274156]"
                         onClick={() => {
@@ -183,7 +184,7 @@ function Home() {
                           });
                         }}
                       >
-                        <p className="font-[700] text-lg">{`${item.name}`}</p>
+                        <p className="font-[900] text-lg uppercase">{`${item.name}`}</p>
                         <svg
                           width="34"
                           height="64"
