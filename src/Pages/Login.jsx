@@ -38,7 +38,7 @@ function Login() {
           navigate("/admin");
         }
         else{
-          navigate("/dashboards");
+          navigate("/home");
         }
         localStorage.setItem("data", JSON.stringify(request.data))
         successNotify("Logged In Sucecssfully");
@@ -122,7 +122,7 @@ function Login() {
       <div className="flex flex-col w-full justify-center items-center gap-2">
         <div className="w-[90%] h-[2px] bg-[#000000]"></div>
         <p className="flex flex-row justify-start  w-[90%]">
-          Client Portal | Dashworx Limited
+          Portal | Dashworx Limited
         </p>
       <ToastContainer />
       </div>

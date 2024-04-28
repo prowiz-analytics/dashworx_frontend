@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../Components/Header";
 import DashboardIcon from "../Assets/dashboards.svg";
 import InsightsIcon from "../Assets/insights.svg";
-import ChatIcon from "../Assets/chat.svg";
+import ChatIcon from "../Assets/Contact.svg";
 import UpgradeIcon from "../Assets/upgrade.svg";
 import { Skeleton } from "antd";
 import KPI from "../Assets/kpi.svg";
@@ -47,7 +47,7 @@ function Home() {
   }, [location.state, navigate]);
   return (
     <div className="flex flex-col">
-      <Header />
+      <Header isHomeNav={true}/>
       <div className="flex flex-row">
         <div className="flex flex-col justify-between items-center sidenav basis-[20%] bg-[#f1f1f1] ">
           <div className="flex flex-col justify-between items-center h-[25%] w-[90%] gap-10">
@@ -84,7 +84,7 @@ function Home() {
                     }`}
                   >
                     <img src={InsightsIcon} alt="" />
-                    <p className="text-[#28262C] font-[500]">
+                    <p className="text-[#8a8a8a] font-[500]">
                       High Level Insights
                     </p>
                   </div>
@@ -98,20 +98,23 @@ function Home() {
                 <h2 className="font-[600] quicksand-font">Support</h2>
                 <div className="flex flex-col justify-start items-start gap-4 w-full">
                   <div className="flex flex-row justify-center items-center gap-4 cursor-pointer">
-                    <img src={ChatIcon} alt="" />
+                    <img src={ChatIcon} alt="" className="w-[18px] h-[28px] font-[800 ]" />
                     <Link
                       target="_blank"
                       to={"https://dashworx.co.uk/book-a-demo/"}
                       className=""
                     >
-                      <p className="font-[500] graphik-font text-[#28262C] border-b-[1px]">
+                      <p className="font-[500] graphik-font text-[#28262C] hover:border-b-[1px]">
                         Contact Dashworx
                       </p>
                     </Link>
                   </div>
                   <div className="flex flex-row justify-center items-center gap-4 cursor-pointer">
+                    
                     <img src={UpgradeIcon} alt="" />
-                    <p className="font-[500] graphik-font text-[#28262C]">Upgrade Plan</p>
+                    <Link target="_blank" to={"https://billing.stripe.com/p/login/cN25ohbPQ3Z44x2000"} >
+                    <p className="font-[500] graphik-font text-[#28262C] hover:border-b-[1px]">Upgrade Plan</p>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -119,7 +122,7 @@ function Home() {
             <div className="w-[95%] flex flex-row justify-start items-center border-t-[1px] ml-2">
               <p className="py-2 quicksand-font ">
                 <span className="font-[600] text-[#28262C]">Portal </span>|
-                {`${process.env.REACT_APP_CLIENT}`} Limited
+                {` Dashworx`} Limited
               </p>
             </div>
           </div>
@@ -127,7 +130,7 @@ function Home() {
         <div className="basis-[80%] flex flex-col home-section">
           <div className="p-4">
             <p className="text-[4vmin] ml-8 font-[600] text-[#000000] flex flex-row">
-              Welcome{" "}
+              Welcome 
               <Skeleton
                 title={false}
                 loading={loading}
@@ -142,7 +145,7 @@ function Home() {
                   rows: 2,
                 }}
               >
-                {"Name"}
+                {" "+data?.firstName}
               </Skeleton>
             </p>
           </div>
@@ -177,7 +180,7 @@ function Home() {
                   return (
                     <div className="w-[100%] flex flex-row justify-center items-center">
                       <div
-                        className="w-[90%] h-[auto] bg-white cursor-pointer hover:bg-[#274156] hover:text-[#ffffff] group hover:fill-[#ffffff] flex flex-row justify-between px-10 items-center gap-8 rounded-[10px] text-[#28262C] border-4 border-[#274156]"
+                        className="w-[90%] h-[auto] bg-white cursor-pointer hover:bg-[#274156] hover:text-[#ffffff] group hover:fill-[#ffffff] flex flex-row justify-between px-10 items-center gap-8 rounded-[10px] text-[#28262C] border-[3px] border-[#274156]"
                         onClick={() => {
                           navigate(`/dash`, {
                             state: { data: JSON.parse(item.link) },

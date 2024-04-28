@@ -16,7 +16,7 @@ function Dash() {
     }, 2000);
   }, []);
   return (
-    <div className="bg-[#ffffff] h-[100vh] w-[100vw] px-4 py-2 flex flex-col">
+    <div className="bg-[#ffffff] h-[100vh] w-[100vw]  flex flex-col">
       {loading && (
             <Spin
               className="spinning_indicator"
@@ -30,13 +30,14 @@ function Dash() {
               }
             />
           )}
-      <Header isNavigatable={true} />
-      <div className="flex-auto bg-[#b1b1b1] mb-12">
+      <Header isNavigatable={true} isHomeNav={false}/>
+      <div className="flex-auto bg-[#b1b1b1] mb-12 px-2">
         <div className="w-full h-full  overflow-auto scroll-smooth mb-1">
           <iframe src={data} className="w-full h-full" frameborder="0"></iframe>
         </div>
+        <Footer />
       </div>
-      <Footer />
+      
     </div>
   );
 }
