@@ -9,6 +9,7 @@ import KPI from "../Assets/kpi.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API } from "../App";
+import SVG from 'react-inlinesvg';
 
 function Home() {
   const location = useLocation();
@@ -168,7 +169,7 @@ function Home() {
                           });
                         }}
                       >
-                        <img src={KPI} alt="" className="w-20 h-20" />
+                        <img src={'/Dashboard_icons/Chart_Icon.svg'} alt="" className="w-20 h-20" />
                         <p className="">{`${item.name}`}</p>
                       </div>
                     </Skeleton>
@@ -180,7 +181,7 @@ function Home() {
                   return (
                     <div className="w-[100%] flex flex-row justify-center items-center">
                       <div
-                        className="w-[90%] h-[auto] bg-white cursor-pointer hover:bg-[#274156] hover:text-[#ffffff] group hover:fill-[#ffffff] flex flex-row justify-between px-10 items-center gap-8 rounded-[10px] text-[#28262C] border-[3px] border-[#274156]"
+                        className="w-[90%] h-[auto] bg-white cursor-pointer hover:bg-[#274156] hover:text-[#ffffff] group hover:fill-[#ffffff] fill-[#274156] flex flex-row justify-between px-10 items-center gap-8 rounded-[10px] text-[#28262C] border-[3px] border-[#274156]"
                         onClick={() => {
                           navigate(`/dash`, {
                             state: { data: JSON.parse(item.link) },
@@ -188,18 +189,8 @@ function Home() {
                         }}
                       >
                         <p className="font-[900] text-lg uppercase">{`${item.name}`}</p>
-                        <svg
-                          width="34"
-                          height="64"
-                          viewBox="0 0 84 84"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M65.3009 15.828V80.1774C65.3009 80.4445 65.0849 80.6606 64.8177 80.6606H57.1214C56.8542 80.6606 56.6382 80.4445 56.6382 80.1774V28.8147C56.6382 27.7444 55.7708 26.877 54.7005 26.877H39.8768C38.8065 26.877 37.9391 27.7444 37.9391 28.8147V80.1774C37.9391 80.4445 37.7231 80.6606 37.4559 80.6606H29.7596C29.4924 80.6606 29.2764 80.4445 29.2764 80.1774V55.0138C29.2764 53.9436 28.409 53.0762 27.3387 53.0762H12.5199C11.4497 53.0762 10.5822 53.9436 10.5822 55.0138V80.1774C10.5822 80.4445 10.3662 80.6606 10.0991 80.6606H3.8226C3.55545 80.6606 3.33942 80.4445 3.33942 80.1774V0.483185C3.33942 0.216032 3.12339 0 2.85623 0H0.483185C0.216032 0 0 0.216032 0 0.483185V83.8334H0.166559V84H83.5168C83.784 84 84 83.784 84 83.5168V15.828C84 14.3323 82.7863 13.1186 81.2905 13.1186H68.012C66.5163 13.1186 65.3026 14.3323 65.3026 15.828H65.3009Z"
-                            className="fill-[#274156] group-hover:fill-[#ffffff]"
-                          />
-                        </svg>
+                        {/* <img src={'/Dashboard_icons/Chart_Icon.svg'} alt="" className="w-20 h-20 "/> */}
+                        <SVG src={`/Dashboard_icons/${item.image}.svg`} className="w-10 h-20"/>
                       </div>
                     </div>
                   );

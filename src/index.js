@@ -11,8 +11,8 @@ root.render(
   </React.StrictMode>
 );
 
-if ("prod" !== "development")
-    console.log = () => {};
+// if ("prod" !== "development")
+//     console.log = () => {};
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

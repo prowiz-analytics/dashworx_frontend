@@ -10,6 +10,7 @@ function Dash() {
   const { data } = location.state;
   console.log(data);
   const [loading, setLoading] = useState(true);
+  const [iframe,setIframe]=useState(0);
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -31,9 +32,10 @@ function Dash() {
             />
           )}
       <Header isNavigatable={true} isHomeNav={false}/>
+      <button onClick={()=>setIframe(iframe => iframe + 1)}>Refresh</button>
       <div className="flex-auto bg-[#b1b1b1] mb-12 px-2">
         <div className="w-full h-full  overflow-auto scroll-smooth mb-1">
-          <iframe src={data} className="w-full h-full" frameborder="0"></iframe>
+          <iframe key={iframe} src={data} className="w-full h-full" frameborder="0"></iframe>
         </div>
         <Footer />
       </div>

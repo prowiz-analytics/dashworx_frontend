@@ -12,11 +12,63 @@ import { Skeleton, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { jwtDecode } from "jwt-decode";
 import { CloseOutlined } from "@ant-design/icons";
-import { Button, Card, Form, Input, Space, Typography } from "antd";
+import { Button, Card, Form, Input, Space, Typography, Select } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Admin() {
+  const ImageOptions = [
+    {
+      image: "/Dashboard_icons/Todo_Icon.svg",
+      name: "Todo",
+      value: "Todo_Icon",
+    },
+    {
+      image: "/Dashboard_icons/Chart_Icon.svg",
+      name: "Chart",
+      value: "Chart_Icon",
+    },
+    {
+      image: "/Dashboard_icons/Chat_Icon.svg",
+      name: "Chat",
+      value: "Chat_Icon",
+    },
+    {
+      image: "/Dashboard_icons/Earth_Icon.svg",
+      name: "Earth",
+      value: "Earth_Icon",
+    },
+    {
+      image: "/Dashboard_icons/Heartbeat_Icon.svg",
+      name: "Heartbeat",
+      value: "Heartbeat_Icon",
+    },
+    {
+      image: "/Dashboard_icons/Calendar_Icon.svg",
+      name: "Calendar",
+      value: "Calendar_Icon",
+    },
+    {
+      image: "/Dashboard_icons/Lightbulb_Icon.svg",
+      name: "Lightbulb",
+      value: "Lightbulb_Icon",
+    },
+    {
+      image: "/Dashboard_icons/Pie_Chart_Icon.svg",
+      name: "Pie_Chart",
+      value: "Pie_Chart_Icon",
+    },
+    {
+      image: "/Dashboard_icons/User_Icon.svg",
+      name: "User",
+      value: "User_Icon",
+    },
+    {
+      image: "/Dashboard_icons/Web_Icon.svg",
+      name: "Web",
+      value: "Web_Icon",
+    },
+  ];
   const validateMessages = {
     required: "${label} is required!",
   };
@@ -37,8 +89,12 @@ function Admin() {
       formData?.dashboards?.length !== 0
     ) {
       formData.dashboards.map((item) => {
-        console.log(item.dashboard);
-        item.dashboard = JSON.stringify(item.dashboard);
+        try{
+          JSON.parse(item.dashboard)
+        }
+        catch(error){
+          item.dashboard = JSON.stringify(item.dashboard);
+        }
         item.username = formData.email;
       });
     }
@@ -73,6 +129,7 @@ function Admin() {
         user_dashboards.push({
           dashboard: JSON.parse(item.link),
           dashboard_name: item.name,
+          dashboard_image: item.image
         });
       });
       console.log(user_dashboards);
@@ -91,8 +148,12 @@ function Admin() {
       formData?.dashboards?.length !== 0
     ) {
       formData.dashboards.map((item) => {
-        console.log(item.dashboard);
-        item.dashboard = JSON.stringify(item.dashboard);
+        try{
+          JSON.parse(item.dashboard)
+        }
+        catch(error){
+          item.dashboard = JSON.stringify(item.dashboard);
+        }
         item.username = formData.email;
       });
     }
@@ -134,12 +195,7 @@ function Admin() {
           if (decoded.user_type !== "admin") {
             navigate("/dashboards");
           }
-          const data = await axios.get(
-            `${API}/auth/dashboards?email=${user.email}`
-          );
-          console.log(data);
-          setLoading(false);
-          setData(data.data);
+          setLoading(false)
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -297,6 +353,36 @@ function Admin() {
                                       >
                                         <Input placeholder="Dashboard Name" />
                                       </Form.Item>
+                                      <Form.Item
+                                      
+                                        noStyle
+                                        name={[
+                                          subField.name,
+                                          "dashboard_image",
+                                        ]}
+                                      >
+                                        <Select placeholder="Dashboard Image">
+                                          {ImageOptions.map((item) => {
+                                            return (
+                                              <Select.Option
+                                                value={item.value}
+                                              >
+                                                <img
+                                                  src={item.image}
+                                                  alt={item.name}
+                                                  style={{
+                                                    marginRight: "8px",
+                                                    width: "20px",
+                                                    height: "20px",
+                                                  }}
+                                                />
+                                                {item.name}
+                                              </Select.Option>
+                                            );
+                                          })}
+                                          {/* Add more options as needed */}
+                                        </Select>
+                                      </Form.Item>
                                       <CloseOutlined
                                         onClick={() => {
                                           subOpt.remove(subField.name);
@@ -425,6 +511,36 @@ function Admin() {
                                         name={[subField.name, "dashboard_name"]}
                                       >
                                         <Input placeholder="Dashboard Name" />
+                                      </Form.Item>
+                                      <Form.Item
+                                        // initialValue={'Todo_Icon'}
+                                        noStyle
+                                        name={[
+                                          subField.name,
+                                          "dashboard_image",
+                                        ]}
+                                      >
+                                        <Select placeholder="Dashboard Image">
+                                          {ImageOptions.map((item) => {
+                                            return (
+                                              <Select.Option
+                                                value={item.value}
+                                              >
+                                                <img
+                                                  src={item.image}
+                                                  alt={item.name}
+                                                  style={{
+                                                    marginRight: "8px",
+                                                    width: "20px",
+                                                    height: "20px",
+                                                  }}
+                                                />
+                                                {item.name}
+                                              </Select.Option>
+                                            );
+                                          })}
+                                          {/* Add more options as needed */}
+                                        </Select>
                                       </Form.Item>
                                       <CloseOutlined
                                         onClick={() => {

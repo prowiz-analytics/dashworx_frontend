@@ -49,3 +49,21 @@
 .sidenav{
   height: calc(100vh - 80px);
 }
+
+.ant-select-item-option-content{
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.ant-select-selection-item{
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center;
+}
+
+#dynamic_form_complex{
+  width: 50vw !important;
+  max-width: 50vw !important;
+}
+
