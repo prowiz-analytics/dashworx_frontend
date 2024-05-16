@@ -3,9 +3,10 @@ import logo from "../Assets/logo.svg";
 import loginIcon from "../Assets/Login_icon 1.svg";
 import DownArrow from "../Assets/downArrow.svg";
 import { useNavigate } from "react-router-dom";
+import RestartIcon from '../Assets/restart_alt.svg';
 
 function Header(props) {
-  const { isNavigatable , isHomeNav } = props;
+  const { isNavigatable , isHomeNav, refreshDashboard, refreshBtn } = props;
   console.log(isNavigatable);
   const navigate = useNavigate();
   const [hover, setHover] = useState(false);
@@ -23,7 +24,12 @@ function Header(props) {
           }}
         />
       </div>
-
+          
+      <div className="flex flex-row gap-4">
+        {refreshBtn && <div className="flex flex-row border-[2px] border-[#274156] px-2 gap-2 justify-between items-center rounded-md cursor-pointer" onClick={()=>{refreshDashboard()}}>
+          <p className="font-[100] graphik-font">Refresh</p>
+          <img src={RestartIcon} alt="" className=""/>
+        </div>}
       <div
         className="w-[auto] relative h-8 bg-hoverColor text-[#f1f1f1] flex flex-row gap-2 mr-4 rounded-md justify-between items-center px-2 profile"
         onMouseOver={() => setHover(true)}
@@ -32,6 +38,7 @@ function Header(props) {
         <img src={loginIcon} alt="" className="w-6 h-6" />
         <p className="font-bold quicksand-font">My Account</p>
         <img src={DownArrow} alt="" />
+      </div>
       </div>
       {hover && (
         <div

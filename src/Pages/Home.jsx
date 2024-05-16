@@ -48,7 +48,7 @@ function Home() {
   }, [location.state, navigate]);
   return (
     <div className="flex flex-col">
-      <Header isHomeNav={true}/>
+      <Header isHomeNav={true} refreshBtn={false}/>
       <div className="flex flex-row">
         <div className="flex flex-col justify-between items-center sidenav basis-[20%] bg-[#f1f1f1] ">
           <div className="flex flex-col justify-between items-center h-[25%] w-[90%] gap-10">

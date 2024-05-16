@@ -16,6 +16,9 @@ function Dash() {
       setLoading(false);
     }, 2000);
   }, []);
+  const refreshDashboard=()=>{
+    setIframe(iframe => iframe + 1)
+  }
   return (
     <div className="bg-[#ffffff] h-[100vh] w-[100vw]  flex flex-col">
       {loading && (
@@ -31,8 +34,8 @@ function Dash() {
               }
             />
           )}
-      <Header isNavigatable={true} isHomeNav={false}/>
-      <button onClick={()=>setIframe(iframe => iframe + 1)}>Refresh</button>
+      <Header isNavigatable={true} isHomeNav={false} refreshDashboard={refreshDashboard} refreshBtn={true}/>
+      {/* <button onClick={()=>setIframe(iframe => iframe + 1)}>Refresh</button> */}
       <div className="flex-auto bg-[#b1b1b1] mb-12 px-2">
         <div className="w-full h-full  overflow-auto scroll-smooth mb-1">
           <iframe key={iframe} src={data} className="w-full h-full" frameborder="0"></iframe>
