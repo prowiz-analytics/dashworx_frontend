@@ -122,7 +122,7 @@ function Home() {
             </div>
             <div className="w-[95%] flex flex-row justify-start items-center border-t-[1px] ml-2">
               <p className="py-2 quicksand-font ">
-                <span className="font-[600] text-[#28262C]">Portal </span>|
+                <span className="font-[600] text-[#28262C]">Data Hub </span>|
                 {` Dashworx`} Limited
               </p>
             </div>
