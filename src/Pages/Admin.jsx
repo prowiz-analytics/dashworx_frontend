@@ -209,7 +209,7 @@ function Admin() {
   console.log(data);
   return (
     <div className="bg-[#ffffff] h-[100vh] w-[100vw] p-4">
-      <Header isNavigatable={false} />
+      <Header isNavigatable={false} isAdminNav={true}/>
       <div className="p-4 flex flex-row">
         <p className="text-[4vmin] text-[#000000] flex flex-row">
           Welcome{" "}

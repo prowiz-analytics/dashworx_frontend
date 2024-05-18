@@ -67,3 +67,18 @@
   max-width: 50vw !important;
 }
 
+.refresh_btn svg  {
+  transition: transform 3s ease-in-out;
+}
+.rotated {
+  transform: rotate(1620deg);
+}
+
+.disabled_btn{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+
+
