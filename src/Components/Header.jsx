@@ -43,7 +43,7 @@ function Header(props) {
           
       <div className="flex flex-row gap-4">
         {refreshBtn && <button className={`flex refresh_btn flex-row border-[2px] ${onRefresh?'disabled_btn':'bg-white hover:bg-[#274156] hover:text-[#ffffff] hover:fill-[#ffffff] fill-[#274156]'}  border-[#274156] px-2 gap-2 justify-between items-center rounded-md cursor-pointer`} disabled={onRefresh} onClick={handleClick}>
-          <p className="font-[100] graphik-font">Refresh</p>
+          
           <SVG src={'/restart_alt.svg'} alt="" style={{ transform: `rotate(${rotationAngle}deg)` }}/>
         </button>}
       <div
