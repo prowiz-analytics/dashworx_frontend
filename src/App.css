@@ -80,5 +80,9 @@
   color: #666666;
 }
 
+.ant-form-item-explain.ant-form-item-explain-connected{
+  display: none !important;
+}
+
 
 

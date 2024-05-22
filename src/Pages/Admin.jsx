@@ -69,8 +69,11 @@ function Admin() {
       value: "Web_Icon",
     },
   ];
-  const validateMessages = {
-    required: "${label} is required!",
+  // const validateMessages = {
+  //   required: "${label} is required!",
+  // };
+  const validateMessages = () =>{
+    notify("${label} is required")
   };
 
   const [form] = Form.useForm();
@@ -148,14 +151,17 @@ function Admin() {
       formData?.dashboards?.length !== 0
     ) {
       formData.dashboards.map((item) => {
-        try{
-          JSON.parse(item.dashboard)
+        if(item?.dashboard !== undefined){
+          try{
+            JSON.parse(item.dashboard)
+          }
+          catch(error){
+            item.dashboard = JSON.stringify(item.dashboard);
+          }
+          item.username = formData.email;
         }
-        catch(error){
-          item.dashboard = JSON.stringify(item.dashboard);
         }
-        item.username = formData.email;
-      });
+      );
     }
     if (formData.dashboards === undefined) {
       formData.dashboards = [];
@@ -178,6 +184,15 @@ function Admin() {
     } catch (err) {
       notify(err.response.data.detail);
     }
+  };
+
+  const handleFinishFailed = ({ errorFields }) => {
+    console.log(errorFields)
+    errorFields.forEach((error) => {
+      toast.error(error.name[error.name.length-1]+" is Required",{
+        toastId:`${error.name[error.name.length-1]}`
+      });
+    });
   };
 
   useEffect(() => {
@@ -208,7 +223,7 @@ function Admin() {
   }, [location.state, navigate]);
   console.log(data);
   return (
-    <div className="bg-[#ffffff] h-[100vh] w-[100vw] p-4">
+    <div className="bg-[#ffffff] h-[100vh] w-[100vw] overflow-auto p-4">
       <Header isNavigatable={false} isAdminNav={true}/>
       <div className="p-4 flex flex-row">
         <p className="text-[4vmin] text-[#000000] flex flex-row">
@@ -251,7 +266,7 @@ function Admin() {
           </button>
         </div>
       </div>
-      <div className="flex flex-col p-4 gap-4 min-h-[70vh]">
+      <div className="flex flex-col p-4 gap-4 min-h-[70vh] mb-24">
         <div className="h-auto">
           {isCreateUser && (
             <div className="w-full h-full flex flex-row justify-center items-center bg-[#ffffff]">
@@ -272,6 +287,7 @@ function Admin() {
                   items: [{}],
                 }}
                 validateMessages={validateMessages}
+                onFinishFailed={handleFinishFailed}
               >
                 <Form.List name="items">
                   {(fields, { add, remove }) => (
@@ -344,12 +360,22 @@ function Admin() {
                                       <Form.Item
                                         noStyle
                                         name={[subField.name, "dashboard"]}
+                                        rules={[
+                                          {
+                                            required: true,
+                                          },
+                                        ]}
                                       >
                                         <Input placeholder="Dasboard Link" />
                                       </Form.Item>
                                       <Form.Item
                                         noStyle
                                         name={[subField.name, "dashboard_name"]}
+                                        rules={[
+                                          {
+                                            required: true,
+                                          },
+                                        ]}
                                       >
                                         <Input placeholder="Dashboard Name" />
                                       </Form.Item>
@@ -439,6 +465,7 @@ function Admin() {
                   items: [{}],
                 }}
                 validateMessages={validateMessages}
+                onFinishFailed={handleFinishFailed}
               >
                 <Form.List name="items">
                   {(fields, { add, remove }) => (
@@ -488,7 +515,7 @@ function Admin() {
                           </div>
 
                           {/* Nest Form.List */}
-                          <Form.Item label="Dashboards">
+                          <Form.Item label="Dashboards" >
                             <Form.List name={[field.name, "dashboards"]}>
                               {(subFields, subOpt) => (
                                 <div
@@ -503,12 +530,22 @@ function Admin() {
                                       <Form.Item
                                         noStyle
                                         name={[subField.name, "dashboard"]}
+                                        rules={[
+                                          {
+                                            required: true,
+                                          },
+                                        ]}
                                       >
                                         <Input placeholder="Dasboard Link" />
                                       </Form.Item>
                                       <Form.Item
                                         noStyle
                                         name={[subField.name, "dashboard_name"]}
+                                        rules={[
+                                          {
+                                            required: true,
+                                          },
+                                        ]}
                                       >
                                         <Input placeholder="Dashboard Name" />
                                       </Form.Item>
@@ -518,6 +555,11 @@ function Admin() {
                                         name={[
                                           subField.name,
                                           "dashboard_image",
+                                        ]}
+                                        rules={[
+                                          {
+                                            required: true,
+                                          },
                                         ]}
                                       >
                                         <Select placeholder="Dashboard Image">
