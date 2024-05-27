@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from "../Assets/logo.svg";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -68,7 +67,7 @@ function Login() {
       />}
       <div className="flex flex-col gap-4 justify-center items-center">
         <div className="w-[400px] rounded-md">
-          <img src={logo} alt="" />
+          <img src={'/logo.svg'} alt="" />
         </div>
         <div className="rounded-[10px] bg-[#ffffff] h-[45vh] w-[35vw] flex flex-col px-4 py-4">
           <p className="text-3xl">Login</p>
@@ -109,7 +108,7 @@ function Login() {
             <input
               type="submit"
               value="Login"
-              className="w-[100%] items-center p-4 bg-[#1C6E8C] text-[#ffffff] font-bold rounded-md cursor-pointer"
+              className="w-[100%] items-center p-4 bg-primaryColor text-[#ffffff] font-bold rounded-md cursor-pointer"
             />
             <div className="flex justify-end items-end">
               <Link to={"/resetpassword"} className="underline">

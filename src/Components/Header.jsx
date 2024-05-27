@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from "../Assets/logo.svg";
 import loginIcon from "../Assets/Login_icon 1.svg";
 import DownArrow from "../Assets/downArrow.svg";
 import { useNavigate } from "react-router-dom";
@@ -30,7 +29,7 @@ function Header(props) {
     <div className={`w-full h-20 flex flex-row justify-between items-center p-4 profile ${isHomeNav ? 'bg-[#f1f1f1]':'bg-[#fffffff]'}`}>
       <div className="basis-[18%] flex flex-row justify-center items-center">
         <img
-          src={logo}
+          src={'/logo.svg'}
           alt=""
           className=" h-14 w-[200px] rounded-sm cursor-pointer"
           onClick={() => {

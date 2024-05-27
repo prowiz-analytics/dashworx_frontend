@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from "../Assets/logo.svg";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import App, { API } from "../App";
@@ -79,7 +78,7 @@ function ResetPassword() {
       )}
       <div className="flex flex-col gap-4 justify-center items-center">
         <div className="w-[400px] rounded-md">
-          <img src={logo} alt="" />
+          <img src={'/logo.svg'} alt="" />
         </div>
         {!successPage && (
           <div className="rounded-[10px] bg-[#ffffff] h-[40vh] w-[40vw] flex flex-col px-4 py-4">
@@ -137,7 +136,7 @@ function ResetPassword() {
                 <input
                   type="submit"
                   value="Reset Password"
-                  className="w-[100%] items-center p-4 bg-[#1C6E8C] text-[#ffffff] font-bold rounded-md cursor-pointer"
+                  className="w-[100%] items-center p-4 bg-primaryColor text-[#ffffff] font-bold rounded-md cursor-pointer"
                 />
               )}
               {emailField && (
@@ -219,7 +218,7 @@ function ResetPassword() {
               <input
                 type="submit"
                 value="Back to Login"
-                className="w-[100%] items-center p-4 bg-[#1C6E8C] text-[#ffffff] font-bold rounded-md mt-4 cursor-pointer"
+                className="w-[100%] items-center p-4 bg-primaryColor text-[#ffffff] font-bold rounded-md mt-4 cursor-pointer"
                 onClick={() => navigate("/login")}
               />
             </form>

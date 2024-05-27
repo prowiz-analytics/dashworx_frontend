@@ -5,7 +5,7 @@ module.exports = {
   ],
   theme: {
     colors:{
-      primaryColor:"#1C6E8C",
+      primaryColor:process.env.REACT_APP_THEME_COLOR,
       hoverColor:"#274156",
     },
     extend: {},
