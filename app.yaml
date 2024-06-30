@@ -1,4 +1,4 @@
-service: {GAE_SERVICE_NAME}
+service: dashworx-portal
 runtime: nodejs20    
 handlers:
   - url: /static
