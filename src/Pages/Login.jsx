@@ -66,7 +66,7 @@ function Login() {
         }
       />}
       <div className="flex flex-col gap-4 justify-center items-center">
-        <div className="w-[400px] rounded-md">
+        <div className="w-[400px] rounded-md flex flex-row justify-center items-center h-[100px]">
           <img src={'/logo.svg'} alt="" />
         </div>
         <div className="rounded-[10px] bg-[#ffffff] h-[45vh] w-[35vw] flex flex-col px-4 py-4">
