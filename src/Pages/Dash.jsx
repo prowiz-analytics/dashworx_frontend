@@ -9,35 +9,68 @@ import SVG from "react-inlinesvg";
 function Dash() {
   const location = useLocation();
   const [showButton, setShowButton] = useState(false);
-
   useEffect(() => {
     const handleEsc = (event) => {
-      console.log(event)
-      if (event.key === "Escape") {
-        setIsEnlarged(false)
+      setIsEnlarged(false);
+      setIsEnlarged(false);
+      if (event.key === "Escape" && isEnlarged) {
+        if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+          // Exit fullscreen mode if currently in fullscreen
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+          }
+        }
+        // Set isEnlarged to false to hide the enlarged view
+        setIsEnlarged(false);
       }
+      setIsEnlarged(false);
     };
     window.addEventListener("keydown", handleEsc);
-
+    
     return () => {
       window.removeEventListener("keydown", handleEsc);
     };
   }, []);
-  const { data } = location.state;
-  console.log(data);
+  const { data } = location.state; 
+  // const { data } =
+  //   "https://lookerstudio.google.com/embed/reporting/4b0d501c-eec1-4414-8abd-12e0419f86d2/page/p_ab655w8zdd";
+  // console.log(data);
   const [loading, setLoading] = useState(true);
   const [isEnlarged, setIsEnlarged] = useState(false);
+  console.log("the value of is Enlarged is",isEnlarged);
   const [iframe, setIframe] = useState(0);
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
   }, []);
+  // useEffect(() => {
+  //   if (isEnlarged) {
+      
+  //     console.log(document.fullscreenElement);
+  //   } else {
+  //     console.log("not in")
+  //   }
+  // }, [isEnlarged]);
   const refreshDashboard = () => {
     setIframe((iframe) => iframe + 1);
   };
   const enlargeDashboard = () => {
     setIsEnlarged(true);
+    const element = document.documentElement;
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.webkitRequestFullscreen) {
+        /* Safari */
+        element.webkitRequestFullscreen();
+      } else if (element.msRequestFullscreen) {
+        /* IE11 */
+        element.msRequestFullscreen();
+      }
   };
   const handleMouseEnter = () => {
     setShowButton(true);
@@ -71,13 +104,15 @@ function Dash() {
       </div>
 
       {/* <button onClick={()=>setIframe(iframe => iframe + 1)}>Refresh</button> */}
-      <div className={`flex-auto bg-[#b1b1b1]  px-2 ${isEnlarged ? "mb-0" : "mb-12"}`}>
+      <div
+        className={`flex-auto bg-[#b1b1b1]  px-2 ${
+          isEnlarged ? "mb-0" : "mb-12"
+        }`}
+      >
         <div className="w-full h-full overflow-auto scroll-smooth mb-4 relative">
           <iframe
             key={iframe}
-            src={
-              data
-            }
+            src={data}
             className="w-full h-full"
             frameborder="0"
           ></iframe>
@@ -107,7 +142,7 @@ function Dash() {
           </div>
         )}
         <div className={`${isEnlarged ? "hidden" : "block"}`}>
-        <Footer />
+          <Footer />
         </div>
       </div>
     </div>

@@ -24,7 +24,7 @@ function Home() {
       setLoading(true);
       try {
         // Check if location.state is null after fetching data
-        console.log(localStorage.getItem("data"));
+        // console.log(localStorage.getItem("data"));
         if (localStorage.getItem("data") === null) {
           navigate("/login");
         } else {
@@ -105,7 +105,7 @@ function Home() {
                       to={"https://dashworx.co.uk/book-a-demo/"}
                       className=""
                     >
-                      <p className="font-[500] graphik-font text-[#28262C] hover:border-b-[1px]">
+                      <p className="font-[500] graphik-font text-[#28262C] hover:border-b-[1px] hover:border-[#000000] border-b-[1px] border-[#ffffff]">
                         Contact Dashworx
                       </p>
                     </Link>
@@ -114,7 +114,7 @@ function Home() {
                     
                     <img src={UpgradeIcon} alt="" />
                     <Link target="_blank" to={"https://billing.stripe.com/p/login/cN25ohbPQ3Z44x2000"} >
-                    <p className="font-[500] graphik-font text-[#28262C] hover:border-b-[1px]">Upgrade Plan</p>
+                    <p className="font-[500] graphik-font text-[#28262C] hover:border-b-[1px] hover:border-[#000000] border-b-[1px] border-[#ffffff]">Upgrade Plan</p>
                     </Link>
                   </div>
                 </div>
@@ -123,7 +123,7 @@ function Home() {
             <div className="w-[95%] flex flex-row justify-start items-center border-t-[1px] ml-2">
               <p className="py-2 quicksand-font ">
                 <span className="font-[600] text-[#28262C]">Data Hub </span>|
-                <span className="capitalize">{`${"Dashworx"}`}</span> Limited
+                <span className="ml-1 mr-1 capitalize">{`${"Dashworx"}`}</span> Limited
               </p>
             </div>
           </div>

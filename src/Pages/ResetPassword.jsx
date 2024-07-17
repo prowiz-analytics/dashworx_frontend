@@ -228,7 +228,7 @@ function ResetPassword() {
       <div className="flex flex-col w-full justify-center items-center gap-2">
         <div className="w-[90%] h-[2px] bg-[#000000]"></div>
         <p className="flex flex-row justify-start  w-[90%]">
-          Data Hub | <span className="capitalize">{"Dashworx"}</span> Limited
+          Data Hub | <span className="ml-1 mr-1 capitalize">{"Dashworx"}</span> Limited
         </p>
         <ToastContainer />
       </div>
