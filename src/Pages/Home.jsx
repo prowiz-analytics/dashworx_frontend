@@ -105,7 +105,7 @@ function Home() {
                       to={"https://dashworx.co.uk/book-a-demo/"}
                       className=""
                     >
-                      <p className="font-[500] graphik-font text-[#28262C] hover:border-b-[1px] hover:border-[#000000] border-b-[1px] border-[#ffffff]">
+                      <p className="font-[500] graphik-font text-[#28262C] hover:border-b-[1px] hover:border-[#000000] border-b-[1px] border-[#f1f1f1]">
                         Contact Dashworx
                       </p>
                     </Link>
@@ -114,7 +114,7 @@ function Home() {
                     
                     <img src={UpgradeIcon} alt="" />
                     <Link target="_blank" to={"https://billing.stripe.com/p/login/cN25ohbPQ3Z44x2000"} >
-                    <p className="font-[500] graphik-font text-[#28262C] hover:border-b-[1px] hover:border-[#000000] border-b-[1px] border-[#ffffff]">Upgrade Plan</p>
+                    <p className="font-[500] graphik-font text-[#28262C] hover:border-b-[1px] hover:border-[#000000] border-b-[1px] border-[#f1f1f1]">Upgrade Plan</p>
                     </Link>
                   </div>
                 </div>
