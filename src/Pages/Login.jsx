@@ -67,7 +67,7 @@ function Login() {
       />}
       <div className="flex flex-col gap-4 justify-center items-center">
         <div className="w-[400px] rounded-md flex flex-row justify-center items-center h-[125px]">
-          <img src={'/yfit.svg'} alt="" className="w-[400px] h-[125px]"/>  
+          <img src={'/logo.svg'} alt="" className="w-[400px] h-[125px]"/>  
         </div>
         <div className="rounded-[10px] bg-[#ffffff] h-[45vh] w-[35vw] flex flex-col px-4 py-4">
           <p className="text-3xl">Login</p>
