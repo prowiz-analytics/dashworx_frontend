@@ -51,16 +51,16 @@ function Home() {
       <Header isHomeNav={true} refreshBtn={false}/>
       <div className="flex flex-row">
         <div className="flex flex-col justify-between items-center sidenav basis-[20%] bg-[#f1f1f1] ">
-          <div className="flex flex-col justify-between items-center h-[25%] w-[90%] gap-10">
+          <div className="flex flex-col justify-between items-center h-[25%] w-[85%] gap-10">
             {/* <div className="border-b-[1px] w-[90%]">
               <p className="text-xl font-[500] text-center graphik-font text-[#28262C]">
                 Current Plan : {"Premium"}
               </p>
             </div> */}
-            <div className="flex flex-row justify-start items-center w-[100%] mt-2">
-              <div className="flex flex-col justify-start items-start gap-4 w-full ml-[10%]">
-                <h2 className="font-[600] quicksand-font">Summary</h2>
-                <div className="flex flex-col justify-start items-start gap-2 w-full graphik-font">
+            <div className="flex flex-row justify-start items-center w-[100%] mt-1">
+              <div className="flex flex-col justify-start items-start gap-4 w-full  border-t-[1px]">
+                {/* <h2 className="font-[600] quicksand-font">Summary</h2> */}
+                <div className="flex flex-col justify-start items-start gap-2 w-full graphik-font mt-4">
                   <div
                     className={`flex flex-row justify-start w-full items-center gap-4 cursor-pointer rounded-md px-2 py-2 ${
                       location.pathname === "/home" ? "bg-[#ffffff]" : "bg-none"
@@ -93,7 +93,7 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col w-[90%] gap-4 mb-4">
+          <div className="flex flex-col w-[95%] gap-4 mb-4">
             <div className="flex flex-row justify-start items-center w-[100%]">
               <div className="flex flex-col gap-4 w-full ml-[10%]">
                 <h2 className="font-[600] quicksand-font">Support</h2>
