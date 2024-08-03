@@ -52,12 +52,12 @@ function Home() {
       <div className="flex flex-row">
         <div className="flex flex-col justify-between items-center sidenav basis-[20%] bg-[#f1f1f1] ">
           <div className="flex flex-col justify-between items-center h-[25%] w-[90%] gap-10">
-            <div className="border-b-[1px] w-[90%]">
+            {/* <div className="border-b-[1px] w-[90%]">
               <p className="text-xl font-[500] text-center graphik-font text-[#28262C]">
                 Current Plan : {"Premium"}
               </p>
-            </div>
-            <div className="flex flex-row justify-start items-center w-[100%]">
+            </div> */}
+            <div className="flex flex-row justify-start items-center w-[100%] mt-2">
               <div className="flex flex-col justify-start items-start gap-4 w-full ml-[10%]">
                 <h2 className="font-[600] quicksand-font">Summary</h2>
                 <div className="flex flex-col justify-start items-start gap-2 w-full graphik-font">
