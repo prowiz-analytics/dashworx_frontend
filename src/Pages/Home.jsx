@@ -164,7 +164,7 @@ function Home() {
                       <div
                         className="w-[80%] h-[30vh] bg-[#1C6E8C] hover:bg-hoverColor cursor-pointer flex flex-col justify-center items-center gap-8 rounded-[10px] text-[#ffffff]"
                         onClick={() => {
-                          navigate(`/dash`, {
+                          navigate(`/dashboard`, {
                             state: { data: item.link },
                           });
                         }}
@@ -183,7 +183,7 @@ function Home() {
                       <div
                         className="w-[90%] h-[auto] bg-white cursor-pointer hover:bg-[#274156] hover:text-[#ffffff] group hover:fill-[#ffffff] fill-[#274156] flex flex-row justify-between px-10 items-center gap-8 rounded-[10px] text-[#28262C] border-[3px] border-[#274156]"
                         onClick={() => {
-                          navigate(`/dash`, {
+                          navigate(`/dashboard`, {
                             state: { data: JSON.parse(item.link) },
                           });
                         }}
