@@ -22,7 +22,7 @@ function App() {
           {/* <Route path='/dashboards' element={<Dashboards/>}/> */}
           <Route path='/home' element={<Home/>}/>
           <Route path='/admin' element={<Admin/>}/>
-          <Route path='/dash' element={<Dash/>}/>
+          <Route path='/dashboard' element={<Dash/>}/>
           <Route path='/resetpassword/:token' element={<PasswordPageReset/>}/>
         </Routes>
       </BrowserRouter>

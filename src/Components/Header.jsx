@@ -10,7 +10,7 @@ function Header(props) {
   // const handleClick = () => {
   //   setIsRefreshed(!isRefreshed);
   // };
-  const { isNavigatable, isHomeNav, refreshDashboard, refreshBtn, enlargeDashboard, isAdminNav } =
+  const { isNavigatable, isHomeNav, refreshDashboard, refreshBtn, enlargeDashboard, isAdminNav ,setIsEnlarged } =
     props;
   console.log(isNavigatable);
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ function Header(props) {
                   : "bg-white hover:bg-[#274156] hover:text-[#ffffff] hover:fill-[#ffffff] fill-[#274156]"
               }  border-[#274156] px-2 gap-2 py-2 justify-between items-center rounded-md cursor-pointer`}
               disabled={onRefresh}
-              onClick={enlargeDashboard}
+              onClick={()=>{setIsEnlarged(true);enlargeDashboard()}}
             >
               <SVG
                 src={"/enlarge.svg"}
