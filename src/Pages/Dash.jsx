@@ -7,6 +7,16 @@ import { LoadingOutlined } from "@ant-design/icons";
 import SVG from "react-inlinesvg";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { FloatButton } from "antd";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// function toastComponent(){
+//   return(
+//     <div className="">
+
+//     </div>
+//   )
+// }
 
 function Dash() {
   const screen1 = useFullScreenHandle();
@@ -50,9 +60,9 @@ function Dash() {
       window.removeEventListener("keydown", handleEsc);
     };
   }, []);
-  const { data } = location.state;
-  // const { data } =
-  //   "https://lookerstudio.google.com/embed/reporting/a8c2cb10-0742-404e-bd22-24fae10c7ab2/page/qlD";
+  // const { data } = location.state;
+  const { data } =
+    "https://lookerstudio.google.com/embed/reporting/a8c2cb10-0742-404e-bd22-24fae10c7ab2/page/qlD";
   console.log(data);
   const [loading, setLoading] = useState(true);
   const [isEnlarged, setIsEnlarged] = useState(false);
@@ -68,6 +78,16 @@ function Dash() {
     setIframe((iframe) => iframe + 1);
   };
   const enlargeDashboard = () => {
+    const notify = () => toast.info("Click Esc Key To Exit Fullscreen",{position: "bottom-left",theme:"dark",className: "toast-message",style: { // Inline styles
+      backgroundColor: '#274156', // Custom background color
+      color: 'white', // Custom text color
+      borderRadius: '10px',
+      padding: '10px',
+      border: '1px solid #888',
+      fontFamily: 'quicksand',
+      fontWeight: '400'
+  }});
+    notify()
     screen1.enter();
   };
 
@@ -141,34 +161,20 @@ function Dash() {
             <iframe
               key={iframe}
               src={
-                data
+                "https://lookerstudio.google.com/embed/reporting/a8c2cb10-0742-404e-bd22-24fae10c7ab2/page/qlD"
               }
               className="w-full h-full"
               frameborder="0"
             ></iframe>
-            {isEnlarged && (
-              <button
-                className="absolute bottom-0 w-auto 2xl:w-auto mr-[40%] opacity-80 hover:opacity-100 px-4 rounded-lg py-2 bg-[#274156] flex gap-2 flex-row justify-end items-center text-[#ffffff]"
-                onClick={() => exitFullScreen()}
-              >
-                <p className="">(esc)</p>
-                <div className="flex flex-row justify-center items-center gap-2">
-                  <p className="text-md">Exit</p>
-                  <SVG
-                    src={"/exitfullscreen.svg"}
-                    alt=""
-                    style={{ width: "1.5rem", height: "1.5rem" }}
-                  />
-                </div>
-              </button>
-            )}
           </div>
+          <ToastContainer />
         </FullScreen>
         <div className={`${isEnlarged ? "hidden" : "block"}`}>
           <Footer />
         </div>
       </div>
       {/* </FullScreen> */}
+      
     </div>
   );
 }
