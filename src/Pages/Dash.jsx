@@ -60,9 +60,9 @@ function Dash() {
       window.removeEventListener("keydown", handleEsc);
     };
   }, []);
-  // const { data } = location.state;
-  const { data } =
-    "https://lookerstudio.google.com/embed/reporting/a8c2cb10-0742-404e-bd22-24fae10c7ab2/page/qlD";
+  const { data } = location.state;
+  // const { data } =
+  //   "https://lookerstudio.google.com/embed/reporting/a8c2cb10-0742-404e-bd22-24fae10c7ab2/page/qlD";
   console.log(data);
   const [loading, setLoading] = useState(true);
   const [isEnlarged, setIsEnlarged] = useState(false);
@@ -161,7 +161,7 @@ function Dash() {
             <iframe
               key={iframe}
               src={
-                "https://lookerstudio.google.com/embed/reporting/a8c2cb10-0742-404e-bd22-24fae10c7ab2/page/qlD"
+                data
               }
               className="w-full h-full"
               frameborder="0"
