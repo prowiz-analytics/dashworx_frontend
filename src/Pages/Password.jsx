@@ -212,9 +212,10 @@ function PasswordPageReset() {
       </div>
       <div className="flex flex-col w-full justify-center items-center gap-2">
         <div className="w-[90%] h-[2px] bg-[#000000]"></div>
-        <p className="flex flex-row justify-start  w-[90%]">
-          Data Hub | <span className="ml-1 mr-1 capitalize">{"Dashworx"}</span> Limited
-        </p>
+        <p className="flex flex-row justify-start  w-[90%] py-2 quicksand-font ">
+                <span className="font-[600] text-[#28262C] mr-1">Data Hub </span>|
+                <span className="ml-1 mr-1">{`${"Powered by dashworx"}`}</span>
+              </p>
         <ToastContainer />
       </div>
     </div>

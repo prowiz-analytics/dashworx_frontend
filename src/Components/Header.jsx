@@ -21,7 +21,7 @@ function Header(props) {
     console.log("clicked");
     setIsOnRefresh(true);
     refreshDashboard();
-    setRotationAngle((prevAngle) => prevAngle - 1680); // Always subtract 180 degrees for counterclockwise rotation
+    setRotationAngle((prevAngle) => prevAngle - 1440); // Always subtract 180 degrees for counterclockwise rotation
     setTimeout(() => {
       setIsOnRefresh(false);
     }, 3000);
@@ -66,14 +66,14 @@ function Header(props) {
                 onRefresh
                   ? "disabled_btn"
                   : "bg-white hover:bg-[#274156] hover:text-[#ffffff] hover:fill-[#ffffff] fill-[#274156]"
-              }  border-[#274156] px-2 py-2 gap-2 justify-between items-center rounded-md cursor-pointer`}
+              }  border-[#274156] px-2 py-2 gap-2 flex justify-between items-center rounded-md cursor-pointer`}
               disabled={onRefresh}
               onClick={handleClick}
             >
               <SVG
                 src={"/restart_alt.svg"}
                 alt=""
-                style={{ transform: `rotate(${rotationAngle}deg)` }}
+                style={{ transform: `rotate(${rotationAngle}deg)`,width:'15px' ,height:'15px',transformOrigin: '7px 8.5px' }}
               />
             </button>
           </div>

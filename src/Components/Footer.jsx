@@ -4,9 +4,10 @@ function Footer() {
   return (
     <div className="flex flex-col w-full justify-center items-center gap-2 fixed ml-[1%]  bottom-0 pb-2 bg-[#ffffff]">
       <div className="w-[95%] h-[2px] mr-[5%] bg-[#000000]"></div>
-      <p className="flex flex-row justify-start  w-[100%]">
-        Data Hub | <span className="ml-1 mr-1 capitalize">{"Dashworx"}</span> Limited
-      </p>
+      <p className="py-2 quicksand-font ">
+                <span className="font-[600] text-[#28262C]">Data Hub </span>|
+                <span className="ml-1 mr-1">{`${"Powered by dashworx"}`}</span>
+              </p>
     </div>
   );
 }

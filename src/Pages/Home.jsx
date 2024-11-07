@@ -35,6 +35,7 @@ function Home() {
           console.log(data);
           setLoading(false);
           setData(data.data);
+          
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -106,29 +107,29 @@ function Home() {
                       className=""
                     >
                       <p className="font-[500] graphik-font text-[#28262C] hover:border-b-[1px] hover:border-[#000000] border-b-[1px] border-[#f1f1f1]">
-                        Contact Dashworx
+                        Contact
                       </p>
                     </Link>
                   </div>
-                  <div className="flex flex-row justify-center items-center gap-4 cursor-pointer">
+                  {/* <div className="flex flex-row justify-center items-center gap-4 cursor-pointer">
                     
                     <img src={UpgradeIcon} alt="" />
                     <Link target="_blank" to={"https://billing.stripe.com/p/login/cN25ohbPQ3Z44x2000"} >
                     <p className="font-[500] graphik-font text-[#28262C] hover:border-b-[1px] hover:border-[#000000] border-b-[1px] border-[#f1f1f1]">Upgrade Plan</p>
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
             <div className="w-[95%] flex flex-row justify-start items-center border-t-[1px] ml-2">
               <p className="py-2 quicksand-font ">
                 <span className="font-[600] text-[#28262C]">Data Hub </span>|
-                <span className="ml-1 mr-1 capitalize">{`${"Dashworx"}`}</span> Limited
+                <span className="ml-1 mr-1">{`${"Powered by dashworx"}`}</span>
               </p>
             </div>
           </div>
         </div>
-        <div className="basis-[80%] flex flex-col home-section">
+        <div className="basis-[80%] overflow-auto flex flex-col home-section">
           <div className="p-4">
             <p className="text-[4vmin] ml-8 font-[600] text-[#000000] flex flex-row">
               Welcome 
@@ -181,7 +182,7 @@ function Home() {
                   return (
                     <div className="w-[100%] flex flex-row justify-center items-center">
                       <div
-                        className="w-[90%] h-[auto] bg-white cursor-pointer hover:bg-[#274156] hover:text-[#ffffff] group hover:fill-[#ffffff] fill-[#274156] flex flex-row justify-between px-10 items-center gap-8 rounded-[10px] text-[#28262C] border-[3px] border-[#274156]"
+                        className="w-[90%] h-[auto] bg-[#F1F1F1] cursor-pointer hover:bg-[#274156] hover:text-[#ffffff] group hover:fill-[#ffffff] fill-[#274156] flex flex-row justify-between px-10 items-center gap-8 rounded-[10px] text-[#28262C] border-[3px] border-[#274156]"
                         onClick={() => {
                           navigate(`/dashboard`, {
                             state: { data: JSON.parse(item.link) },

@@ -7,6 +7,7 @@ import Password from './Pages/Password';
 import PasswordPageReset from './Pages/Password';
 import Admin from './Pages/Admin';
 import Home from './Pages/Home';
+import { Helmet } from 'react-helmet';
 
 // URI OF API
 export const API = "https://dashworx.prowiz.io"
@@ -14,6 +15,9 @@ export const API = "https://dashworx.prowiz.io"
 function App() {
   return (
     <div className="App">
+      <Helmet>
+        <title>{`${process.env.REACT_APP_ENV_NAME || 'Client'} - Data Hub`}</title>
+      </Helmet>
       <BrowserRouter>
         <Routes>
           <Route path='/login' element={<Login/>}/>
