@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <Helmet>
-        <title>{`${process.env.REACT_APP_ENV_NAME || 'Client'} - Data Hub`}</title>
+        <title className='capitalize'>{`${process.env.REACT_APP_CLIENT_NAME || 'Client'} - Data Hub`}</title>
       </Helmet>
       <BrowserRouter>
         <Routes>
