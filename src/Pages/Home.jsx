@@ -9,7 +9,7 @@ import KPI from "../Assets/kpi.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API } from "../App";
-import SVG from 'react-inlinesvg';
+import SVG from "react-inlinesvg";
 
 function Home() {
   const location = useLocation();
@@ -25,17 +25,113 @@ function Home() {
       try {
         // Check if location.state is null after fetching data
         // console.log(localStorage.getItem("data"));
-        if (localStorage.getItem("data") === null) {
+        if (localStorage.getItem("data") !== null) {
           navigate("/login");
         } else {
-          let user = JSON.parse(localStorage.getItem("data"));
-          const data = await axios.get(
-            `${API}/auth/dashboards?email=${user.email}`
-          );
-          console.log(data);
+          // let user = JSON.parse(localStorage.getItem("data"));
+          // const data = await axios.get(
+          //   `${API}/auth/dashboards?email=${user.email}`
+          // );
+          // console.log(data);
           setLoading(false);
-          setData(data.data);
-          
+          // setData(data.data);
+          let data = {
+            email: "demo@dashworx.co.uk",
+            dashboards: [
+              {
+                link: '"https://lookerstudio.google.com/embed/reporting/efdaed51-db5b-447a-bcbe-8a7d9e935c40/page/2jyxD"',
+                name: "Master Ads Overview",
+                image: "Pie_Chart_Icon",
+              },
+              {
+                link: '"https://lookerstudio.google.com/embed/reporting/5a26b988-cba2-4613-a38a-450ba0215970/page/2jyxD"',
+                name: "Shopify Report",
+                image: "Chart_Icon",
+              },
+              {
+                link: '"https://lookerstudio.google.com/embed/reporting/8d6cf582-5ee0-43bf-bc9f-66a5ddd71be9/page/WrX6D"',
+                name: "Retention Overview",
+                image: "User_Icon",
+              },
+              {
+                link: '"https://lookerstudio.google.com/embed/reporting/d09fbf42-53d4-4644-b13f-ec9451713aa9/page/2jyxD"',
+                name: "Master Ecom Overview",
+                image: "Heartbeat_Icon",
+              },
+              {
+                link: '"https://lookerstudio.google.com/embed/reporting/5d27bf9b-7447-4944-9362-cad35b785a4a/page/2jyxD"',
+                name: "Google Analytics Report",
+                image: "Web_Icon",
+              },
+              {
+                link: '"https://lookerstudio.google.com/embed/reporting/1871f543-3696-42d3-bfdb-f716d1d8f8ae/page/p_j1vqqokqhd"',
+                name: "Google Ads Report",
+                image: "Lightbulb_Icon",
+              },
+              {
+                link: '"https://lookerstudio.google.com/embed/reporting/efdaed51-db5b-447a-bcbe-8a7d9e935c40/page/2jyxD"',
+                name: "Master Ads Overview",
+                image: "Pie_Chart_Icon",
+              },
+              {
+                link: '"https://lookerstudio.google.com/embed/reporting/5a26b988-cba2-4613-a38a-450ba0215970/page/2jyxD"',
+                name: "Shopify Report",
+                image: "Chart_Icon",
+              },
+              {
+                link: '"https://lookerstudio.google.com/embed/reporting/8d6cf582-5ee0-43bf-bc9f-66a5ddd71be9/page/WrX6D"',
+                name: "Retention Overview",
+                image: "User_Icon",
+              },
+              {
+                link: '"https://lookerstudio.google.com/embed/reporting/d09fbf42-53d4-4644-b13f-ec9451713aa9/page/2jyxD"',
+                name: "Master Ecom Overview",
+                image: "Heartbeat_Icon",
+              },
+              {
+                link: '"https://lookerstudio.google.com/embed/reporting/5d27bf9b-7447-4944-9362-cad35b785a4a/page/2jyxD"',
+                name: "Google Analytics Report",
+                image: "Web_Icon",
+              },
+              {
+                link: '"https://lookerstudio.google.com/embed/reporting/1871f543-3696-42d3-bfdb-f716d1d8f8ae/page/p_j1vqqokqhd"',
+                name: "Google Ads Report",
+                image: "Lightbulb_Icon",
+              },
+              {
+                link: '"https://lookerstudio.google.com/embed/reporting/efdaed51-db5b-447a-bcbe-8a7d9e935c40/page/2jyxD"',
+                name: "Master Ads Overview",
+                image: "Pie_Chart_Icon",
+              },
+              {
+                link: '"https://lookerstudio.google.com/embed/reporting/5a26b988-cba2-4613-a38a-450ba0215970/page/2jyxD"',
+                name: "Shopify Report",
+                image: "Chart_Icon",
+              },
+              {
+                link: '"https://lookerstudio.google.com/embed/reporting/8d6cf582-5ee0-43bf-bc9f-66a5ddd71be9/page/WrX6D"',
+                name: "Retention Overview",
+                image: "User_Icon",
+              },
+              {
+                link: '"https://lookerstudio.google.com/embed/reporting/d09fbf42-53d4-4644-b13f-ec9451713aa9/page/2jyxD"',
+                name: "Master Ecom Overview",
+                image: "Heartbeat_Icon",
+              },
+              {
+                link: '"https://lookerstudio.google.com/embed/reporting/5d27bf9b-7447-4944-9362-cad35b785a4a/page/2jyxD"',
+                name: "Google Analytics Report",
+                image: "Web_Icon",
+              },
+              {
+                link: '"https://lookerstudio.google.com/embed/reporting/1871f543-3696-42d3-bfdb-f716d1d8f8ae/page/p_j1vqqokqhd"',
+                name: "Google Ads Report",
+                image: "Lightbulb_Icon",
+              },
+            ],
+            firstName: "Demo",
+          };
+          setData(data);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -47,11 +143,14 @@ function Home() {
 
     getData();
   }, [location.state, navigate]);
+  console.log(data);
   return (
     <div className="flex flex-col">
-      <Header isHomeNav={true} refreshBtn={false}/>
-      <div className="flex flex-row">
-        <div className="flex flex-col justify-between items-center sidenav basis-[20%] bg-[#f1f1f1] ">
+      <div className="fixed top-0 h-[10vh] w-full">
+        <Header isHomeNav={true} refreshBtn={false} />
+      </div>
+      <div className="flex flex-row w-full">
+        <div className="flex flex-col justify-between items-center sidenav top-[10vh] w-[20vw] fixed left-0 bg-[#f1f1f1] ">
           <div className="flex flex-col justify-between items-center h-[25%] w-[85%] gap-10">
             {/* <div className="border-b-[1px] w-[90%]">
               <p className="text-xl font-[500] text-center graphik-font text-[#28262C]">
@@ -67,9 +166,9 @@ function Home() {
                       location.pathname === "/home" ? "bg-[#ffffff]" : "bg-none"
                     }`}
                   >
-                    <img src={DashboardIcon} alt="" />
+                    <img src={DashboardIcon} alt="" className="w-[1vw]"/>
                     <p
-                      className={` text-[#28262C] ${
+                      className={` text-[#28262C] text-[2vmin] ${
                         location.pathname === "/home"
                           ? "font-[700]"
                           : "font-[500]"
@@ -85,8 +184,8 @@ function Home() {
                         : "bg-none"
                     }`}
                   >
-                    <img src={InsightsIcon} alt="" />
-                    <p className="text-[#8a8a8a] font-[500]">
+                    <img src={InsightsIcon} alt="" className="w-[1vw]"/>
+                    <p className="text-[#8a8a8a] text-[2vmin] font-[500]">
                       High Level Insights
                     </p>
                   </div>
@@ -97,16 +196,20 @@ function Home() {
           <div className="flex flex-col w-[95%] gap-4 mb-4">
             <div className="flex flex-row justify-start items-center w-[100%]">
               <div className="flex flex-col gap-4 w-full ml-[10%]">
-                <h2 className="font-[600] quicksand-font">Support</h2>
+                <h2 className="font-[600] quicksand-font text-[2vmin]">Support</h2>
                 <div className="flex flex-col justify-start items-start gap-4 w-full">
                   <div className="flex flex-row justify-center items-center gap-4 cursor-pointer">
-                    <img src={ChatIcon} alt="" className="w-[18px] h-[28px] font-[800 ]" />
+                    <img
+                      src={ChatIcon}
+                      alt=""
+                      className="w-[18px] h-[28px]"
+                    />
                     <Link
                       target="_blank"
                       to={"https://dashworx.co.uk/book-a-demo/"}
                       className=""
                     >
-                      <p className="font-[500] graphik-font text-[#28262C] hover:border-b-[1px] hover:border-[#000000] border-b-[1px] border-[#f1f1f1]">
+                      <p className="font-[500] text-[2vmin] graphik-font text-[#28262C] hover:border-b-[1px] hover:border-[#000000] border-b-[1px] border-[#f1f1f1]">
                         Contact
                       </p>
                     </Link>
@@ -122,17 +225,17 @@ function Home() {
               </div>
             </div>
             <div className="w-[95%] flex flex-row justify-start items-center border-t-[1px] ml-2">
-              <p className="py-2 quicksand-font ">
+              <p className="py-2 quicksand-font text-[2vmin]">
                 <span className="font-[600] text-[#28262C]">Data Hub </span>|
                 <span className="ml-1 mr-1">{`${"Powered by dashworx"}`}</span>
               </p>
             </div>
           </div>
         </div>
-        <div className="basis-[80%] overflow-auto flex flex-col home-section">
+        <div className="basis-[80%] mt-[10vh] overflow-auto flex flex-col ml-[20%] home-section">
           <div className="p-4">
-            <p className="text-[4vmin] ml-8 font-[600] text-[#000000] flex flex-row">
-              Welcome 
+            <p className="text-[4vmin]  ml-8 font-[600] text-[#000000] flex flex-row">
+              Welcome
               <Skeleton
                 title={false}
                 loading={loading}
@@ -147,7 +250,7 @@ function Home() {
                   rows: 2,
                 }}
               >
-                {" "+data?.firstName}
+                {" " + data?.firstName}
               </Skeleton>
             </p>
           </div>
@@ -170,8 +273,12 @@ function Home() {
                           });
                         }}
                       >
-                        <img src={'/Dashboard_icons/Chart_Icon.svg'} alt="" className="w-20 h-20" />
-                        <p className="">{`${item.name}`}</p>
+                        <img
+                          src={"/Dashboard_icons/Chart_Icon.svg"}
+                          alt=""
+                          className="w-20 h-20"
+                        />
+                        <p className="text-[2.3vmin]">{`${item.name}`}</p>
                       </div>
                     </Skeleton>
                   );
@@ -182,16 +289,19 @@ function Home() {
                   return (
                     <div className="w-[100%] flex flex-row justify-center items-center">
                       <div
-                        className="w-[90%] h-[auto] bg-[#F1F1F1] cursor-pointer hover:bg-[#274156] hover:text-[#ffffff] group hover:fill-[#ffffff] fill-[#274156] flex flex-row justify-between px-10 items-center gap-8 rounded-[10px] text-[#28262C] border-[3px] border-[#274156]"
+                        className="w-[90%] h-[9vh] bg-[#F1F1F1] cursor-pointer hover:bg-[#274156] hover:text-[#ffffff] group hover:fill-[#ffffff] fill-[#274156] flex flex-row justify-between px-10 items-center gap-8 rounded-[10px] text-[#28262C] border-[3px] border-[#274156]"
                         onClick={() => {
                           navigate(`/dashboard`, {
                             state: { data: JSON.parse(item.link) },
                           });
                         }}
                       >
-                        <p className="font-[900] text-lg uppercase">{`${item.name}`}</p>
+                        <p className="font-[900] text-[2vh] text-lg uppercase">{`${item.name}`}</p>
                         {/* <img src={'/Dashboard_icons/Chart_Icon.svg'} alt="" className="w-20 h-20 "/> */}
-                        <SVG src={`/Dashboard_icons/${item.image}.svg`} className="w-10 h-20"/>
+                        <SVG
+                          src={`/Dashboard_icons/${item.image}.svg`}
+                          className="w-10 h-[5vh]"
+                        />
                       </div>
                     </div>
                   );
