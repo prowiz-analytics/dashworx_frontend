@@ -81,7 +81,7 @@ function ResetPassword() {
           <img src={'/logo.svg'} alt="" />
         </div>
         {!successPage && (
-          <div className="rounded-[10px] bg-[#ffffff] h-[40vh] w-[40vw] flex flex-col px-4 py-4">
+          <div className="rounded-[10px] bg-[#ffffff] quicksand-font h-[40vh] w-[40vw] flex flex-col px-4 py-4">
             <p className="text-3xl">Password Reset</p>
             <p className="text-xl">
               We will send you an email to reset your password
