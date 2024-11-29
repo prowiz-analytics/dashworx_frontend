@@ -66,17 +66,17 @@ function Login() {
         }
       />}
       <div className="flex flex-col gap-4 h-[55vh] mb-[15vh] justify-center items-center">
-        <div className="sm:w-[20vw] md:w-[20vw] rounded-md flex flex-row justify-center items-center">
-          <img src={'/logo.svg'} alt="" className="md:w-[20vw] h-[12vh]"/>  
+        <div className=" rounded-md flex flex-row justify-center items-center">
+          <img src={'/logo.svg'} alt="" className="sm:w-[30vw] md:w-[30vw] lg:w-[28vw] xl:w-[24vw] h-[15vh]"/>  
         </div>
-        <div className="rounded-[10px] bg-[#ffffff] h-[55vh] w-[35vw] sm:w-[40vw] md:w-[35vw] 2xl:w-[40vw] quicksand-font flex flex-col 2xl:px-12  px-4 py-4">
-          <p className="text-[3vmin]">Login</p>
+        <div className="rounded-[10px] bg-[#ffffff] h-[55vh] w-[35vw] sm:w-[40vw] md:w-[35vw] 2xl:w-[30vw] quicksand-font flex flex-col 2xl:px-12  px-4 py-4">
+          <p className="text-[3vmin] font-[500]">Login</p>
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col h-full max-h-900:gap-2 gap-4 justify-around"
           >
             <div className="flex flex-col">
-              <label htmlFor="" className="text-[2.3vmin]">Username</label>
+              <label htmlFor="" className="text-[1.6vmin]">Username</label>
               <input
                 placeholder="Username"
                 {...register("username", { required: true })}
@@ -84,21 +84,21 @@ function Login() {
                   errors.username
                     ? "error_outline focus:border-[red]"
                     : "focus:border-[black] no_outline"
-                } text-[2.3vmin] focus:outline-none max-h-900:px-2 max-h-990:py-3 px-4 py-3 rounded-md`}
+                } text-[1.8vmin] focus:outline-none max-h-900:px-2 max-h-990:py-3 px-3 py-3 rounded-md`}
               />
               {errors.username && (
                 <span className="text-[#DD0F0F]">This field is required</span>
               )}
             </div>
             <div className="flex flex-col">
-              <label htmlFor="" className="text-[2.3vmin]">Password</label>
+              <label htmlFor="" className="text-[1.6vmin]">Password</label>
               <input
                 type={isPassVisible ? "text" : "password"}
                 placeholder="Password"
                 {...register("password", { required: true })}
                 className={`${
                   errors.password ? "error_outline" : "no_outline"
-                } text-[2.3vmin] focus:outline-none max-h-900:px-2 max-h-990:py-3 px-4 py-3 rounded-md`}
+                } text-[1.8vmin] focus:outline-none max-h-900:px-2 max-h-990:py-3 px-3 py-3 rounded-md`}
               />
               {errors.password && (
                 <span className="text-[#DD0F0F]">This field is required</span>
@@ -107,9 +107,9 @@ function Login() {
             <input
               type="submit"
               value="Login"
-              className="w-[100%] mt-[1vh] text-[2.3vmin] items-center max-h-900:px-2 max-h-900:py-4 px-4 py-4 p-4 bg-primaryColor text-[#ffffff] font-bold rounded-md cursor-pointer"
+              className="w-[100%] mt-[1vh] text-[1.8vmin] items-center max-h-900:px-2 max-h-900:py-4 px-4 py-4 p-4 bg-primaryColor text-[#ffffff] font-bold rounded-md cursor-pointer"
             />
-            <div className="flex justify-end items-end text-[2.3vmin]">
+            <div className="flex justify-end items-end text-[1.6vmin]">
               <Link to={"/resetpassword"} className="underline">
                 Forgot Password?
               </Link>
@@ -119,7 +119,7 @@ function Login() {
       </div>
       <div className="flex flex-col fixed bottom-[5vh] w-full justify-center items-center gap-2">
         <div className="w-[90%] h-[2px] bg-[#000000]"></div>
-        <p className="py-2 text-[2.3vmin] quicksand-font flex flex-row justify-start  w-[90%]">
+        <p className="py-2 text-[1.8vmin] quicksand-font flex flex-row justify-start  w-[90%]">
                 <span className="font-[600] text-[#28262C] mr-1">Data Hub </span>|
                 <span className="ml-1 mr-1">{`${"Powered by dashworx"}`}</span>
               </p>

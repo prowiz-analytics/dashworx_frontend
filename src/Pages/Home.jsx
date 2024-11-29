@@ -32,6 +32,7 @@ function Home() {
           const data = await axios.get(
             `${API}/auth/dashboards?email=${user.email}`
           );
+          
           console.log(data);
           setLoading(false);
           setData(data.data);
@@ -53,7 +54,7 @@ function Home() {
         <Header isHomeNav={true} refreshBtn={false} />
       </div>
       <div className="flex flex-row w-full">
-        <div className="flex flex-col justify-between items-center sidenav top-[10vh] w-[20vw] fixed left-0 bg-[#f1f1f1] ">
+        <div className="flex flex-col justify-between items-center sidenav top-[10vh] md:w-[20vw] lg:w-[22vw] xl:w-[22vw] fixed left-0 bg-[#f1f1f1]">
           <div className="flex flex-col justify-between items-center h-[25%] w-[85%] gap-10">
             {/* <div className="border-b-[1px] w-[90%]">
               <p className="text-xl font-[500] text-center graphik-font text-[#28262C]">
@@ -71,7 +72,7 @@ function Home() {
                   >
                     <img src={DashboardIcon} alt="" className="w-[1vw]"/>
                     <p
-                      className={` text-[#28262C] text-[2vmin] ${
+                      className={` text-[#28262C] text-[1.8vmin] ${
                         location.pathname === "/home"
                           ? "font-[700]"
                           : "font-[500]"
@@ -88,7 +89,7 @@ function Home() {
                     }`}
                   >
                     <img src={InsightsIcon} alt="" className="w-[1vw]"/>
-                    <p className="text-[#8a8a8a] text-[2vmin] font-[500]">
+                    <p className="text-[#8a8a8a] text-[1.8vmin] font-[500]">
                       High Level Insights
                     </p>
                   </div>
@@ -99,7 +100,7 @@ function Home() {
           <div className="flex flex-col w-[95%] gap-4 mb-4">
             <div className="flex flex-row justify-start items-center w-[100%]">
               <div className="flex flex-col gap-4 w-full ml-[10%]">
-                <h2 className="font-[600] quicksand-font text-[2vmin]">Support</h2>
+                <h2 className="font-[600] quicksand-font text-[1.8vmin]">Support</h2>
                 <div className="flex flex-col justify-start items-start gap-4 w-full">
                   <div className="flex flex-row justify-center items-center gap-4 cursor-pointer">
                     <img
@@ -112,7 +113,7 @@ function Home() {
                       to={"https://dashworx.co.uk/book-a-demo/"}
                       className=""
                     >
-                      <p className="font-[500] text-[2vmin] graphik-font text-[#28262C] hover:border-b-[1px] hover:border-[#000000] border-b-[1px] border-[#f1f1f1]">
+                      <p className="font-[500] text-[1.8vmin] graphik-font text-[#28262C] hover:border-b-[1px] hover:border-[#000000] border-b-[1px] border-[#f1f1f1]">
                         Contact
                       </p>
                     </Link>
@@ -128,16 +129,16 @@ function Home() {
               </div>
             </div>
             <div className="w-[95%] flex flex-row justify-start items-center border-t-[1px] ml-2">
-              <p className="py-2 quicksand-font text-[2vmin]">
+              <p className="py-2 quicksand-font text-[1.8vmin]">
                 <span className="font-[600] text-[#28262C]">Data Hub </span>|
                 <span className="ml-1 mr-1">{`${"Powered by dashworx"}`}</span>
               </p>
             </div>
           </div>
         </div>
-        <div className="basis-[80%] mt-[10vh] overflow-auto flex flex-col ml-[20%] home-section">
+        <div className="basis-[80%] mt-[10vh] overflow-auto flex flex-col ml-[22vw] md:ml-[20vw] lg:ml-[22vw] xl:ml-[22vw] home-section">
           <div className="p-4">
-            <p className="text-[4vmin]  ml-8 font-[600] text-[#000000] flex flex-row">
+            <p className="text-[4vmin] ml-8 font-[600] text-[#000000] flex flex-row">
               Welcome
               <Skeleton
                 title={false}
@@ -192,7 +193,7 @@ function Home() {
                   return (
                     <div className="w-[100%] flex flex-row justify-center items-center">
                       <div
-                        className="w-[90%] h-[9vh] bg-[#F1F1F1] cursor-pointer hover:bg-[#274156] hover:text-[#ffffff] group hover:fill-[#ffffff] fill-[#274156] flex flex-row justify-between px-10 items-center gap-8 rounded-[10px] text-[#28262C] border-[3px] border-[#274156]"
+                        className="w-[90%] h-[10vh] max-h-900:h-[12vh] min-h-1000:h-[100px] max-h-600:h-[12vh] bg-[#F1F1F1] cursor-pointer hover:bg-[#274156] hover:text-[#ffffff] group hover:fill-[#ffffff] fill-[#274156] flex flex-row justify-between px-10 items-center gap-8 rounded-[10px] text-[#28262C] border-[3px] border-[#274156]"
                         onClick={() => {
                           navigate(`/dashboard`, {
                             state: { data: JSON.parse(item.link) },

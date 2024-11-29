@@ -16,9 +16,10 @@ module.exports = {
         'xl': '1700px',
         '2xl':'2000px',
         // Custom max-height breakpoints
-        'max-h-600': { 'raw': '(max-height: 600px)' },
-        'max-h-800': { 'raw': '(max-height: 800px)' },
-        'max-h-900': { 'raw': '(max-height: 900px)' },
+        'max-h-600':  { 'raw': '(max-height: 600px)' },
+        'max-h-800':  { 'raw': '(max-height: 800px)' },
+        'max-h-900':  { 'raw': '(max-height: 900px)' },
+        'min-h-1000': {'raw':'(min-height: 1000px)'},
         'min-h-1400': {'raw':'(min-height: 1400px)'}
       },
     },

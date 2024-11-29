@@ -36,7 +36,7 @@ function Header(props) {
         <img
           src={"/logo.svg"}
           alt=""
-          className=" h-14 w-[10vw] rounded-sm cursor-pointer"
+          className=" h-14 w-[14vw] rounded-sm cursor-pointer"
           onClick={() => {
             if (isNavigatable) {
               navigate("/home");
@@ -80,19 +80,20 @@ function Header(props) {
           </div>
         )}
         <div
-          className="sm:w-[10vw] lg:w-[8vw] md:w-[9vw] relative py-1 bg-hoverColor text-[#f1f1f1] flex flex-row gap-1 mr-[0.5vw] rounded-md justify-between items-center px-2 profile"
+          className="relative sm:w-[120px] md:w-[150px] xl:w-[150px] h-[36px]"
           onMouseOver={() => setHover(true)}
           onMouseOut={() => setHover(false)}
         >
-          <img src={loginIcon} alt="" className="w-[18px] h-[3vh]" />
-          <p className="font-bold quicksand-font text-[1.5vmin]">My Account</p>
+          <div className="py-1 w-full absolute bg-hoverColor text-[#f1f1f1] flex flex-row gap-1 mr-[0.5vw] rounded-md justify-between items-center px-2 profile">
+          <img src={loginIcon} alt="" className="w-[1vw] h-[3vh]" />
+          <p className="font-bold quicksand-font text-[1.3vmin]">My Account</p>
           <img src={DownArrow} alt="" className="w-[10px]"/>
-        </div>
-        {hover && (
+          </div>
+          {hover && (
         <div
-          className={`absolute sm:w-[10vw] max-h-900:border-[0.5px] lg:w-[8vw] md:w-[9vw] quicksand-font bg-[#f1f1f1] h-auto border-[2px] border-[#274156
+          className={`absolute max-h-900:border-[0.5px] text-[#000000] w-full top-0 quicksand-font bg-[#f1f1f1] h-auto border-[2px] border-[#274156
 ] mt-[3vh] py-2 px-2  rounded-[10px] no-profile flex flex-col gap-1 font-[600] ${
-            isAdminNav ? "right-[48px]" : "right-[1.4vw]"
+            isAdminNav ? "right-[48px]" : "right-[0%]"
           }`}
           onMouseOver={() => setHover(true)}
           onMouseOut={() => setHover(false)}
@@ -124,6 +125,8 @@ function Header(props) {
           </p>
         </div>
       )}
+        </div>
+        
 
 
       </div>
