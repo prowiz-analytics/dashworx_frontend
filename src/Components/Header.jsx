@@ -36,7 +36,7 @@ function Header(props) {
         <img
           src={"/logo.svg"}
           alt=""
-          className=" h-14 w-[14vw] rounded-sm cursor-pointer"
+          className="h-14 max-h-600:w-[12vw] md:w-[14vw] rounded-sm cursor-pointer"
           onClick={() => {
             if (isNavigatable) {
               navigate("/home");
@@ -44,7 +44,7 @@ function Header(props) {
           }}
         />
       </div>
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-row justify-center items-center gap-4">
         {refreshBtn && (
           <div className="flex flex-row justify-center items-center gap-4">
             <button
@@ -80,26 +80,25 @@ function Header(props) {
           </div>
         )}
         <div
-          className="relative sm:w-[120px] md:w-[150px] xl:w-[150px] h-[36px]"
+          className="relative sm:w-[120px] h-full flex flex-col justify-center items-center md:w-[120px] xl:w-[160px]"
           onMouseOver={() => setHover(true)}
           onMouseOut={() => setHover(false)}
         >
           <div className="py-1 w-full absolute bg-hoverColor text-[#f1f1f1] flex flex-row gap-1 mr-[0.5vw] rounded-md justify-between items-center px-2 profile">
           <img src={loginIcon} alt="" className="w-[1vw] h-[3vh]" />
-          <p className="font-bold quicksand-font text-[1.3vmin]">My Account</p>
+          <p className="font-bold quicksand-font max-h-600:text-[0.75rem] text-[1rem]">My Account</p>
           <img src={DownArrow} alt="" className="w-[10px]"/>
           </div>
           {hover && (
         <div
-          className={`absolute max-h-900:border-[0.5px] text-[#000000] w-full top-0 quicksand-font bg-[#f1f1f1] h-auto border-[2px] border-[#274156
-] mt-[3vh] py-2 px-2  rounded-[10px] no-profile flex flex-col gap-1 font-[600] ${
-            isAdminNav ? "right-[48px]" : "right-[0%]"
+          className={`absolute max-h-900:border-[0.5px] text-[#000000] w-full top-0 quicksand-font bg-[#f1f1f1] h-auto border-[2px] border-[#274156]  py-2 px-2 mt-[6px] rounded-b-[10px] rounded-l-[10px] no-profile flex flex-col gap-1 font-[600] ${
+            isAdminNav ? "right-[50px]" : "right-[5px]"
           }`}
           onMouseOver={() => setHover(true)}
           onMouseOut={() => setHover(false)}
         >
           <p
-            className="cursor-pointer text-[1.5vmin]"
+            className="cursor-pointer max-h-600:text-[0.75rem] text-[1rem]"
             onClick={() => {
               if (isNavigatable) {
                 navigate("/home");
@@ -109,7 +108,7 @@ function Header(props) {
             Home
           </p>
           <p
-            className="cursor-pointer text-[1.5vmin]"
+            className="cursor-pointer max-h-600:text-[0.75rem] text-[1rem]"
             onClick={() => {
               navigate("/login");
               localStorage.removeItem("data");
@@ -118,7 +117,7 @@ function Header(props) {
             Log Out
           </p>
           <p
-            className="cursor-pointer text-[1.5vmin]"
+            className="cursor-pointer max-h-600:text-[0.75rem] text-[1rem]"
             onClick={() => navigate("/resetpassword")}
           >
             Change Password
@@ -126,9 +125,6 @@ function Header(props) {
         </div>
       )}
         </div>
-        
-
-
       </div>
       
     </div>

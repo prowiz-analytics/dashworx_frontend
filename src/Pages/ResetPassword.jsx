@@ -76,13 +76,13 @@ function ResetPassword() {
           }
         />
       )}
-      <div className="flex flex-col gap-4 justify-center items-center">
-        <div className="w-[400px] rounded-md">
-          <img src={'/logo.svg'} alt="" />
+      <div className="flex flex-col gap-4 h-[55vh] mb-[15vh] justify-center items-center">
+        <div className=" rounded-md flex flex-row justify-center items-center">
+          <img src={'/logo.svg'} alt="" className="sm:w-[20vw] md:w-[30vw] lg:w-[28vw] xl:w-[24vw] max-h-600:h-[10vh] h-[15vh]"/>  
         </div>
         {!successPage && (
-          <div className="rounded-[10px] bg-[#ffffff] quicksand-font h-[40vh] w-[40vw] flex flex-col px-4 py-4">
-            <p className="text-3xl">Password Reset</p>
+          <div className="rounded-[10px] bg-[#ffffff] max-h-600:h-[auto] h-[35vh] w-[35vw] sm:w-[27vw] md:w-[32vw] 2xl:w-[30vw] quicksand-font flex flex-col max-h-600:py-4 2xl:px-12  px-4 py-4">
+            <p className="max-h-600:text-[1.25rem] mb-[10px] text-[2rem] font-[500]">Reset Password</p>
             <p className="text-xl">
               We will send you an email to reset your password
             </p>
@@ -225,14 +225,14 @@ function ResetPassword() {
           </div>
         )}
       </div>
-      <div className="flex flex-col w-full justify-center items-center gap-2">
-        <div className="w-[90%] h-[2px] bg-[#000000]"></div>
-        <p className="flex flex-row justify-start w-[90%] py-2 quicksand-font ">
-                <span className="font-[600] text-[#28262C] mr-1">Data Hub </span>|
-                <span className="ml-1 mr-1">{`${"Powered by dashworx"}`}</span>
-              </p>
-        <ToastContainer />
-      </div>
+      <div className="flex flex-col fixed bottom-[5vh] w-full justify-center items-center gap-2">
+              <div className="w-[90%] h-[2px] bg-[#000000]"></div>
+              <p className="py-2 max-h-600:text-[0.75rem] text-[1rem] quicksand-font flex flex-row justify-start  w-[90%]">
+                      <span className="font-[600] text-[#28262C] mr-1">Data Hub </span>|
+                      <span className="ml-1 mr-1">{`${"Powered by dashworx"}`}</span>
+                    </p>
+            <ToastContainer />
+            </div>
     </div>
   );
 }
