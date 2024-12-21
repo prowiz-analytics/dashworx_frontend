@@ -84,7 +84,6 @@ function Home() {
           //     firstName: "Demo",
           //   },
           // };
-
           console.log(data);
           setLoading(false);
           setData(data.data);
@@ -105,7 +104,7 @@ function Home() {
       <div className="fixed top-0 h-[10vh] w-full">
         <Header isHomeNav={true} refreshBtn={false} />
       </div>
-      <div className="flex flex-col justify-between items-center sidenav top-[10vh] md:w-[20vw] lg:w-[22vw] xl:w-[22vw] fixed left-0 bg-[#f1f1f1]">
+      <div className="flex flex-col justify-between items-center sidenav top-[10vh] md:w-[22vw] lg:w-[22vw] xl:w-[22vw] fixed left-0 bg-[#f1f1f1]">
         <div className="flex flex-col justify-between items-center h-[25%] w-[85%] gap-10">
           <div className="flex flex-row justify-start items-center w-[100%] mt-1">
             <div className="flex flex-col justify-start items-start gap-4 w-full  border-t-[1px]">
@@ -303,7 +302,7 @@ function Settings({}) {
 
 function Dashboards({ loading, data, navigate }) {
   return (
-    <div className="basis-[80%] mt-[10vh] overflow-auto flex flex-col ml-[22vw] md:ml-[20vw] lg:ml-[22vw] xl:ml-[22vw] home-section">
+    <div className="basis-[80%] mt-[10vh] overflow-auto flex flex-col ml-[22vw] md:ml-[22vw] lg:ml-[22vw] xl:ml-[22vw] home-section">
       <div className="p-4">
         <p className="text-[4vmin] ml-8 font-[600] text-[#000000] flex flex-row">
           Welcome
@@ -362,7 +361,7 @@ function Dashboards({ loading, data, navigate }) {
               return (
                 <div className="w-[100%] flex flex-row justify-center items-center">
                   <div
-                    className="w-[90%] h-[10vh] max-h-900:h-[12vh] min-h-1000:h-[100px] max-h-600:h-[12vh] bg-[#F1F1F1] cursor-pointer hover:bg-[#274156] hover:text-[#ffffff] group hover:fill-[#ffffff] fill-[#274156] flex flex-row justify-between px-10 items-center gap-8 rounded-[10px] text-[#28262C] border-[3px] border-[#274156]"
+                    className="w-[90%] h-[75px] max-h-900:h-[75px] min-h-1000:h-[75px] max-h-600:h-[75px] bg-[#F1F1F1] cursor-pointer hover:bg-[#274156] hover:text-[#ffffff] group hover:fill-[#ffffff] fill-[#274156] flex flex-row justify-between px-10 items-center gap-8 rounded-[10px] text-[#28262C] border-[3px] border-[#274156]"
                     onClick={() => {
                       navigate(`/dashboard`, {
                         state: {

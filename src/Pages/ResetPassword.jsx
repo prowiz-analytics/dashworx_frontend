@@ -81,9 +81,9 @@ function ResetPassword() {
           <img src={'/logo.svg'} alt="" className="sm:w-[20vw] md:w-[30vw] lg:w-[28vw] xl:w-[24vw] max-h-600:h-[10vh] h-[15vh]"/>  
         </div>
         {!successPage && (
-          <div className="rounded-[10px] bg-[#ffffff] max-h-600:h-[auto] h-[35vh] w-[35vw] sm:w-[27vw] md:w-[32vw] 2xl:w-[30vw] quicksand-font flex flex-col max-h-600:py-4 2xl:px-12  px-4 py-4">
-            <p className="max-h-600:text-[1.25rem] mb-[10px] text-[2rem] font-[500]">Reset Password</p>
-            <p className="text-xl">
+          <div className="rounded-[10px] bg-[#ffffff] max-h-600:h-[auto] max-h-900:h-[60vh] h-[35vh] w-[38vw] sm:w-[27vw] md:w-[38vw] 2xl:w-[30vw] quicksand-font flex flex-col max-h-600:py-4 2xl:px-12  px-4 py-4">
+            <p className="max-h-600:text-[1.25rem] mb-[10px] text-[1.75rem] font-[500]">Reset Password</p>
+            <p className="max-h-600:text-[0.75rem] text-[1rem]">
               We will send you an email to reset your password
             </p>
             <form
@@ -92,12 +92,12 @@ function ResetPassword() {
             >
               {emailField && (
                 <div className="flex flex-col">
-                  <label htmlFor="">Email Address</label>
+                  <label htmlFor="" className="max-h-600:text-[0.75rem] text-[1rem]">Email Address</label>
                   <input
                     placeholder="Email"
                     type="email"
                     {...register("email", { required: true })}
-                    className={`${
+                    className={`max-h-600:text-[0.75rem] text-[1rem] ${
                       errors.username
                         ? "error_outline focus:border-[red]"
                         : "focus:border-[black] no_outline"
@@ -136,11 +136,11 @@ function ResetPassword() {
                 <input
                   type="submit"
                   value="Reset Password"
-                  className="w-[100%] items-center p-4 bg-primaryColor text-[#ffffff] font-bold rounded-md cursor-pointer"
+                  className="w-[100%] max-h-600:text-[0.75rem] text-[1rem] items-center p-4 bg-primaryColor text-[#ffffff] font-bold rounded-md cursor-pointer"
                 />
               )}
               {emailField && (
-                <div className="flex justify-center items-center">
+                <div className="flex justify-center items-center max-h-600:text-[0.75rem] text-[1rem]">
                   <Link to={"/login"} className="underline">
                     Back to Login
                   </Link>

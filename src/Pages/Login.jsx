@@ -67,7 +67,7 @@ function Login() {
       />}
       <div className="flex flex-col gap-4 h-[55vh] mb-[15vh] justify-center items-center">
         <div className=" rounded-md flex flex-row justify-center items-center">
-          <img src={'/logo.svg'} alt="" className="sm:w-[20vw] md:w-[30vw] lg:w-[28vw] xl:w-[24vw] max-h-600:h-[10vh] h-[15vh]"/>  
+          <img src={'/logo.svg'} alt="" className="sm:w-[20vw] md:w-[26vw] lg:w-[26vw] xl:w-[24vw] max-h-600:h-[10vh] h-[15vh]"/>  
         </div>
         <div className="rounded-[10px] bg-[#ffffff] max-h-600:h-[auto] h-[55vh] w-[35vw] sm:w-[27vw] md:w-[32vw] 2xl:w-[30vw] quicksand-font flex flex-col max-h-600:py-4 2xl:px-12  px-4 py-4">
           <p className="max-h-600:text-[1.25rem] mb-[10px] text-[2rem] font-[500]">Login</p>
@@ -109,7 +109,7 @@ function Login() {
               value="Login"
               className="w-[100%] mt-[1vh] max-h-600:text-[0.75rem] text-[1rem] items-center max-h-900:px-2 max-h-900:py-4 px-4 py-4 p-4 bg-primaryColor text-[#ffffff] font-bold rounded-md cursor-pointer"
             />
-            <div className="flex justify-end items-end max-h-600:text-[0.75rem] text-[1rem]">
+            <div className="flex justify-end items-end  ">
               <Link to={"/resetpassword"} className="underline">
                 Forgot Password?
               </Link>
