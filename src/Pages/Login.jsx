@@ -70,7 +70,7 @@ function Login() {
           <img src={'/logo.svg'} alt="" className="sm:w-[20vw] md:w-[26vw] lg:w-[26vw] xl:w-[24vw] max-h-600:h-[10vh] h-[15vh]"/>  
         </div>
         <div className="rounded-[10px] bg-[#ffffff] max-h-600:h-[auto] h-[55vh] w-[35vw] sm:w-[27vw] md:w-[32vw] 2xl:w-[30vw] quicksand-font flex flex-col max-h-600:py-4 2xl:px-12  px-4 py-4">
-          <p className="max-h-600:text-[1.25rem] mb-[10px] text-[2rem] font-[500]">Login</p>
+          <p className="max-h-600:text-[1.25rem] mb-[10px] graphik-font text-[2rem] font-[500]">Login</p>
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col h-full max-h-900:gap-2 gap-4 justify-around"

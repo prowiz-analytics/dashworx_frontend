@@ -91,7 +91,7 @@ function Header(props) {
           </div>
         )}
         <div
-          className="relative sm:w-[120px] h-full flex flex-col justify-center items-center md:w-[140px] xl:w-[160px]"
+          className="relative sm:w-[120px] h-full flex flex-col justify-center items-center md:w-[150px] xl:w-[160px]"
           onMouseOver={() => setHover(true)}
           onMouseOut={() => setHover(false)}
         >
@@ -104,14 +104,14 @@ function Header(props) {
           </div>
           {hover && (
             <div
-              className={`absolute max-h-900:border-[0.5px] text-[#000000] w-full top-0 quicksand-font bg-[#f1f1f1] h-auto border-[2px] border-[#274156]  py-2 px-2 mt-[6px] rounded-b-[10px] rounded-l-[10px] no-profile flex flex-col gap-1 font-[600] ${
+              className={`absolute max-h-900:border-[0.5px] max-h-900:mt-[6px] text-[#000000] w-full top-0 quicksand-font bg-[#f1f1f1] h-auto border-[2px] border-[#274156]  py-2 px-2 mt-[10px] pt-2 rounded-b-[10px]  no-profile flex flex-col gap-1 font-[600] ${
                 isAdminNav ? "right-[10px]" : "right-[10px]"
               }`}
               onMouseOver={() => setHover(true)}
               onMouseOut={() => setHover(false)}
             >
               <p
-                className="cursor-pointer max-h-600:text-[0.75rem] text-[1rem]"
+                className="cursor-pointer max-h-600:text-[0.75rem] text-[0.90rem]"
                 onClick={() => {
                   if (isNavigatable) {
                     navigate("/home");
@@ -121,7 +121,7 @@ function Header(props) {
                 Home
               </p>
               <p
-                className="cursor-pointer max-h-600:text-[0.75rem] text-[1rem]"
+                className="cursor-pointer max-h-600:text-[0.75rem] text-[0.90rem]"
                 onClick={() => {
                   navigate("/login");
                   localStorage.removeItem("data");
@@ -130,7 +130,7 @@ function Header(props) {
                 Log Out
               </p>
               <p
-                className="cursor-pointer max-h-600:text-[0.75rem] text-[1rem]"
+                className="cursor-pointer max-h-600:text-[0.75rem] text-[0.90rem]"
                 onClick={() => navigate("/resetpassword")}
               >
                 Change Password
