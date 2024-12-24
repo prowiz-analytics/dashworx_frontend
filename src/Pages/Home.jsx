@@ -39,51 +39,51 @@ function Home() {
       try {
         // Check if location.state is null after fetching data
         // console.log(localStorage.getItem("data"));
-        if (localStorage.getItem("data") !== null) {
+        if (localStorage.getItem("data") === null) {
           navigate("/login");
         } else {
-          // let user = JSON.parse(localStorage.getItem("data"));
-          // const data = await axios.get(
-          //   `${API}/auth/dashboards?email=${user.email}`
-          // );
-          let data = {
-            data: {
-              email: "demo@dashworx.co.uk",
-              dashboards: [
-                {
-                  link: '"https://lookerstudio.google.com/embed/reporting/5d27bf9b-7447-4944-9362-cad35b785a4a/page/p_7th4a67ijd"',
-                  name: "Google Analytics Report",
-                  image: "Web_Icon",
-                },
-                {
-                  link: '"https://lookerstudio.google.com/embed/reporting/5a26b988-cba2-4613-a38a-450ba0215970/page/2jyxD"',
-                  name: "Shopify Report",
-                  image: "Chart_Icon",
-                },
-                {
-                  link: '"https://lookerstudio.google.com/embed/reporting/d09fbf42-53d4-4644-b13f-ec9451713aa9/page/p_1088fw1tld"',
-                  name: "Master Ecom Overview",
-                  image: "Heartbeat_Icon",
-                },
-                {
-                  link: '"https://lookerstudio.google.com/embed/reporting/8d6cf582-5ee0-43bf-bc9f-66a5ddd71be9/page/p_j1f6bq2vld"',
-                  name: "Retention Overview",
-                  image: "User_Icon",
-                },
-                {
-                  link: '"https://lookerstudio.google.com/embed/reporting/1871f543-3696-42d3-bfdb-f716d1d8f8ae/page/p_j1vqqokqhd"',
-                  name: "Google Ads Report",
-                  image: "Lightbulb_Icon",
-                },
-                {
-                  link: '"https://lookerstudio.google.com/embed/reporting/efdaed51-db5b-447a-bcbe-8a7d9e935c40/page/2jyxD"',
-                  name: "Master Ads Overview",
-                  image: "Pie_Chart_Icon",
-                },
-              ],
-              firstName: "Demo",
-            },
-          };
+          let user = JSON.parse(localStorage.getItem("data"));
+          const data = await axios.get(
+            `${API}/auth/dashboards?email=${user.email}`
+          );
+          // let data = {
+          //   data: {
+          //     email: "demo@dashworx.co.uk",
+          //     dashboards: [
+          //       {
+          //         link: '"https://lookerstudio.google.com/embed/reporting/5d27bf9b-7447-4944-9362-cad35b785a4a/page/p_7th4a67ijd"',
+          //         name: "Google Analytics Report",
+          //         image: "Web_Icon",
+          //       },
+          //       {
+          //         link: '"https://lookerstudio.google.com/embed/reporting/5a26b988-cba2-4613-a38a-450ba0215970/page/2jyxD"',
+          //         name: "Shopify Report",
+          //         image: "Chart_Icon",
+          //       },
+          //       {
+          //         link: '"https://lookerstudio.google.com/embed/reporting/d09fbf42-53d4-4644-b13f-ec9451713aa9/page/p_1088fw1tld"',
+          //         name: "Master Ecom Overview",
+          //         image: "Heartbeat_Icon",
+          //       },
+          //       {
+          //         link: '"https://lookerstudio.google.com/embed/reporting/8d6cf582-5ee0-43bf-bc9f-66a5ddd71be9/page/p_j1f6bq2vld"',
+          //         name: "Retention Overview",
+          //         image: "User_Icon",
+          //       },
+          //       {
+          //         link: '"https://lookerstudio.google.com/embed/reporting/1871f543-3696-42d3-bfdb-f716d1d8f8ae/page/p_j1vqqokqhd"',
+          //         name: "Google Ads Report",
+          //         image: "Lightbulb_Icon",
+          //       },
+          //       {
+          //         link: '"https://lookerstudio.google.com/embed/reporting/efdaed51-db5b-447a-bcbe-8a7d9e935c40/page/2jyxD"',
+          //         name: "Master Ads Overview",
+          //         image: "Pie_Chart_Icon",
+          //       },
+          //     ],
+          //     firstName: "Demo",
+          //   },
+          // };
           console.log(data);
           setLoading(false);
           setData(data.data);
