@@ -3,7 +3,7 @@ import Header from "../Components/Header";
 import DashboardIcon from "../Assets/dashboards.svg";
 import InsightsIcon from "../Assets/insights.svg";
 import ChatIcon from "../Assets/Contact.svg";
-import LockIcon from "../Assets/lock.svg";
+
 import SettingsIcon from "../Assets/settings.svg";
 import { Skeleton } from "antd";
 import KPI from "../Assets/kpi.svg";
@@ -26,7 +26,6 @@ import QRCode from "react-qr-code";
 // ]
 
 function Home() {
-  const [currentSection, setCurrentSection] = useState(0);
   const location = useLocation();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -43,9 +42,14 @@ function Home() {
           navigate("/login");
         } else {
           let user = JSON.parse(localStorage.getItem("data"));
+          const headers = {
+            Authorization: `Bearer ${user.token}`,
+          };
+
           const data = await axios.get(
-            `${API}/auth/dashboards?email=${user.email}`
-          );
+            `${API}/auth/dashboards?email=${user.email}`,
+            { headers: headers }
+          );  
           // let data = {
           //   data: {
           //     email: "demo@dashworx.co.uk",
@@ -161,14 +165,14 @@ function Home() {
                     </p>
                   </Link>
                 </div>
-                {/* <div className="flex flex-row justify-center items-center gap-4 cursor-pointer">
+                <div className="flex flex-row justify-center items-center gap-4 cursor-pointer">
                   <img src={SettingsIcon} alt="" />
-                  <Link target="_blank" to={"/settings"}>
+                  <Link to={"/settings"}>
                     <p className="font-[500] text-[1.8vmin] graphik-font text-[#28262C] hover:border-b-[1px] hover:border-[#000000] border-b-[1px] border-[#f1f1f1]">
                       Settings
                     </p>
                   </Link>
-                </div> */}
+                </div>
               </div>
             </div>
           </div>
@@ -181,12 +185,10 @@ function Home() {
         </div>
       </div>
       <div className="flex flex-row w-full">
-        {currentSection === 0 && (
           <Dashboards loading={loading} data={data} navigate={navigate} />
-        )}
-        {currentSection === 1 && (
+        {/* {currentSection === 1 && (
           <Settings loading={loading} data={data} navigate={navigate} />
-        )}
+        )} */}
       </div>
     </div>
   );
@@ -194,111 +196,7 @@ function Home() {
 
 export default Home;
 
-function Settings({}) {
-  return (
-    <div className="basis-[80%] mt-[10vh] overflow-auto flex flex-col ml-[22vw] md:ml-[20vw] lg:ml-[22vw] xl:ml-[22vw] home-section h-[90vh]">
-      <div className="p-4 flex flex-col h-full gap-4">
-        <div className="border-[2px] rounded-md border-[#000000] p-4">
-          <div className="flex flex-row w-full">
-            <div className="flex flex-row gap-4 basis-[35%]">
-              <img src="favicon.ico" alt="" className="w-[100px]" />
-              <div className="flex flex-col justify-center items-start">
-                <p className="graphik-font text-[1.4rem]">Company name:</p>
-                <p className="quicksand-font text-[1.2rem]">Dashworx</p>
-              </div>
-            </div>
-            <div className="flex flex-row gap-4 basis-[30%] justify-center items-center">
-              <div className="flex flex-col justify-center items-start">
-                <p className="graphik-font text-[1.4rem]">Email address:</p>
-                <p className="quicksand-font text-[1.2rem]">
-                  demo@dashworx.co.uk
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-row gap-4 basis-[30%] items-center justify-center">
-              <div className="flex flex-col justify-center items-start">
-                <p className="graphik-font text-[1.4rem]">Password reset:</p>
-                <p className="quicksand-font text-[1.2rem] underline">
-                  Change Password ?
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="border-[2px] flex-1 flex flex-col rounded-md border-[#000000] p-4 gap-4">
-          <div className="flex flex-col">
-            <p className="graphik-font text-[1.4rem]">
-              2 Factor Authentication
-            </p>
-            <p className="graphik-font text-[1.2rem] text-[#A51E2C]">
-              Required by your admin
-            </p>
-          </div>
-          <div className="border-[#7B7B7B] border-[1px] rounded-md flex flex-row p-4">
-            <div className="basis-[5%]">
-              <img src={LockIcon} alt="" />
-            </div>
-            <div className="basis-[90%] flex flex-col gap-1">
-              <div className="flex flex-row justify-start items-center gap-4">
-                <p className="graphik-font text-[1.4rem]">Authenticator App</p>
-                <span className="px-2 py-1 bg-[#A51E2C] text-[#ffffff] text-[0.75rem] rounded-[20px]">
-                  Required for data access
-                </span>
-              </div>
-              <p className="quicksand-font text-[1rem]">
-                Your admin has turned on 2FA. Use an authenticator app to
-                generate a code required for logging in.
-              </p>
-            </div>
-          </div>
-          <div className="w-full border border-[#7B7B7B] mt-2 h-[1px]"></div>
-          <div className="w-full flex flex-row">
-            <div className="basis-[80%]">
-              <p className="graphik-font text-[1.4rem]">1. Scan QR Code</p>
-              <p className="quicksand-font">
-                Use a supported authenticator app like Google Authenticator or
-                Duo to scan the QR code. Once scanned, you'll receive a
-                six-digit code to enter below.
-              </p>
-            </div>
-            <div className="flex flex-row justify-center basis-[20%] items-center">
-              <div className="w-[200px]">
-                <QRCode
-                  size={256}
-                  style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                  value={"qr1"}
-                  // viewBox={`0 0 50 50`}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="w-full border border-[#7B7B7B] mt-2 h-[1px]"></div>
-          <div className="w-full flex flex-row justify-between">
-            <div className="">
-              <p className="graphik-font text-[1.4rem]">
-                2. Enter Code Confirmation
-              </p>
-              <p className="quicksand-font">
-                Enter the six-digit code generated by your authenticator app
-              </p>
-              <input
-                placeholder="Generated OTP"
-                className={`${"focus:border-[black] no_outline"} text-[1.8vmin] w-[50%] focus:outline-none max-h-900:px-2 max-h-990:py-3 px-3 py-3 rounded-md`}
-              />
-            </div>
-            <div className="flex flex-col justify-end">
-              <button className="bg-[#274156] px-4 py-2 text-[#ffffff] text-[1.4rem] font-[500] rounded-[10px]">
-                Turn on
-              </button>
-            </div>
-          </div>
-          <div className="w-full border border-[#7B7B7B] mt-2 h-[1px]"></div>
-          <div className="flex flex-row justify-end items-end"></div>
-        </div>
-      </div>
-    </div>
-  );
-}
+
 
 function Dashboards({ loading, data, navigate }) {
   return (

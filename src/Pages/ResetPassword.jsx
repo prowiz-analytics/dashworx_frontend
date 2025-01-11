@@ -110,28 +110,6 @@ function ResetPassword() {
                   )}
                 </div>
               )}
-
-              {/* {!emailField && (
-                <div className="flex flex-col">
-                  <label htmlFor="">New Password</label>
-                  <input
-                    placeholder="Password"
-                    type="password"
-                    {...register("password", { required: true })}
-                    className={`${
-                      errors.password
-                        ? "error_outline focus:border-[red]"
-                        : "focus:border-[black] no_outline"
-                    } focus:outline-none px-4 py-4 rounded-md`}
-                  />
-                  {errors.password && (
-                    <span className="text-[#DD0F0F]">
-                      This field is required
-                    </span>
-                  )}
-                </div>
-              )} */}
-
               {emailField && (
                 <input
                   type="submit"

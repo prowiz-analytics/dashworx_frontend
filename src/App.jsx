@@ -8,9 +8,10 @@ import PasswordPageReset from './Pages/Password';
 import Admin from './Pages/Admin';
 import Home from './Pages/Home';
 import { Helmet } from 'react-helmet';
+import Settings from './Pages/Settings';
 
 // URI OF API
-export const API = "https://dashworx.prowiz.io"
+export const API = "http://127.0.0.1:8000"
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/resetpassword' element={<ResetPassword/>}/>
           {/* <Route path='/dashboards' element={<Dashboards/>}/> */}
           <Route path='/home' element={<Home/>}/>
+          <Route path='/settings' element={<Settings/>}/>
           <Route path='/admin' element={<Admin/>}/>
           <Route path='/dashboard' element={<Dash/>}/>
           <Route path='/resetpassword/:token' element={<PasswordPageReset/>}/>
