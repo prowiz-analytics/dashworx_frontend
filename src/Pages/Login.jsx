@@ -56,8 +56,7 @@ function Login() {
     setLoading(true);
     console.log(data);
     try {
-      let user = JSON.parse(localStorage.getItem("data"));
-      const decoded = jwtDecode(user.token);
+      
       const request = await axios.post(`${API}/auth/login`, {
         email: data.username,
         password: data.password,
@@ -65,6 +64,8 @@ function Login() {
       console.log(request.data);
       if (request.status === 200) {
         localStorage.setItem("data", JSON.stringify(request.data));
+        let user = request?.data;
+        const decoded = jwtDecode(user.token);
         if(request.data.is_2fa_enabled && request?.data?.is_2fa_setup_done){
           setIs2faPage(true);
         }
@@ -92,8 +93,8 @@ function Login() {
         setLoading(false);
       }
     } catch (err) {
-      console.log(err.response.data);
-      notify(err.response.data.detail);
+      console.log(err);
+      notify(err?.response?.data?.detail);
       setLoading(false);
     }
     // console.log(request);
