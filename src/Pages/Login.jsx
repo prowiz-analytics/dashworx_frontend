@@ -57,6 +57,7 @@ function Login() {
     console.log(data);
     try {
       let user = JSON.parse(localStorage.getItem("data"));
+      const decoded = jwtDecode(user.token);
       const request = await axios.post(`${API}/auth/login`, {
         email: data.username,
         password: data.password,
@@ -68,10 +69,15 @@ function Login() {
           setIs2faPage(true);
         }
         else if(request.data.is_2fa_enabled && !request?.data?.is_2fa_setup_done){
-          navigate('/settings');
+          if (decoded.user_type === "admin") {
+            navigate("/admin");
+          } else {
+            navigate("/settings");
+          }
+          successNotify("Logged In Sucecssfully");
         }
         else if(!request.data.is_2fa_enabled){
-          const decoded = jwtDecode(user.token);
+          
           if (decoded.user_type === "admin") {
           navigate("/admin");
         } else {
