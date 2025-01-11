@@ -56,6 +56,7 @@ function Login() {
     setLoading(true);
     console.log(data);
     try {
+      let user = JSON.parse(localStorage.getItem("data"));
       const request = await axios.post(`${API}/auth/login`, {
         email: data.username,
         password: data.password,
@@ -70,16 +71,18 @@ function Login() {
           navigate('/settings');
         }
         else if(!request.data.is_2fa_enabled){
-          navigate('/home');
+          const decoded = jwtDecode(user.token);
+          if (decoded.user_type === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/home");
+        }
+        successNotify("Logged In Sucecssfully");
+          // navigate('/home');
         }
         // const decoded = jwtDecode(request.data.token);
         // console.log(decoded);
-        // if (decoded.user_type === "admin") {
-        //   navigate("/admin");
-        // } else {
-        //   navigate("/home");
-        // }
-        // successNotify("Logged In Sucecssfully");
+        
         setLoading(false);
       }
     } catch (err) {
