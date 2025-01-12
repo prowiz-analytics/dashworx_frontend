@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet';
 import Settings from './Pages/Settings';
 
 // URI OF API
-export const API = "http://127.0.0.1:8000"
+export const API = "https://dev.dashworxhub.com"
 
 function App() {
   return (

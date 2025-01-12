@@ -168,7 +168,7 @@ function Home() {
                 <div className="flex flex-row justify-center items-center gap-4 cursor-pointer">
                   <img src={SettingsIcon} alt="" />
                   <Link to={"/settings"}>
-                    <p className="font-[500] text-[1.8vmin] graphik-font text-[#28262C] hover:border-b-[1px] hover:border-[#000000] border-b-[1px] border-[#f1f1f1]">
+                    <p className="font-[500] max-h-600:text-[0.75rem] text-[1rem] graphik-font text-[#28262C] hover:border-b-[1px] hover:border-[#000000] border-b-[1px] border-[#f1f1f1]">
                       Settings
                     </p>
                   </Link>
@@ -278,14 +278,15 @@ function Dashboards({ loading, data, navigate }) {
                 </div>
               );
             })}
-          {!loading && data?.dashboards?.length === 0 && (
+          
+        </div>
+        {!loading && data?.dashboards?.length === 0 && (
             <>
-              <div className="w-[90vw] h-[30vh] flex flex-col justify-center items-center gap-8 rounded-[10px] text-[#000000]">
+              <div className="w-[100%] min-h-[70vh] text-[1.25rem] font-[500] flex flex-col justify-center items-center gap-8 rounded-[10px] text-[#000000]">
                 Sorry No Dashboards Available For User !!
               </div>
             </>
           )}
-        </div>
       </div>
     </div>
   );

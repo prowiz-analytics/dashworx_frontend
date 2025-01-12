@@ -122,8 +122,13 @@ function Admin() {
   const getUser = async (formData) => {
     try {
       console.log(formData);
+      let user = JSON.parse(localStorage.getItem("data"));
+      const headers = {
+        Authorization: `Bearer ${user.token}`,
+      };
+
       const res = await axios.get(
-        `${API}/auth/dashboards?email=${formData.email}`
+        `${API}/admin/dashboards?email=${formData.email}`,{headers:headers}
       );
       console.log(res.data);
 
