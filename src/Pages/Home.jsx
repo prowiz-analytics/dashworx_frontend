@@ -148,7 +148,7 @@ function Home() {
         </div>
         <div className="flex flex-col w-[95%] gap-4 mb-4">
           <div className="flex flex-row justify-start items-center w-[100%]">
-            <div className="flex flex-col gap-4 w-full ml-[10%]">
+            <div className="flex flex-col gap-4 w-full ml-[7%]">
               <h2 className="font-[600] quicksand-font max-h-600:text-[0.75rem] text-[1rem]">
                 Support
               </h2>

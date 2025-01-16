@@ -29,7 +29,7 @@ function Settings({}) {
   }, []);
   const [otpValue, setOtpValue] = useState("");
   const [invalidOtp, setInvalidOtp] = useState(false);
-  const otpRef= useRef();
+  const otpRef = useRef();
   const errorOtp = "Incorrect Code";
   //   console.log(otpRef?.current?.value);
   const setup_2fa = async () => {
@@ -53,7 +53,7 @@ function Settings({}) {
       if (err?.response?.data?.detail === "Invalid OTP") {
         setOtpValue("");
         setInvalidOtp(true);
-        toast.error(err?.response?.data?.detail)
+        toast.error(err?.response?.data?.detail);
         otpRef.current.blur();
         console.log("first");
       }
@@ -61,6 +61,21 @@ function Settings({}) {
       // console.log(err?.response?.data?.detail)
     }
   };
+
+  const reset_2fa = async() => {
+    let user = JSON.parse(localStorage.getItem("data"));
+      const headers = {
+        Authorization: `Bearer ${user.token}`,
+      };
+    const res = await axios.put(`${API}/settings/reset-gauth`,{},{headers:headers})
+    console.log(res)
+    
+    if(res.status == 200){
+      window.location.reload();
+    }
+  }
+
+
   return (
     <div className="flex flex-col">
       <div className="fixed top-0 h-[10vh] w-full">
@@ -76,11 +91,27 @@ function Settings({}) {
                   className={`flex flex-row justify-start w-full items-center gap-4 cursor-pointer rounded-md px-2 py-2 ${
                     location.pathname === "/home" ? "bg-[#ffffff]" : "bg-none"
                   }`}
-                  onClick={()=>{if(data.is_2fa_enabled && data?.is_2fa_setup_done){navigate('/home')}}}
+                  onClick={() => {
+                    if (data.is_2fa_enabled && data?.is_2fa_setup_done) {
+                      navigate("/home");
+                    }
+                  }}
                 >
-                  <img src={DashboardIcon} alt="" className="w-[1vw]" />
+                  <img
+                    src={DashboardIcon}
+                    alt=""
+                    className={`w-[1vw] ${
+                      data && data.is_2fa_enabled && !data?.is_2fa_setup_done
+                        ? "opacity-50"
+                        : "opacity-100"
+                    }`}
+                  />
                   <p
-                    className={`${(data && data.is_2fa_enabled && !data?.is_2fa_setup_done) ?"text-[#8a8a8a]":"text-[#28262C]"} max-h-600:text-[0.75rem] text-[1rem] ${
+                    className={`${
+                      data && data.is_2fa_enabled && !data?.is_2fa_setup_done
+                        ? "text-[#8a8a8a]"
+                        : "text-[#28262C]"
+                    } max-h-600:text-[0.75rem] text-[1rem] ${
                       location.pathname === "/home"
                         ? "font-[700]"
                         : "font-[500]"
@@ -107,7 +138,7 @@ function Settings({}) {
         </div>
         <div className="flex flex-col w-[95%] gap-4 mb-4">
           <div className="flex flex-row justify-start items-center w-[100%]">
-            <div className="flex flex-col gap-4 w-full ml-[10%]">
+            <div className="flex flex-col gap-4 w-full ml-[7%]">
               <h2 className="font-[600] quicksand-font max-h-600:text-[0.75rem] text-[1rem]">
                 Support
               </h2>
@@ -149,9 +180,15 @@ function Settings({}) {
           <div className="border-[2px] rounded-md border-[#000000] p-4">
             <div className="flex flex-row w-full">
               <div className="flex flex-row gap-4 basis-[35%]">
-                <img src="favicon.ico" alt="" className="max-h-900:w-[70px] w-[100px]" />
+                <img
+                  src="favicon.ico"
+                  alt=""
+                  className="max-h-900:w-[70px] w-[100px]"
+                />
                 <div className="flex flex-col justify-center items-start">
-                  <p className="graphik-font max-h-900:text-[1.1rem] text-[1.4rem]">Company name:</p>
+                  <p className="graphik-font max-h-900:text-[1.1rem] text-[1.4rem]">
+                    Company name:
+                  </p>
                   <p className="quicksand-font max-h-900:text-[0.9rem] text-[1.2rem]">
                     {data?.client_name}
                   </p>
@@ -159,15 +196,24 @@ function Settings({}) {
               </div>
               <div className="flex flex-row gap-4 basis-[30%] justify-center items-center">
                 <div className="flex flex-col justify-center items-start">
-                  <p className="graphik-font max-h-900:text-[1.1rem] text-[1.4rem]">Email address:</p>
-                  <p className="quicksand-font max-h-900:text-[0.9rem] text-[1.2rem]">{data?.email}</p>
+                  <p className="graphik-font max-h-900:text-[1.1rem] text-[1.4rem]">
+                    Email address:
+                  </p>
+                  <p className="quicksand-font max-h-900:text-[0.9rem] text-[1.2rem]">
+                    {data?.email}
+                  </p>
                 </div>
               </div>
               <div className="flex flex-row gap-4 basis-[30%] items-center justify-center">
                 <div className="flex flex-col justify-center items-start">
-                  <p className="graphik-font max-h-900:text-[1.1rem] text-[1.4rem]">Password reset:</p>
-                  <p className="quicksand-font max-h-900:text-[0.9rem] text-[1.2rem] underline" onClick={()=>navigate('/resetpassword')}>
-                    Change Password ?
+                  <p className="graphik-font max-h-900:text-[1.1rem] text-[1.4rem]">
+                    Password reset:
+                  </p>
+                  <p
+                    className="quicksand-font max-h-900:text-[0.9rem] text-[1.2rem] underline"
+                    onClick={() => navigate("/resetpassword")}
+                  >
+                    Change Password?
                   </p>
                 </div>
               </div>
@@ -186,7 +232,11 @@ function Settings({}) {
             </div>
             <div className="border-[#7B7B7B] border-[1px] rounded-md flex  items-center flex-row p-4">
               <div className="basis-[5%]">
-                <img src={LockIcon} alt="" className="max-h-900:w-[40px] w-[50px]"/>
+                <img
+                  src={LockIcon}
+                  alt=""
+                  className="max-h-900:w-[40px] w-[50px]"
+                />
               </div>
               <div className="basis-[90%] flex flex-col gap-1">
                 <div className="flex flex-row justify-start items-center gap-4">
@@ -194,37 +244,46 @@ function Settings({}) {
                     Authenticator App
                   </p>
 
-                  {(data && !data?.is_2fa_enabled) && (
+                  {data && !data?.is_2fa_enabled && (
                     <span className="px-5 py-1 bg-[#274156] max-h-900:text-[0.75rem]  text-[#ffffff] text-[0.9rem] rounded-[20px]">
                       Not enabled
                     </span>
                   )}
-                  {(data && data?.is_2fa_enabled && data?.is_2fa_setup_done) && (
+                  {data && data?.is_2fa_enabled && data?.is_2fa_setup_done && (
                     <span className="px-5 py-1 bg-[#2F6A41] max-h-900:text-[0.75rem] text-[#ffffff] text-[0.9rem] rounded-[20px]">
                       Activated
                     </span>
                   )}
-                  {(data && data.is_2fa_enabled && !data?.is_2fa_setup_done) && (
+                  {data && data.is_2fa_enabled && !data?.is_2fa_setup_done && (
                     <span className="px-5 py-1 bg-[#A51E2C] max-h-900:text-[0.75rem] text-[#ffffff] text-[0.9rem] rounded-[20px]">
                       Required for data access
                     </span>
                   )}
                 </div>
-                {(data && !data?.is_2fa_enabled) && (
+                {data && !data?.is_2fa_enabled && (
                   <p className="quicksand-font max-h-900:text-[0.90rem] text-[1rem]">
                     If you would like to enable two-factor authentication (2FA),
                     please contact your administrator.
                   </p>
                 )}
-                {(data && data?.is_2fa_enabled && data?.is_2fa_setup_done) && (
-                  <p className="quicksand-font max-h-900:text-[0.90rem] text-[1rem]">
-                    After entering your password, verify your identity using a
-                    supported authenticator app, such as Google Authenticator or
-                    Duo. To disable two-factor authentication (2FA), please
-                    contact your administrator.
-                  </p>
+                {data && data?.is_2fa_enabled && data?.is_2fa_setup_done && (
+                  <div className="flex flex-col gap-4">
+                    <p className="quicksand-font max-h-900:text-[0.90rem] text-[1rem]">
+                      After entering your password, verify your identity using a
+                      supported authenticator app, such as Google Authenticator
+                      or Duo. To disable two-factor authentication (2FA), please
+                      contact your administrator.
+                    </p>
+                    <p
+                      to={"/settings"}
+                      className="underline cursor-pointer max-h-600:text-[0.75rem] max-h-900:text-[0.85rem]"
+                      onClick={reset_2fa}
+                    >
+                      Reset 2 Factor Authentication?
+                    </p>
+                  </div>
                 )}
-                {(data && data.is_2fa_enabled && !data?.is_2fa_setup_done) && (
+                {data && data.is_2fa_enabled && !data?.is_2fa_setup_done && (
                   <p className="quicksand-font max-h-900:text-[0.90rem] text-[1rem]">
                     Your admin has turned on 2FA. Use an authenticator app to
                     generate a code required for logging in.
@@ -275,29 +334,30 @@ function Settings({}) {
                     <input
                       ref={otpRef}
                       onChange={(e) => setOtpValue(e.target.value)}
-                      value={invalidOtp?errorOtp:otpValue}
-                      onFocus={()=>setInvalidOtp(false)}
+                      value={invalidOtp ? errorOtp : otpValue}
+                      onFocus={() => setInvalidOtp(false)}
                       placeholder={`${
                         invalidOtp ? "Incorrect Code" : "Enter OTP Here"
                       }`}
                       className={`${" border-[2px]"} ${
-                        invalidOtp ? "border-[red] text-[red]" : "border-[#000] text-[black]"
+                        invalidOtp
+                          ? "border-[red] text-[red]"
+                          : "border-[#000] text-[black]"
                       } max-h-900:text-[0.90rem] text-[1rem] w-[100%] focus:outline-none max-h-900:px-2 max-h-990:py-3 px-3 py-3 rounded-md`}
                     />
                   </div>
-                    <div className="w-full border block border-[#7B7B7B] mt-6 h-[1px]"></div>{" "}
-                  
+                  <div className="w-full border block border-[#7B7B7B] mt-6 h-[1px]"></div>{" "}
                 </div>
                 <div className="flex flex-row w-full justify-end">
-                    <button
-                      className={`${
-                        otpValue > 0 ? "bg-[#274156]" : "bg-[#7d8c9a]"
-                      }  px-0 py-2 w-[120px] text-[#ffffff] max-h-900:text-[0.90rem] text-[1.2rem] font-[500] rounded-[10px]`}
-                      onClick={setup_2fa}
-                    >
-                      Turn on
-                    </button>
-                  </div>
+                  <button
+                    className={`${
+                      otpValue.length > 5 ? "bg-[#274156]" : "bg-[#7d8c9a]"
+                    }  px-0 py-2 w-[120px] text-[#ffffff] max-h-900:text-[0.90rem] text-[1.2rem] font-[500] rounded-[10px]`}
+                    onClick={setup_2fa}
+                  >
+                    Turn on
+                  </button>
+                </div>
               </>
             )}
 
