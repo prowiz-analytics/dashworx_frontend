@@ -21,6 +21,10 @@
   border: 2px solid black;
 }
 
+::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and newer Edge */
+}
+
 .profile{
   z-index: 100 !important;
 }

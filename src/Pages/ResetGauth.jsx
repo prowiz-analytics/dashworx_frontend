@@ -1,8 +1,8 @@
-import { QRCode, Spin } from "antd";
+import { QRCode } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import LockIcon from "../Assets/lock.svg";
 import Header from "../Components/Header";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import DashboardIcon from "../Assets/dashboards.svg";
 import InsightsIcon from "../Assets/insights.svg";
 import ChatIcon from "../Assets/Contact.svg";
@@ -10,22 +10,33 @@ import SettingsIcon from "../Assets/settings.svg";
 import axios from "axios";
 import { API } from "../App";
 import { toast, ToastContainer } from "react-toastify";
-import { LoadingOutlined } from "@ant-design/icons";
+import { jwtDecode } from "jwt-decode";
 
-function Settings({}) {
+function ResetGauth({}) {
   const navigate = useNavigate();
   const location = useLocation();
-  const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
+  const { token } = useParams();
+  
   useEffect(() => {
-    let user = JSON.parse(localStorage.getItem("data"));
     const headers = {
-      Authorization: `Bearer ${user.token}`,
+      Authorization: `Bearer ${token}`,
     };
+
     const getData = async () => {
-      const res = await axios.get(`${API}/settings`, { headers: headers });
-      console.log({ ...user, ...res.data });
-      setData({ ...user, ...res.data });
+      try {
+        const decoded = jwtDecode(token);
+        const res = await axios.get(`${API}/settings`, { headers: headers });
+        if (res.status === 200) {
+          res.data.gauth = decoded?.gauth
+          setData({ ...decoded,...res.data });
+        }
+      } catch (err) {
+        if(err?.status === 401){
+          toast.error("Your reset 2FA link has been expired")
+        }
+        console.log(err.status);
+      }
     };
     getData();
   }, []);
@@ -34,22 +45,23 @@ function Settings({}) {
   const otpRef = useRef();
   const errorOtp = "Incorrect Code";
   //   console.log(otpRef?.current?.value);
-  const setup_2fa = async () => {
+  const reset_2fa = async () => {
     try {
       let formData = {
         gauth_code: data?.gauth.unique_code,
         otp: otpValue,
       };
-      let user = JSON.parse(localStorage.getItem("data"));
+
       const headers = {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${token}`,
       };
-      const res = await axios.post(`${API}/settings/setup-gauth`, formData, {
+      const res = await axios.put(`${API}/settings/reset-gauth/${token}`, formData, {
         headers: headers,
       });
       console.log(res);
       if (res.status === 200) {
-        navigate("/home");
+        toast.success("Reset 2FA is Successfull")
+        navigate("/login");
       }
     } catch (err) {
       if (err?.response?.data?.detail === "Incorrect OTP") {
@@ -64,40 +76,11 @@ function Settings({}) {
     }
   };
 
-  const reset_2fa = async() => {
-    setLoading(true)
-    let user = JSON.parse(localStorage.getItem("data"));
-      const headers = {
-        Authorization: `Bearer ${user.token}`,
-      };
-    const res = await axios.get(`${API}/settings/reset-gauth/mail`,{headers:headers})
-    console.log(res)
-    
-    if (res.status === 200) {
-      setLoading(false);
-      navigate("/resetgauth");
-    }
-  }
-
-
   return (
     <div className="flex flex-col">
       <div className="fixed top-0 h-[10vh] w-full">
         <Header isHomeNav={true} refreshBtn={false} />
       </div>
-      {loading && (
-        <Spin
-          className="spinning_indicator"
-          indicator={
-            <LoadingOutlined
-              style={{
-                fontSize: 24,
-              }}
-              spin
-            />
-          }
-        />
-      )}
       <div className="flex flex-col justify-between items-center sidenav top-[10vh] h-[90vh] md:w-[22vw] lg:w-[22vw] xl:w-[22vw] fixed left-0 bg-[#f1f1f1]">
         <div className="flex flex-col justify-between items-center h-[25%] w-[85%] gap-10">
           <div className="flex flex-row justify-start items-center w-[100%] mt-1">
@@ -108,27 +91,15 @@ function Settings({}) {
                   className={`flex flex-row justify-start w-full items-center gap-4 cursor-pointer rounded-md px-2 py-2 ${
                     location.pathname === "/home" ? "bg-[#ffffff]" : "bg-none"
                   }`}
-                  onClick={() => {
-                    if (data.is_2fa_enabled && data?.is_2fa_setup_done) {
-                      navigate("/home");
-                    }
-                  }}
+                  
                 >
                   <img
                     src={DashboardIcon}
                     alt=""
-                    className={`w-[1vw] ${
-                      data && data.is_2fa_enabled && !data?.is_2fa_setup_done
-                        ? "opacity-50"
-                        : "opacity-100"
-                    }`}
+                    className={`w-[1vw] opacity-50`}
                   />
                   <p
-                    className={`${
-                      data && data.is_2fa_enabled && !data?.is_2fa_setup_done
-                        ? "text-[#8a8a8a]"
-                        : "text-[#28262C]"
-                    } max-h-600:text-[0.75rem] text-[1rem] ${
+                    className={`text-[#8a8a8a] max-h-600:text-[0.75rem] text-[1rem] ${
                       location.pathname === "/home"
                         ? "font-[700]"
                         : "font-[500]"
@@ -198,7 +169,7 @@ function Settings({}) {
             <div className="flex flex-row w-full">
               <div className="flex flex-row gap-4 basis-[35%]">
                 <img
-                  src="company.svg"
+                  src="favicon.ico"
                   alt=""
                   className="max-h-900:w-[70px] w-[100px] "
                 />
@@ -261,55 +232,33 @@ function Settings({}) {
                     Authenticator App
                   </p>
 
-                  {data && !data?.is_2fa_enabled && (
+                  {/* {data && !data?.is_2fa_enabled && (
                     <span className="px-3 py-1 bg-[#274156] max-h-900:text-[0.75rem]  text-[#ffffff] text-[1rem] rounded-[20px]">
                       Not enabled
                     </span>
-                  )}
-                  {data && data?.is_2fa_enabled && data?.is_2fa_setup_done && (
+                  )} */}
+                  {
                     <span className="px-3 py-1 bg-[#2F6A41] max-h-900:text-[0.75rem] text-[#ffffff] text-[1rem] rounded-[20px]">
                       Activated
                     </span>
-                  )}
-                  {data && data.is_2fa_enabled && !data?.is_2fa_setup_done && (
+                  }
+                  {/* {data && data.is_2fa_enabled && !data?.is_2fa_setup_done && (
                     <span className="px-3 py-1 bg-[#A51E2C] max-h-900:text-[0.75rem] text-[#ffffff] text-[1rem] rounded-[20px]">
                       Required for data access
                     </span>
-                  )}
+                  )} */}
                 </div>
-                {data && !data?.is_2fa_enabled && (
-                  <p className="quicksand-font max-h-900:text-[0.90rem] text-[1rem]">
-                    If you would like to enable two-factor authentication (2FA),
-                    please contact your administrator.
-                  </p>
-                )}
-                {data && data?.is_2fa_enabled && data?.is_2fa_setup_done && (
-                  <div className="flex flex-col gap-4">
-                    <p className="quicksand-font max-h-900:text-[0.90rem] text-[1rem]">
-                      After entering your password, verify your identity using a
-                      supported authenticator app, such as Google Authenticator
-                      or Duo. To disable two-factor authentication (2FA), please
-                      contact your administrator.
-                    </p>
-                    <p
-                      to={"/settings"}
-                      className="underline cursor-pointer max-h-600:text-[0.75rem] max-h-900:text-[0.85rem]"
-                      onClick={reset_2fa}
-                    >
-                      Reset 2 Factor Authentication?
-                    </p>
-                  </div>
-                )}
-                {data && data.is_2fa_enabled && !data?.is_2fa_setup_done && (
+
+                {
                   <p className="quicksand-font max-h-900:text-[0.90rem] text-[1rem]">
                     Your admin has turned on 2FA. Use an authenticator app to
                     generate a code required for logging in.
                   </p>
-                )}
+                }
               </div>
             </div>
 
-            {!data?.is_2fa_setup_done && data && (
+            {data && (
               <>
                 <div className="w-full border-t-[1px] border-[#7B7B7B] mt-2 h-[0px]"></div>
                 <div className="w-full flex flex-row">
@@ -370,7 +319,7 @@ function Settings({}) {
                     className={`${
                       otpValue.length > 5 ? "bg-[#274156]" : "bg-[#7d8c9a]"
                     }  px-0 py-2 w-[120px] text-[#ffffff] max-h-900:text-[0.90rem] text-[1.2rem] font-[500] rounded-[10px]`}
-                    onClick={setup_2fa}
+                    onClick={reset_2fa}
                   >
                     Turn on
                   </button>
@@ -387,4 +336,4 @@ function Settings({}) {
   );
 }
 
-export default Settings;
+export default ResetGauth;

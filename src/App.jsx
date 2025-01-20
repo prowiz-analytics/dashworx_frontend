@@ -9,6 +9,11 @@ import Admin from './Pages/Admin';
 import Home from './Pages/Home';
 import { Helmet } from 'react-helmet';
 import Settings from './Pages/Settings';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import ResetGauthNotify from './Pages/ResetGauthNotify';
+import ResetGauth from './Pages/ResetGauth';
+
 
 // URI OF API
 export const API = "https://dev.dashworxhub.com"
@@ -30,8 +35,11 @@ function App() {
           <Route path='/admin' element={<Admin/>}/>
           <Route path='/dashboard' element={<Dash/>}/>
           <Route path='/resetpassword/:token' element={<PasswordPageReset/>}/>
+          <Route path='/resetgauth' element={<ResetGauthNotify/>}/>
+          <Route path='/settings/:token' element={<ResetGauth/>}/>
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </div>
   );
 }

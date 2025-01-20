@@ -27,11 +27,11 @@ function Login() {
     console.log(data);
     let user = JSON.parse(localStorage.getItem("data"));
     const headers = {
-      Authorization:`Bearer ${user.token}`
+      Authorization: `Bearer ${user.token}`,
     };
     try {
       const request = await axios.get(`${API}/auth/verify?otp=${data.otp}`, {
-        headers:headers
+        headers: headers,
       });
       console.log(request.data);
       if (request.status === 200) {
@@ -51,12 +51,11 @@ function Login() {
       notify(err.response.data.detail);
       setLoading(false);
     }
-  }
+  };
   const onSubmit = async (data) => {
     setLoading(true);
     console.log(data);
     try {
-      
       const request = await axios.post(`${API}/auth/login`, {
         email: data.username,
         password: data.password,
@@ -66,30 +65,30 @@ function Login() {
         localStorage.setItem("data", JSON.stringify(request.data));
         let user = request?.data;
         const decoded = jwtDecode(user.token);
-        if(request.data.is_2fa_enabled && request?.data?.is_2fa_setup_done){
+        if (request.data.is_2fa_enabled && request?.data?.is_2fa_setup_done) {
           setIs2faPage(true);
-        }
-        else if(request.data.is_2fa_enabled && !request?.data?.is_2fa_setup_done){
+        } else if (
+          request.data.is_2fa_enabled &&
+          !request?.data?.is_2fa_setup_done
+        ) {
           if (decoded.user_type === "admin") {
             navigate("/admin");
           } else {
             navigate("/settings");
           }
           successNotify("Logged In Sucecssfully");
-        }
-        else if(!request.data.is_2fa_enabled){
-          
+        } else if (!request.data.is_2fa_enabled) {
           if (decoded.user_type === "admin") {
-          navigate("/admin");
-        } else {
-          navigate("/home");
-        }
-        successNotify("Logged In Sucecssfully");
+            navigate("/admin");
+          } else {
+            navigate("/home");
+          }
+          successNotify("Logged In Succecssfully");
           // navigate('/home');
         }
         // const decoded = jwtDecode(request.data.token);
         // console.log(decoded);
-        
+
         setLoading(false);
       }
     } catch (err) {
@@ -100,20 +99,23 @@ function Login() {
     // console.log(request);
   };
 
-  
-
-  const reset_2fa = async() => {
+  const reset_2fa = async () => {
+    setLoading(true);
     let user = JSON.parse(localStorage.getItem("data"));
-      const headers = {
-        Authorization: `Bearer ${user.token}`,
-      };
-    const res = await axios.put(`${API}/settings/reset-gauth`,{},{headers:headers})
-    console.log(res)
-    
-    if(res.status == 200){
-      navigate('/settings');
+    const headers = {
+      Authorization: `Bearer ${user.token}`,
+    };
+    const res = await axios.get(
+      `${API}/settings/reset-gauth/mail`,
+      { headers: headers }
+    );
+    console.log(res);
+
+    if (res.status == 200) {
+      navigate("/resetgauth");
+      setLoading(false);
     }
-  }
+  };
 
   console.log(watch("example"));
   return (
@@ -248,7 +250,11 @@ function Login() {
                 className={`w-[100%] bg-primaryColor max-h-600:text-[0.75rem] max-h-900:py-3 text-[1.1rem] items-center max-h-900:px-2  px-4 py-4 p-4 text-[#ffffff] font-bold rounded-[10px] cursor-pointer`}
               />
               <div className="flex justify-end items-end  ">
-                <p to={"/settings"} className="underline cursor-pointer max-h-600:text-[0.75rem] max-h-900:text-[0.85rem]" onClick={reset_2fa}>
+                <p
+                  to={"/settings"}
+                  className="underline cursor-pointer max-h-600:text-[0.75rem] max-h-900:text-[0.85rem]"
+                  onClick={reset_2fa}
+                >
                   Reset 2 Factor Authentication?
                 </p>
               </div>
@@ -262,8 +268,8 @@ function Login() {
           <span className="font-[600] text-[#28262C] mr-1">Data Hub </span>|
           <span className="ml-1 mr-1">{`${"Powered by dashworx"}`}</span>
         </p>
-        <ToastContainer />
       </div>
+      <ToastContainer />
     </div>
   );
 }
