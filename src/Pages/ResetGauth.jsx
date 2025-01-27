@@ -17,7 +17,7 @@ function ResetGauth({}) {
   const location = useLocation();
   const [data, setData] = useState();
   const { token } = useParams();
-  
+
   useEffect(() => {
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -28,12 +28,12 @@ function ResetGauth({}) {
         const decoded = jwtDecode(token);
         const res = await axios.get(`${API}/settings`, { headers: headers });
         if (res.status === 200) {
-          res.data.gauth = decoded?.gauth
-          setData({ ...decoded,...res.data });
+          res.data.gauth = decoded?.gauth;
+          setData({ ...decoded, ...res.data });
         }
       } catch (err) {
-        if(err?.status === 401){
-          toast.error("Your reset 2FA link has been expired")
+        if (err?.status === 401) {
+          toast.error("Your reset 2FA link has been expired");
         }
         console.log(err.status);
       }
@@ -55,12 +55,16 @@ function ResetGauth({}) {
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      const res = await axios.put(`${API}/settings/reset-gauth/${token}`, formData, {
-        headers: headers,
-      });
+      const res = await axios.put(
+        `${API}/settings/reset-gauth/${token}`,
+        formData,
+        {
+          headers: headers,
+        }
+      );
       console.log(res);
       if (res.status === 200) {
-        toast.success("Reset 2FA is Successfull")
+        toast.success("2FA Reset Successfully");
         navigate("/login");
       }
     } catch (err) {
@@ -69,10 +73,12 @@ function ResetGauth({}) {
         setInvalidOtp(true);
         toast.error(err?.response?.data?.detail);
         otpRef.current.blur();
-        console.log("first");
+      } else {
+        setOtpValue("");
+        setInvalidOtp(true);
+        toast.error(err?.response?.data?.detail);
+        otpRef.current.blur();
       }
-      // toast.error(err?.response?.data?.detail)
-      // console.log(err?.response?.data?.detail)
     }
   };
 
@@ -91,7 +97,6 @@ function ResetGauth({}) {
                   className={`flex flex-row justify-start w-full items-center gap-4 cursor-pointer rounded-md px-2 py-2 ${
                     location.pathname === "/home" ? "bg-[#ffffff]" : "bg-none"
                   }`}
-                  
                 >
                   <img
                     src={DashboardIcon}
@@ -163,13 +168,13 @@ function ResetGauth({}) {
         </div>
       </div>
       <div className="flex flex-row w-full"></div>
-      <div className="mt-[10vh] overflow-auto flex flex-col ml-[22vw] md:ml-[22vw] lg:ml-[22vw] xl:ml-[22vw] home-section h-[90vh]">
+      <div className="mt-[10vh] overflow-auto flex flex-col ml-[22vw] md:ml-[22vw] lg:ml-[22vw] xl:ml-[22vw] home-section h-auto">
         <div className="p-4 flex flex-col h-full gap-4">
-          <div className="border-[1px] rounded-md border-[#000000] px-4 py-3">
-            <div className="flex flex-row w-full">
-              <div className="flex flex-row gap-4 basis-[35%]">
+          <div className="border-[1px] rounded-md border-[#000000] px-4 py-6">
+            <div className="flex flex-row w-full justify-around">
+              <div className="flex flex-row gap-4 basis-[33%]">
                 <img
-                  src="favicon.ico"
+                  src="/company.svg"
                   alt=""
                   className="max-h-900:w-[70px] w-[100px] "
                 />
@@ -182,7 +187,7 @@ function ResetGauth({}) {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-row gap-4 basis-[30%] justify-center items-center">
+              <div className="flex flex-row gap-4 basis-[33%] justify-center items-center">
                 <div className="flex flex-col justify-center items-start">
                   <p className="graphik-font max-h-900:text-[1.1rem] text-[1.4rem]">
                     Email address:
@@ -192,7 +197,7 @@ function ResetGauth({}) {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-row gap-4 basis-[30%] items-center justify-center">
+              <div className="flex flex-row gap-4 basis-[33%] items-center justify-center">
                 <div className="flex flex-col justify-center items-start">
                   <p className="graphik-font max-h-900:text-[1.1rem] text-[1.4rem]">
                     Password reset:
@@ -238,8 +243,8 @@ function ResetGauth({}) {
                     </span>
                   )} */}
                   {
-                    <span className="px-3 py-1 bg-[#2F6A41] max-h-900:text-[0.75rem] text-[#ffffff] text-[1rem] rounded-[20px]">
-                      Activated
+                    <span className="px-3 py-1 bg-[#D9831B] max-h-900:text-[0.75rem] text-[#ffffff] text-[1rem] rounded-[20px]">
+                      Reactivate
                     </span>
                   }
                   {/* {data && data.is_2fa_enabled && !data?.is_2fa_setup_done && (

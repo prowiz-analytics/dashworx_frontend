@@ -49,6 +49,7 @@ function Settings({}) {
       });
       console.log(res);
       if (res.status === 200) {
+        toast.success("2FA Enabled")
         navigate("/home");
       }
     } catch (err) {
@@ -192,13 +193,13 @@ function Settings({}) {
         </div>
       </div>
       <div className="flex flex-row w-full"></div>
-      <div className="mt-[10vh] overflow-auto flex flex-col ml-[22vw] md:ml-[22vw] lg:ml-[22vw] xl:ml-[22vw] home-section h-[90vh]">
+      <div className="mt-[10vh] overflow-auto flex flex-col ml-[22vw] md:ml-[22vw] lg:ml-[22vw] xl:ml-[22vw] home-section h-auto">
         <div className="p-4 flex flex-col h-full gap-4">
-          <div className="border-[1px] rounded-md border-[#000000] px-4 py-3">
+          <div className="border-[1px] rounded-md border-[#000000] px-4 py-4">
             <div className="flex flex-row w-full">
-              <div className="flex flex-row gap-4 basis-[35%]">
+              <div className="flex flex-row gap-4 basis-[33%]">
                 <img
-                  src="company.svg"
+                  src="/company.svg"
                   alt=""
                   className="max-h-900:w-[70px] w-[100px] "
                 />
@@ -211,7 +212,7 @@ function Settings({}) {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-row gap-4 basis-[30%] justify-center items-center">
+              <div className="flex flex-row gap-4 basis-[33%] justify-center items-center">
                 <div className="flex flex-col justify-center items-start">
                   <p className="graphik-font max-h-900:text-[1.1rem] text-[1.4rem]">
                     Email address:
@@ -221,7 +222,7 @@ function Settings({}) {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-row gap-4 basis-[30%] items-center justify-center">
+              <div className="flex flex-row gap-4 basis-[33%] items-center justify-center">
                 <div className="flex flex-col justify-center items-start">
                   <p className="graphik-font max-h-900:text-[1.1rem] text-[1.4rem]">
                     Password reset:
@@ -262,17 +263,17 @@ function Settings({}) {
                   </p>
 
                   {data && !data?.is_2fa_enabled && (
-                    <span className="px-3 py-1 bg-[#274156] max-h-900:text-[0.75rem]  text-[#ffffff] text-[1rem] rounded-[20px]">
+                    <span className="px-3 py-1 bg-[#274156] max-h-900:text-[0.75rem] font-[400] text-[#ffffff] text-[1rem] rounded-[20px]">
                       Not enabled
                     </span>
                   )}
                   {data && data?.is_2fa_enabled && data?.is_2fa_setup_done && (
-                    <span className="px-3 py-1 bg-[#2F6A41] max-h-900:text-[0.75rem] text-[#ffffff] text-[1rem] rounded-[20px]">
+                    <span className="px-3 py-1 bg-[#2F6A41] max-h-900:text-[0.75rem] font-[400] text-[#ffffff] text-[1rem] rounded-[20px]">
                       Activated
                     </span>
                   )}
                   {data && data.is_2fa_enabled && !data?.is_2fa_setup_done && (
-                    <span className="px-3 py-1 bg-[#A51E2C] max-h-900:text-[0.75rem] text-[#ffffff] text-[1rem] rounded-[20px]">
+                    <span className="px-3 py-1 bg-[#A51E2C] max-h-900:text-[0.75rem] font-[400] text-[#ffffff] text-[1rem] rounded-[20px]">
                       Required for data access
                     </span>
                   )}

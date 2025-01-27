@@ -53,16 +53,16 @@ function ResetGauthNotify() {
           <img
             src={"/logo.svg"}
             alt=""
-            className="sm:w-[20vw] md:w-[30vw] lg:w-[28vw] xl:w-[24vw] max-h-600:h-[10vh] h-[15vh]"
+            className="sm:w-[20vw] md:w-[18vw] lg:w-[18vw] xl:w-[24vw] max-h-600:h-[10vh] h-[10vh]"
           />
         </div>
         {true && (
-          <div className="rounded-[10px] bg-[#ffffff] max-h-600:h-[auto] h-[auto] w-[35vw] sm:w-[27vw] md:w-[32vw] 2xl:w-[30vw] graphik-font flex flex-col gap-4 max-h-600:py-4 2xl:px-12  px-6 py-6">
+          <div className="rounded-[10px] bg-[#ffffff] max-h-600:h-[auto] h-[auto] w-[35vw] sm:w-[27vw] md:w-[35vw] 2xl:w-[32vw] graphik-font flex flex-col gap-4 max-h-600:py-4 2xl:px-12  px-8 py-8">
             <div className="flex flex-col gap-2">
-            <p className="text-4xl ">Check your Inbox</p>
-            <p className="text-[1.2rem] quicksand-font">
-              We have sent you an email to reset your 2FA
-            </p>
+              <p className="text-3xl ">Check your Inbox</p>
+              <p className="text-[1.1rem] quicksand-font">
+                We have sent you an email to reset your 2FA
+              </p>
             </div>
             <form
               // onSubmit={handleSubmit(onSubmit)}
