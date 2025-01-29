@@ -269,7 +269,7 @@ function Login() {
           <span className="ml-1 mr-1">{`${"Powered by dashworx"}`}</span>
         </p>
       </div>
-      <ToastContainer />
+      
     </div>
   );
 }
