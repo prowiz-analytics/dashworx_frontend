@@ -111,7 +111,7 @@ function Home() {
   console.log(data);
   return (
     <div className="flex flex-col">
-      <div className="fixed top-0 h-[10vh] w-full">
+      <div className="fixed top-0 z-[1000] h-[10vh] w-full">
         <Header isHomeNav={true} refreshBtn={false} />
       </div>
       <div className="flex flex-col justify-between items-center sidenav top-[10vh] md:w-[22vw] lg:w-[22vw] xl:w-[22vw] fixed left-0 bg-[#f1f1f1]">

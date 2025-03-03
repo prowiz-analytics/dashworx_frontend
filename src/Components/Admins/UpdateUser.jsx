@@ -112,39 +112,42 @@ function UpdateUser() {
       formData?.dashboards?.length !== 0
     ) {
       formData.dashboards.map((brands) => {
-        brands.dashboards.map((item)=>{
+        brands.dashboards.map((item) => {
           if (item?.dashboard !== undefined) {
             try {
               JSON.parse(item.dashboard);
             } catch (error) {
               item.dashboard = JSON.stringify(item.dashboard);
             }
-            
           }
-        })
+        });
       });
     }
-    console.log(formData)
+    console.log(formData);
     if (formData.dashboards === undefined) {
       formData.dashboards = [];
     }
-    let dashboards = []
+    let dashboards = [];
     formData.dashboards.forEach((item) => {
-      dashboards = [...dashboards, ...item.dashboards];  // Append item.dashboards (which is also an array)
+      dashboards = [...dashboards, ...item.dashboards]; // Append item.dashboards (which is also an array)
     });
     let payload = {
-      "data":dashboards
-    }
-    console.log(payload)
+      data: dashboards,
+    };
+    console.log(payload);
     let user = JSON.parse(localStorage.getItem("data"));
     const headers = {
       Authorization: `Bearer ${user.token}`,
     };
     try {
-      console.log(payload)
-      const data = await axios.put(`${API}/admin/user/dashboards?email=${formData.email}`, payload, {
-        headers,
-      });
+      console.log(payload);
+      const data = await axios.put(
+        `${API}/admin/user/dashboards?email=${formData.email}`,
+        payload,
+        {
+          headers,
+        }
+      );
       if (data.status === 200) {
         successNotify("Updated Dashboards Successfully");
       } else {
@@ -283,7 +286,6 @@ function UpdateUser() {
                               <Form.Item
                                 className="basis-[30%]"
                                 name={[subField.name, "brand_id"]}
-                                
                               >
                                 <Select
                                   placeholder="Brands"
@@ -303,13 +305,6 @@ function UpdateUser() {
                               <Form.Item
                                 className="flex-1"
                                 name={[subField.name, "dashboards"]}
-                                rules={[
-                                  {
-                                    required: true,
-                                    message:
-                                      "Please select at least one dashboard",
-                                  },
-                                ]}
                               >
                                 <Select
                                   mode="multiple"
@@ -383,7 +378,40 @@ function UpdateUser() {
                                               return (
                                                 <div className="flex flex-col w-full justify-start items-start gap-4">
                                                   {index === 0 && (
-                                                    <div className="flex flex-row justify-start border-2 border-[#000000] rounded-md items-start w-full gap-8">
+                                                    <div
+                                                      className="flex flex-row justify-start border-2 border-[#000000] rounded-md items-start w-full gap-8"
+                                                      onClick={() => {
+                                                        let allDashboards =
+                                                        brandsOptions
+                                                          ?.find(
+                                                            (brand) =>
+                                                              brand.brand_id ===
+                                                              form.getFieldValue([
+                                                                "items",
+                                                                field.name,
+                                                                "dashboards",
+                                                                subField.name,
+                                                                "brand_id",
+                                                              ])
+                                                          )
+                                                          ?.dashboards
+                                                        console.log(allDashboards)
+                                                        allDashboards.map((item)=>item.label = item.dashboard_name);
+                                                        const items =
+                                                          form.getFieldValue(
+                                                            "items"
+                                                          );
+                                                        console.log(items);
+                                                        items[0].dashboards[
+                                                          subField.name
+                                                        ].dashboards =
+                                                          allDashboards;
+                                                        console.log(items);
+                                                        form.setFieldsValue({
+                                                          items,
+                                                        });
+                                                      }}
+                                                    >
                                                       <div className="p-2 text-center w-[100%] rounded-md">
                                                         <p>
                                                           {`+ Select All Dashboards From This Brand`}
@@ -463,11 +491,6 @@ function UpdateUser() {
                                                         form.setFieldsValue({
                                                           items,
                                                         });
-                                                        console.log(
-                                                          form.getFieldValue(
-                                                            "items"
-                                                          )
-                                                        );
                                                         // form.get
                                                       }
                                                     }}
@@ -505,55 +528,7 @@ function UpdateUser() {
                                   }}
                                   maxTagCount="responsive" // Automatically handles overflow with "..."
                                   optionLabelProp="label"
-                                >
-                                  {/* {brandsOptions
-                                    ?.find(
-                                      (brand) =>
-                                        brand.brand_id ===
-                                        form.getFieldValue([
-                                          "items",
-                                          field.name,
-                                          "dashboards",
-                                          subField.name,
-                                          "brand_id",
-                                        ])
-                                    )
-                                    ?.dashboards?.map((dashboard, index) => {
-                                      console.log(
-                                        form.getFieldValue([
-                                          "items",
-                                          field.name,
-                                          "dashboards",
-                                          subField.name,
-                                          "dashboards",
-                                        ])
-                                      );
-                                      const selectedDashboardIds = form
-                                        .getFieldsValue()
-                                        .items[0].dashboards[
-                                          subField.name
-                                        ].dashboards?.map((item) => {
-                                          return item.dashboard_id;
-                                        });
-                                      console.log(selectedDashboardIds);
-
-                                      // let isSelected = true;
-                                      let isSelected =
-                                        selectedDashboardIds.includes(
-                                          dashboard.dashboard_id
-                                        );
-
-                                      return (
-                                        <Select.Option
-                                          key={dashboard.dashboard_id}
-                                          value={dashboard.dashboard_id}
-                                          label={dashboard.dashboard_name}
-                                        >
-                                          
-                                        </Select.Option>
-                                      );
-                                    })} */}
-                                </Select>
+                                ></Select>
                               </Form.Item>
 
                               <div className="basis-[3%] mb-[20px]">

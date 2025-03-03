@@ -6,58 +6,7 @@ import { toast } from "react-toastify";
 import { CloseOutlined } from "@ant-design/icons";
 
 function CreateUser() {
-  const ImageOptions = [
-    {
-      image: "/Dashboard_icons/Todo_Icon.svg",
-      name: "Todo",
-      value: "Todo_Icon",
-    },
-    {
-      image: "/Dashboard_icons/Chart_Icon.svg",
-      name: "Chart",
-      value: "Chart_Icon",
-    },
-    {
-      image: "/Dashboard_icons/Chat_Icon.svg",
-      name: "Chat",
-      value: "Chat_Icon",
-    },
-    {
-      image: "/Dashboard_icons/Earth_Icon.svg",
-      name: "Earth",
-      value: "Earth_Icon",
-    },
-    {
-      image: "/Dashboard_icons/Heartbeat_Icon.svg",
-      name: "Heartbeat",
-      value: "Heartbeat_Icon",
-    },
-    {
-      image: "/Dashboard_icons/Calendar_Icon.svg",
-      name: "Calendar",
-      value: "Calendar_Icon",
-    },
-    {
-      image: "/Dashboard_icons/Lightbulb_Icon.svg",
-      name: "Lightbulb",
-      value: "Lightbulb_Icon",
-    },
-    {
-      image: "/Dashboard_icons/Pie_Chart_Icon.svg",
-      name: "Pie_Chart",
-      value: "Pie_Chart_Icon",
-    },
-    {
-      image: "/Dashboard_icons/User_Icon.svg",
-      name: "User",
-      value: "User_Icon",
-    },
-    {
-      image: "/Dashboard_icons/Web_Icon.svg",
-      name: "Web",
-      value: "Web_Icon",
-    },
-  ];
+  
   const [form] = Form.useForm();
   const [brandsOptions, setBrandsOptions] = useState([]);
   const validateMessages = () => {
@@ -134,9 +83,10 @@ function CreateUser() {
           span: 18,
         }}
         form={form}
-        name="dynamic_form_complex"
+        
         style={{
-          maxWidth: 600,
+          maxWidth: "60vw",
+          width: "70vw"
         }}
         autoComplete="off"
         initialValues={{
@@ -239,13 +189,7 @@ function CreateUser() {
                               <Form.Item
                                 className="flex-1"
                                 name={[subField.name, "dashboards"]}
-                                rules={[
-                                  {
-                                    required: true,
-                                    message:
-                                      "Please select at least one dashboard",
-                                  },
-                                ]}
+                                
                               >
                                 <Select
                                   mode="multiple"
@@ -319,7 +263,38 @@ function CreateUser() {
                                               return (
                                                 <div className="flex flex-col w-full justify-start items-start gap-4">
                                                   {index === 0 && (
-                                                    <div className="flex flex-row justify-start border-2 border-[#000000] rounded-md items-start w-full gap-8">
+                                                    <div className="flex flex-row justify-start border-2 border-[#000000] rounded-md items-start w-full gap-8"
+                                                    onClick={() => {
+                                                      let allDashboards =
+                                                      brandsOptions
+                                                        ?.find(
+                                                          (brand) =>
+                                                            brand.brand_id ===
+                                                            form.getFieldValue([
+                                                              "items",
+                                                              field.name,
+                                                              "dashboards",
+                                                              subField.name,
+                                                              "brand_id",
+                                                            ])
+                                                        )
+                                                        ?.dashboards
+                                                      console.log(allDashboards)
+                                                      allDashboards.map((item)=>item.label = item.dashboard_name);
+                                                      const items =
+                                                        form.getFieldValue(
+                                                          "items"
+                                                        );
+                                                      console.log(items);
+                                                      items[0].dashboards[
+                                                        subField.name
+                                                      ].dashboards =
+                                                        allDashboards;
+                                                      console.log(items);
+                                                      form.setFieldsValue({
+                                                        items,
+                                                      });
+                                                    }}>
                                                       <div className="p-2 text-center w-[100%] rounded-md">
                                                         <p>
                                                           {`+ Select All Dashboards From This Brand`}
