@@ -12,6 +12,7 @@ import axios from "axios";
 import { API } from "../App";
 import SVG from "react-inlinesvg";
 import QRCode from "react-qr-code";
+import { jwtDecode } from "jwt-decode";
 
 // NOTE:  REFERENCE FOR PAGE SECTIONS
 // let sections = [
@@ -42,14 +43,19 @@ function Home() {
           navigate("/login");
         } else {
           let user = JSON.parse(localStorage.getItem("data"));
+          const decoded = jwtDecode(user.token);
+          console.log(decoded);
+          if (!decoded.logged_in) {
+            navigate("/login");
+          }
           const headers = {
             Authorization: `Bearer ${user.token}`,
           };
 
           const data = await axios.get(
-            `${API}/auth/dashboards?email=${user.email}`,
+            `${API}/auth/user/dashboards?email=${decoded.email}`,
             { headers: headers }
-          );  
+          );
           // let data = {
           //   data: {
           //     email: "demo@dashworx.co.uk",
@@ -185,7 +191,7 @@ function Home() {
         </div>
       </div>
       <div className="flex flex-row w-full">
-          <Dashboards loading={loading} data={data} navigate={navigate} />
+        <Dashboards loading={loading} data={data} navigate={navigate} />
         {/* {currentSection === 1 && (
           <Settings loading={loading} data={data} navigate={navigate} />
         )} */}
@@ -195,8 +201,6 @@ function Home() {
 }
 
 export default Home;
-
-
 
 function Dashboards({ loading, data, navigate }) {
   return (
@@ -270,23 +274,50 @@ function Dashboards({ loading, data, navigate }) {
                   >
                     <p className="font-[900] max-h-600:text-[1rem] max-h-900:text-[1rem]  md:text-[1.5rem] lg:text-[1.25rem] uppercase">{`${item.name}`}</p>
                     {/* <img src={'/Dashboard_icons/Chart_Icon.svg'} alt="" className="w-20 h-20 "/> */}
-                    <SVG
-                      src={`/Dashboard_icons/${item.image}.svg`}
-                      className="w-10 h-[5vh]"
-                    />
+                    <div className="flex">
+                      {item?.image.map((icon, index) => {
+                        return (
+                          <>
+                          {index !== 3 && <div
+                            key={index}
+                            style={{
+                              zIndex: index + 100 - index * (index + 1),
+                            }}
+                            className={`relative -mr-6 rounded-full first:ml-0 border-white bg-white `}
+                          >
+                            <SVG
+                              src={`/DashboardIcons/${icon.label}.svg`}
+                              className="w-[50px] h-[40px]"
+                            />
+                          </div>}
+                          {index === 3 && <div
+                            key={index}
+                            style={{
+                              zIndex: index + 100 - index * (index + 1),
+                            }}
+                            className={`relative -mr-6 rounded-full first:ml-0 border-white bg-white `}
+                          >
+                            <SVG
+                              src={`/DashboardIcons/plus.svg`}
+                              className="w-[50px] h-[40px]"
+                            />
+                          </div>}
+                          </>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               );
             })}
-          
         </div>
         {!loading && data?.dashboards?.length === 0 && (
-            <>
-              <div className="w-[100%] min-h-[70vh] text-[1.25rem] font-[500] flex flex-col justify-center items-center gap-8 rounded-[10px] text-[#000000]">
-                Sorry No Dashboards Available For User !!
-              </div>
-            </>
-          )}
+          <>
+            <div className="w-[100%] min-h-[70vh] text-[1.25rem] font-[500] flex flex-col justify-center items-center gap-8 rounded-[10px] text-[#000000]">
+              Sorry No Dashboards Available For User !!
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

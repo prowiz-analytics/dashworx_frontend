@@ -34,6 +34,7 @@ function Login() {
         headers: headers,
       });
       console.log(request.data);
+      localStorage.setItem("data", JSON.stringify(request.data));
       if (request.status === 200) {
         const decoded = jwtDecode(user.token);
         console.log(decoded);

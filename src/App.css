@@ -30,7 +30,7 @@
 }
 
 #dynamic_form_complex{
-  width: 600px !important;
+  width: 800px !important;
 }
 
 
@@ -62,13 +62,13 @@
 .ant-select-selection-item{
   display: flex !important;
   flex-direction: row !important;
-  justify-content: center !important;
+  justify-content: start !important;
   align-items: center;
 }
 
 #dynamic_form_complex{
-  width: 50vw !important;
-  max-width: 50vw !important;
+  width: 70vw ;
+  max-width: 70vw !important;
 }
 
 .refresh_btn svg  {
@@ -92,5 +92,131 @@
   height: 20px !important;
 }
 
+.ant-form-item-label > label{
+  font-size: 1.1rem !important;
+  font-weight: 500 !important;
+  margin-top: 8px;
+  width: 100%;
+  text-align: center !important;
+  align-items: center !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* margin-right: 30px; */
+}
 
+.ant-col-6{
+  flex:0 0 35% !important;
+  max-width: 35% !important;
+}
 
+.ant-card .ant-card-bordered .ant-card-small .css-dev-only-do-not-override-1kf000u{
+    border: 2px solid black !important;
+    border-radius: 10px !important;
+}
+:where(.css-dev-only-do-not-override-1kf000u).ant-card-bordered{
+  border: 2px solid black !important;
+}
+.ant-card{
+  border-radius: 10px !important;
+}
+
+.ant-card-head-title{
+  font-size: 1.1rem !important;
+  padding: 10px 10px;
+}
+
+.ant-card-head{
+  padding: 10px 10px;
+  border-bottom: 2px solid black !important;
+}
+
+.no-flex-basis .ant-col-6{
+  flex:0 0 15% !important;
+  max-width: 15% !important;
+}
+
+.ant-select-selector{
+  margin-bottom: 15px !important;
+  padding: 20px !important;
+}
+
+.no-flex-basis .ant-col-18{
+  flex: 0 0 85% !important;
+  max-width: 85% !important;
+}
+
+.ant-select .ant-select-arrow {
+  margin: 0px !important;
+}
+
+.icons-select .ant-select-selector{
+  padding: 5px !important;
+}
+
+.icons-select .ant-select-arrow{
+  top: 30% !important;
+}
+
+.ant-select-selection-overflow{
+  gap: 20px !important;
+}
+
+.brands-select .ant-select-arrow{
+  top: 40% !important;
+}
+
+:where(.css-dev-only-do-not-override-1kf000u).ant-select-multiple  .ant-select-selection-overflow{
+  overflow: hidden !important;
+  display: inline !important;
+  width: 98% !important;
+  height: 100% !important;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+  /* creating a custom design */
+  width: 2.2em;
+  height: 2.2em;
+  border-radius: 0.15em;
+  margin-right: 0.5em;
+  border: 0.15em solid #000000;
+  outline: none;
+  cursor: pointer;
+}
+
+.checkbox-wrapper input[type="checkbox"]:disabled {
+  border-color: #c0c0c0;
+  background-color: #c0c0c0;
+}
+
+.checkbox-wrapper input[type="checkbox"]:disabled + span {
+  color: #c0c0c0;
+}
+
+input:checked {
+  background-color: #ffffff;
+  position: relative;
+}
+
+input:checked::before {
+  content: "✔";
+  font-size: 1em;
+  color: #000 !important;
+  position: absolute;
+  right: 5px;
+  top: 0px;
+}
+
+:where(.css-dev-only-do-not-override-1kf000u).ant-select-dropdown{
+  border: 2px solid black !important;
+  padding: 10px !important;
+  background: white !important;
+}
+
+:where(.css-dev-only-do-not-override-1kf000u).ant-select-dropdown .ant-select-item-option-active:not(.ant-select-item-option-disabled){
+  background-color: white !important;
+}

@@ -43,7 +43,7 @@ function Header(props) {
         <img
           src={"/logo.svg"}
           alt=""
-          className="h-14 max-h-600:w-[12vw] md:w-[14vw] rounded-sm cursor-pointer"
+          className="h-14 hidden max-h-600:w-[12vw] md:w-[14vw] rounded-sm cursor-pointer"
           onClick={() => {
             if (isNavigatable) {
               navigate("/home");
