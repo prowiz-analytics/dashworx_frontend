@@ -111,13 +111,18 @@
   max-width: 35% !important;
 }
 
-.ant-card .ant-card-bordered .ant-card-small .css-dev-only-do-not-override-1kf000u{
+/* .ant-card .ant-card-bordered .ant-card-small .css-dev-only-do-not-override-1kf000u{
     border: 2px solid black !important;
     border-radius: 10px !important;
-}
+} */
 :where(.css-dev-only-do-not-override-1kf000u).ant-card-bordered{
   border: 2px solid black !important;
 }
+
+.ant-card-bordered{
+  border: 2px solid black !important;
+}
+
 .ant-card{
   border-radius: 10px !important;
 }
@@ -161,6 +166,7 @@
 
 .ant-select-selection-overflow{
   gap: 20px !important;
+  height: 38px !important;
 }
 
 .brands-select .ant-select-arrow{
@@ -171,7 +177,7 @@
   overflow: hidden !important;
   display: inline !important;
   width: 98% !important;
-  height: 100% !important;
+  /* height: 100% !important; */
 }
 
 .checkbox-wrapper input[type="checkbox"] {
@@ -203,12 +209,22 @@ input:checked {
 }
 
 input:checked::before {
-  content: "✔";
-  font-size: 1em;
-  color: #000 !important;
+  content: "";
   position: absolute;
-  right: 5px;
+  right: 0px;
   top: 0px;
+  width: 26px; /* Adjust size as needed */
+  height: 26px;
+  background-image: url("https://www.svgrepo.com/show/491147/tick.svg"); /* Path to your icon */
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.ant-input-outlined:hover{
+  border-color: #000000 !important;
+}
+
+.ant-input-outlined:focus{
+  border-color: #000000 !important;
 }
 
 :where(.css-dev-only-do-not-override-1kf000u).ant-select-dropdown{

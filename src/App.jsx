@@ -18,6 +18,9 @@ import ResetGauth from './Pages/ResetGauth';
 // URI OF API
 export const API = "https://dev.dashworxhub.com"
 
+// URI OF DEV API
+// export const API = "http://localhost:8000"
+
 function App() {
   return (
     <div className="App">

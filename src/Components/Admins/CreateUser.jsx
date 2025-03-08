@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import { CloseOutlined } from "@ant-design/icons";
 
 function CreateUser() {
-  
   const [form] = Form.useForm();
   const [brandsOptions, setBrandsOptions] = useState([]);
   const validateMessages = () => {
@@ -29,17 +28,17 @@ function CreateUser() {
         item.username = formData.email;
       });
     }
-    let dashboards = []
+    let dashboards = [];
     formData.dashboards.forEach((item) => {
-      dashboards = [...dashboards, ...item.dashboards];  // Append item.dashboards (which is also an array)
+      dashboards = [...dashboards, ...item.dashboards]; // Append item.dashboards (which is also an array)
     });
-    formData.dashboards = dashboards
+    formData.dashboards = dashboards;
     // console.log(formData);
     let user = JSON.parse(localStorage.getItem("data"));
     const headers = {
       Authorization: `Bearer ${user.token}`,
     };
-    
+
     try {
       const data = await axios.post(`${API}/admin/create/user`, formData, {
         headers,
@@ -59,6 +58,9 @@ function CreateUser() {
       });
     });
   };
+
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
   useEffect(() => {
     const getBrandDashboards = async () => {
       let user = JSON.parse(localStorage.getItem("data"));
@@ -83,10 +85,9 @@ function CreateUser() {
           span: 18,
         }}
         form={form}
-        
         style={{
           maxWidth: "60vw",
-          width: "70vw"
+          width: "70vw",
         }}
         autoComplete="off"
         initialValues={{
@@ -168,28 +169,90 @@ function CreateUser() {
                               className="flex flex-row justify-start items-center gap-4 w-full"
                             >
                               <Form.Item
-                                className="basis-[30%]"
+                                className="basis-[40%]"
                                 name={[subField.name, "brand_id"]}
                               >
                                 <Select
                                   placeholder="Brands"
                                   className="h-[48px] brands-select"
+                                  open={dropdownOpen} // Control dropdown open/close state
+                                  onDropdownVisibleChange={(visible) =>
+                                    setDropdownOpen(visible)
+                                  } // Sync state
+                                  dropdownRender={(menu) => (
+                                    <div className="relative flex flex-col gap-4 h-auto p-4 overflow-auto">
+                                      {brandsOptions?.map((item) => (
+                                        <div
+                                          key={item.brand_id}
+                                          className="p-1 border-[2px] rounded-[8px] border-black cursor-pointer"
+                                          onClick={() => {
+                                            // Get form values safely
+                                            const items =
+                                              form.getFieldValue("items") || [];
+
+                                            // Ensure items[0] exists
+                                            if (!items[0]) {
+                                              items[0] = { dashboards: {} };
+                                            }
+
+                                            // Ensure dashboards exist
+                                            if (!items[0].dashboards) {
+                                              items[0].dashboards = {};
+                                            }
+
+                                            // Ensure subField.name exists in dashboards
+                                            if (
+                                              !items[0].dashboards[
+                                                subField.name
+                                              ]
+                                            ) {
+                                              items[0].dashboards[
+                                                subField.name
+                                              ] = {};
+                                            }
+
+                                            // Update brand_id safely
+                                            items[0].dashboards[
+                                              subField.name
+                                            ].brand_id = item.brand_id;
+
+                                            // Set updated values
+                                            form.setFieldsValue({ items });
+
+                                            console.log(
+                                              "Selected Brand ID:",
+                                              item.brand_id
+                                            );
+                                            console.log(
+                                              "Updated Form Data:",
+                                              form.getFieldsValue()
+                                            );
+
+                                            // Close the dropdown after selection
+                                            setDropdownOpen(false);
+                                          }}
+                                        >
+                                          <p className="text-[1.1rem] text-center">
+                                            {item.brand_name}
+                                          </p>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  )}
                                 >
-                                  {brandsOptions?.map((item) => {
-                                    // console.log(item);
-                                    return (
-                                      <Select.Option value={item.brand_id}>
-                                        {item.brand_name}
-                                      </Select.Option>
-                                    );
-                                  })}
-                                  {/* Add more options as needed */}
+                                  {brandsOptions?.map((item) => (
+                                    <Select.Option
+                                      key={item.brand_id}
+                                      value={item.brand_id}
+                                    >
+                                      {item.brand_name}
+                                    </Select.Option>
+                                  ))}
                                 </Select>
                               </Form.Item>
                               <Form.Item
                                 className="flex-1"
                                 name={[subField.name, "dashboards"]}
-                                
                               >
                                 <Select
                                   mode="multiple"
@@ -221,7 +284,7 @@ function CreateUser() {
                                   }}
                                   dropdownRender={(menu) => {
                                     return (
-                                      <div className="relative flex flex-col gap-4 h-[350px] overflow-auto">
+                                      <div className="relative flex flex-col gap-4 h-[350px] p-4 overflow-auto">
                                         {brandsOptions
                                           ?.find(
                                             (brand) =>
@@ -263,38 +326,46 @@ function CreateUser() {
                                               return (
                                                 <div className="flex flex-col w-full justify-start items-start gap-4">
                                                   {index === 0 && (
-                                                    <div className="flex flex-row justify-start border-2 border-[#000000] rounded-md items-start w-full gap-8"
-                                                    onClick={() => {
-                                                      let allDashboards =
-                                                      brandsOptions
-                                                        ?.find(
-                                                          (brand) =>
-                                                            brand.brand_id ===
-                                                            form.getFieldValue([
-                                                              "items",
-                                                              field.name,
-                                                              "dashboards",
-                                                              subField.name,
-                                                              "brand_id",
-                                                            ])
-                                                        )
-                                                        ?.dashboards
-                                                      console.log(allDashboards)
-                                                      allDashboards.map((item)=>item.label = item.dashboard_name);
-                                                      const items =
-                                                        form.getFieldValue(
-                                                          "items"
+                                                    <div
+                                                      className="flex flex-row justify-start border-2 border-[#000000] rounded-md items-start w-full gap-6"
+                                                      onClick={() => {
+                                                        let allDashboards =
+                                                          brandsOptions?.find(
+                                                            (brand) =>
+                                                              brand.brand_id ===
+                                                              form.getFieldValue(
+                                                                [
+                                                                  "items",
+                                                                  field.name,
+                                                                  "dashboards",
+                                                                  subField.name,
+                                                                  "brand_id",
+                                                                ]
+                                                              )
+                                                          )?.dashboards;
+                                                        console.log(
+                                                          allDashboards
                                                         );
-                                                      console.log(items);
-                                                      items[0].dashboards[
-                                                        subField.name
-                                                      ].dashboards =
-                                                        allDashboards;
-                                                      console.log(items);
-                                                      form.setFieldsValue({
-                                                        items,
-                                                      });
-                                                    }}>
+                                                        allDashboards.map(
+                                                          (item) =>
+                                                            (item.label =
+                                                              item.dashboard_name)
+                                                        );
+                                                        const items =
+                                                          form.getFieldValue(
+                                                            "items"
+                                                          );
+                                                        console.log(items);
+                                                        items[0].dashboards[
+                                                          subField.name
+                                                        ].dashboards =
+                                                          allDashboards;
+                                                        console.log(items);
+                                                        form.setFieldsValue({
+                                                          items,
+                                                        });
+                                                      }}
+                                                    >
                                                       <div className="p-2 text-center w-[100%] rounded-md">
                                                         <p>
                                                           {`+ Select All Dashboards From This Brand`}
@@ -303,7 +374,7 @@ function CreateUser() {
                                                     </div>
                                                   )}
                                                   <div
-                                                    className="flex flex-row justify-between items-center gap-8 w-full"
+                                                    className="flex flex-row justify-between items-center gap-4 w-full"
                                                     onClick={() => {
                                                       console.log(dashboard);
                                                       if (isSelected) {
@@ -393,7 +464,7 @@ function CreateUser() {
                                                       />
                                                     </div>
                                                     <div className="flex-1">
-                                                      <p className="p-2 border-2 border-[#000000] w-[100%] rounded-md">
+                                                      <p className="p-2 border-2 h-[4] border-[#000000] w-[100%] rounded-md">
                                                         {
                                                           dashboard.dashboard_name
                                                         }
