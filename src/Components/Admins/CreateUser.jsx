@@ -52,14 +52,20 @@ function CreateUser() {
   };
   const handleFinishFailed = ({ errorFields }) => {
     console.log(errorFields);
-    errorFields.forEach((error) => {
-      toast.error(error.name[error.name.length - 1] + " is Required", {
+    errorFields.forEach((error) => {                                                                                                                                                                                                                                                                                                                                                                                            
+      toast.error(error.name[error.name.length - 1].replace('_',' ') + " is Required", {
         toastId: `${error.name[error.name.length - 1]}`,
+        className: `customtoastcss`
       });
     });
   };
 
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  // const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [openDropdownKey, setOpenDropdownKey] = useState(null);
+
+  const toggleDropdown = (key, visible) => {
+    setOpenDropdownKey(visible ? key : null); // Ensure only one dropdown opens at a time
+  };
 
   useEffect(() => {
     const getBrandDashboards = async () => {
@@ -124,6 +130,7 @@ function CreateUser() {
                     rules={[
                       {
                         required: true,
+                        message:"Email is required"
                       },
                     ]}
                   >
@@ -141,7 +148,7 @@ function CreateUser() {
                     <Input />
                   </Form.Item>
                   <Form.Item
-                    label="First_Name"
+                    label="First Name"
                     name={[field.name, "first_name"]}
                     rules={[
                       {
@@ -174,11 +181,12 @@ function CreateUser() {
                               >
                                 <Select
                                   placeholder="Brands"
+                                  key={subField.key}
                                   className="h-[48px] brands-select"
-                                  open={dropdownOpen} // Control dropdown open/close state
+                                  open={openDropdownKey === subField.key} // Only the selected dropdown is open
                                   onDropdownVisibleChange={(visible) =>
-                                    setDropdownOpen(visible)
-                                  } // Sync state
+                                    toggleDropdown(subField.key, visible)
+                                  }
                                   dropdownRender={(menu) => (
                                     <div className="relative flex flex-col gap-4 h-auto p-4 overflow-auto">
                                       {brandsOptions?.map((item) => (
@@ -228,8 +236,8 @@ function CreateUser() {
                                               form.getFieldsValue()
                                             );
 
-                                            // Close the dropdown after selection
-                                            setDropdownOpen(false);
+                                            // Close dropdown after selecting an option
+                                            setOpenDropdownKey(null);
                                           }}
                                         >
                                           <p className="text-[1.1rem] text-center">

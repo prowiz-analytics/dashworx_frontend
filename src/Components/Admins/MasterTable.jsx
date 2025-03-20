@@ -241,7 +241,10 @@ function MasterTable() {
                               >
                                 <Select
                                   mode="multiple"
+                                  getPopupContainer={(trigger) => trigger.parentNode}
                                   className="icons-select"
+                                  dropdownAlign={{ points: ['tl', 'bl'] }}
+                                  dropdownStyle={{ top: "100%" }}
                                   placeholder="Select Dashboard Icons"
                                   style={{ width: "450px" }}
                                   value={form.getFieldValue([
@@ -378,7 +381,7 @@ function MasterTable() {
                                                       });
                                                     } else {
                                                       notify(
-                                                        "You Cannot Select More Than 3 Icons"
+                                                        "You Cannot Select More Than 4 Icons"
                                                       );
                                                     }
                                                   }
@@ -450,7 +453,7 @@ function MasterTable() {
                 </Card>
               ))}
 
-              <div className="flex flex-row w-full justify-center items-center">
+              <div className="flex flex-row w-full justify-center items-center mt-10">
                 <button
                   type="solid"
                   onClick={updateDashboards}

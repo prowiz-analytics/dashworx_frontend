@@ -236,3 +236,13 @@ input:checked::before {
 :where(.css-dev-only-do-not-override-1kf000u).ant-select-dropdown .ant-select-item-option-active:not(.ant-select-item-option-disabled){
   background-color: white !important;
 }
+
+:where(.css-1v613y0).ant-select-multiple .ant-select-selection-overflow{
+  overflow: hidden !important;
+  display: inline !important;
+  width: 98% !important;
+}
+
+.customtoastcss{
+  text-transform: capitalize !important;
+}

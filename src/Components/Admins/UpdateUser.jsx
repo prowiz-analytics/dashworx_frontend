@@ -193,8 +193,14 @@ function UpdateUser() {
     });
   };
 
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  
+  // const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const [openDropdownKey, setOpenDropdownKey] = useState(null);
+
+  const toggleDropdown = (key, visible) => {
+    setOpenDropdownKey(visible ? key : null); // Ensure only one dropdown opens at a time
+  };
+
   // useEffect(()=>{
   //   console.log(form.getFieldValue("items"));
   // },[form])
@@ -292,11 +298,12 @@ function UpdateUser() {
                               >
                                 <Select
                                   placeholder="Brands"
+                                  key={subField.key}
                                   className="h-[48px] brands-select"
-                                  open={dropdownOpen} // Control dropdown open/close state
+                                  open={openDropdownKey === subField.key} // Only the selected dropdown is open
                                   onDropdownVisibleChange={(visible) =>
-                                    setDropdownOpen(visible)
-                                  } // Sync state
+                                    toggleDropdown(subField.key, visible)
+                                  }
                                   dropdownRender={(menu) => (
                                     <div className="relative flex flex-col gap-4 h-auto p-4 overflow-auto">
                                       {brandsOptions?.map((item) => (
@@ -346,8 +353,8 @@ function UpdateUser() {
                                               form.getFieldsValue()
                                             );
 
-                                            // Close the dropdown after selection
-                                            setDropdownOpen(false);
+                                            // Close dropdown after selecting an option
+                                            setOpenDropdownKey(null);
                                           }}
                                         >
                                           <p className="text-[1.1rem] text-center">
