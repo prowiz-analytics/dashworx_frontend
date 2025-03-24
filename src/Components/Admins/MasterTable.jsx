@@ -98,6 +98,7 @@ function MasterTable() {
     };
     getDashboardIcons();
   }, []);
+  console.log(dashboardIcons);
   return (
     <div className="w-full h-full flex flex-col gap-6 justify-around items-center bg-[#ffffff]">
       <Form
@@ -110,8 +111,8 @@ function MasterTable() {
         form={form}
         name=""
         style={{
-          width: "90vw",
-          maxWidth: "90vw",
+          width: "95vw",
+          maxWidth: "95vw",
         }}
         autoComplete="off"
         initialValues={{
@@ -240,13 +241,21 @@ function MasterTable() {
                                 ]}
                               >
                                 <Select
+                                  
+                                  onInputKeyDown={event => {
+                                    if (event.key === 'Backspace') {
+                                            return event.stopPropagation()
+                                      }
+                                 }}
                                   mode="multiple"
-                                  getPopupContainer={(trigger) => trigger.parentNode}
+                                  getPopupContainer={(trigger) => trigger.parentNode} // need scroll means enable this 
+                                  // getPopupContainer={() => document.body}
                                   className="icons-select"
-                                  dropdownAlign={{ points: ['tl', 'bl'] }}
-                                  dropdownStyle={{ top: "100%" }}
+                                  // dropdownAlign={{ points: ['tl', 'bl'] }}
+                                  // placement="topLeft"
+                                  // dropdownStyle={{ top: "100%" }}
                                   placeholder="Select Dashboard Icons"
-                                  style={{ width: "450px" }}
+                                  style={{ width: "470px" }}
                                   value={form.getFieldValue([
                                     subField.name,
                                     "icons",
@@ -257,23 +266,8 @@ function MasterTable() {
                                     closable,
                                     onClose,
                                   }) => {
-                                    console.log(form.getFieldValue([
-                                      subField.name,
-                                      "icons",
-                                    ]))
-                                    console.log(label)
-                                    const selectedIconsID = form
-                                      .getFieldsValue()
-                                      .items[0].dashboards[
-                                        subField.name
-                                      ].icons?.map((item) => {
-                                        return item.id;
-                                      });
+                                    
 
-                                    const selectedIcon = dashboardIcons.filter(
-                                      (icon) =>
-                                        selectedIconsID?.includes(icon.id)
-                                    );
                                     
                                     return (
                                       <div
@@ -287,6 +281,7 @@ function MasterTable() {
                                         }}
                                       >
                                         <img
+                                          key={label}
                                           src={`/DashboardIcons/${label}.svg`}
                                           alt={label}
                                           style={{
@@ -297,6 +292,9 @@ function MasterTable() {
                                       </div>
                                     );
                                   }}
+                                  
+                                  
+                                  showSearch={false}
                                   dropdownRender={(menu) => {
                                     const selectedValues =
                                       form.getFieldValue([
@@ -305,7 +303,7 @@ function MasterTable() {
                                       ]) || [];
 
                                     return (
-                                      <div style={{ padding: "8px" }}>
+                                      <div style={{ padding: "8px" }} >
                                         <div
                                           style={{
                                             display: "grid",
@@ -321,7 +319,7 @@ function MasterTable() {
                                               .items[0].dashboards[
                                                 subField.name
                                               ].icons?.map((item) => {
-                                                return item.id;
+                                                return item?.id;
                                               });
                                               console.log(selectedIconsID);
                                             const isSelected =
@@ -334,7 +332,7 @@ function MasterTable() {
                                                   if (isSelected) {
                                                     let filteredValues = form
                                                       .getFieldsValue()
-                                                      .items[0].dashboards[
+                                                      ?.items[0]?.dashboards[
                                                         subField.name
                                                       ].icons?.filter(
                                                         (singleIcon) =>
@@ -420,13 +418,27 @@ function MasterTable() {
                                       </div>
                                     );
                                   }}
-                                  onChange={(selectedValues) => {
-                                    form.setFieldValue(
-                                      [subField.name, "icons"],
-                                      selectedValues
-                                    );
-                                    // console.log(selectedValues);
+                                  onChange={(selectedValues, option) => {
+                                    const previousValues = form.getFieldValue([subField.name, "icons"]) || [];
+                                
+                                    // Prevent deletion by comparing old & new values
+                                    if (selectedValues.length < previousValues.length) {
+                                      form.setFieldsValue({
+                                        [subField.name]: { icons: previousValues }, // Keep old values
+                                      });
+                                    } else {
+                                      form.setFieldsValue({
+                                        [subField.name]: { icons: selectedValues },
+                                      });
+                                    }
                                   }}
+                                  // onChange={(selectedValues) => {
+                                  //   form.setFieldValue(
+                                  //     [subField.name, "icons"],
+                                  //     selectedValues
+                                  //   );
+                                  //   // console.log(selectedValues);
+                                  // }}
                                 >
                                   
                                 </Select>

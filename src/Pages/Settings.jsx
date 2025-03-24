@@ -113,6 +113,9 @@ function Settings({}) {
                     if (data.is_2fa_enabled && data?.is_2fa_setup_done) {
                       navigate("/home");
                     }
+                    else if(!data.is_2fa_enabled){
+                      navigate('/home');
+                    }
                   }}
                 >
                   <img
